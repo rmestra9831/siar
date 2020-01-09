@@ -1,1 +1,153 @@
-//
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// mediaQuerys
+@import "mediaQuery";
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+#app {
+  display: block !important;
+  position: relative !important;
+  height: 100% !important;
+}
+
+.body_content {
+  height: 100% !important;
+  width: 100% !important;
+  background: white;
+}
+
+// estilos de la estructura
+// estilo del main
+.main_section {
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  position: fixed;
+  display: -webkit-box;
+  display: flex;
+  padding: 20px;
+  box-shadow: 0px 0 8px rgba(0, 0, 0, 0.29);
+  z-index: 10;
+  background: white;
+
+  .head {
+    display: table-header-group;
+    height: 150px;
+    display: table-cell;
+    margin-bottom: 30px;
+
+    img {
+      padding: 10px;
+      border-radius: 100%;
+      background: #eaeaea73;
+    }
+  }
+
+  .body {
+    // height: 100%;
+    display: table-row;
+
+    .main_body {
+      margin: 20px 10px;
+    }
+  }
+
+  .foter {
+    display: table-footer-group;
+    height: 80px;
+    display: table-cell;
+  }
+
+  .container {
+    margin: 0;
+  }
+}
+
+.content_section {
+  height: 100%;
+  position: fixed;
+  display: flex;
+  width: 80%;
+  float: left;
+  right: 0;
+
+  .content_header {
+    background: white;
+    box-shadow: 0 -5px 15px rgba(128, 128, 128, 0.451);
+    display: table-row;
+    height: 60px;
+    text-align: center;
+
+    .title {
+      height: 100%;
+
+      h1 {
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+    }
+  }
+
+  .contents_body {
+    display: table-row;
+
+    .body {
+      height: 100%;
+      overflow: auto;
+      position: relative;
+      padding: 10px 20px;
+    }
+  }
+
+  .content_foter {
+    display: table-row;
+    height: 50px;
+  }
+}
+
+.pan {
+  position: relative;
+  display: table;
+  height: 100%;
+  padding: 0;
+}
+
+// BOTONES PERSONALIZADOS
+.btn_logout {
+  text-decoration: none;
+  width: 80% !important;
+  padding: 5px 20px;
+  border: 2px solid;
+  border-radius: 20px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// lista de menus
+
+.item_main {
+  height: 35px;
+  border-bottom: 1px solid;
+  display: flex !important;
+  position: relative !important;
+  align-items: center !important;
+  color: black !important;
+  transition: 0.5s;
+
+  &:hover {
+    text-decoration: none;
+    background: rgba(134, 134, 134, 0.17);
+    transition: 0.5;
+  }
+}
