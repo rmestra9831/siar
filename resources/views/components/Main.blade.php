@@ -1,6 +1,6 @@
 {{-- logo --}}
 @section('img')
-    <img class="ui centered small image"
+    <img class="ui centered image"
     @role('super admin') src=" {{asset('icon/stadistics.svg')}} " @endrole
     
     alt="">

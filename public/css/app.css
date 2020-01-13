@@ -18,6 +18,12 @@
   }
 }
 
+@media only screen and (min-width: 1200px) {
+  .example {
+    background: pink;
+  }
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -11407,6 +11413,7 @@ a.text-dark:focus {
 }
 
 .main_section .head img {
+  width: 70%;
   padding: 10px;
   border-radius: 100%;
   background: rgba(235, 235, 235, 0.7);

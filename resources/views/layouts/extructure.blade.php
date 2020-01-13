@@ -50,7 +50,7 @@
     {{-- seccion del contenido --}}
     <div class="@auth content_section @else content_section_log @endauth">
       @auth
-        <div class="container pan">
+        <div class="container-fluid pan">
           <div class="content_header">
             <div class="title">
               <h1> @yield('title_content') </h1>
