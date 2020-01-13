@@ -11409,7 +11409,7 @@ a.text-dark:focus {
 .main_section .head img {
   padding: 10px;
   border-radius: 100%;
-  background: #eaeaea73;
+  background: rgba(235, 235, 235, 0.7);
 }
 
 .main_section .body {
@@ -11428,6 +11428,10 @@ a.text-dark:focus {
 
 .main_section .container {
   margin: 0;
+}
+
+.bg_admissions {
+  background: #3375D5;
 }
 
 .content_section {
@@ -11493,10 +11497,13 @@ a.text-dark:focus {
   padding: 5px 20px;
   border: 2px solid;
   border-radius: 20px;
+  color: white;
 }
 
 .btn_logout:hover {
   text-decoration: none;
+  color: white;
+  background: #ffffff47;
 }
 
 .item_main {

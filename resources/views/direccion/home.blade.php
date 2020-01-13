@@ -1,5 +1,5 @@
 @section('title_content')
-    Home
+    Home Direccion
 @endsection
 
 @section('body_main')

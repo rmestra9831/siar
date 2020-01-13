@@ -17,6 +17,7 @@ class CreateMotivosTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('type_motivo');
+            $table->integer('id_sede');
             $table->timestamps();
         });
     }

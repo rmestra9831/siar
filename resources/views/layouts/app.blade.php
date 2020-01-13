@@ -15,12 +15,14 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.20/b-1.6.1/r-2.2.3/rg-1.1.1/sc-2.0.1/datatables.min.css"/>
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet"/>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.20/b-1.6.1/r-2.2.3/rg-1.1.1/sc-2.0.1/datatables.min.js"></script>
 </head>
 <body>
     <div id="app" style="display: block !important;

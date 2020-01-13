@@ -44,7 +44,7 @@
     img {
       padding: 10px;
       border-radius: 100%;
-      background: #eaeaea73;
+      background: hsla(0, 0%, 92%, 0.70);
     }
   }
 
@@ -66,6 +66,10 @@
   .container {
     margin: 0;
   }
+}
+
+.bg_admissions{
+  background: $color-admissions;
 }
 
 .content_section {
@@ -128,9 +132,12 @@
   padding: 5px 20px;
   border: 2px solid;
   border-radius: 20px;
+  color: white;
 
   &:hover {
     text-decoration: none;
+    color: white;
+    background: #ffffff47;
   }
 }
 

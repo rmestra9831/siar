@@ -1,24 +1,35 @@
 <div class="ui list">
  
-  @role('admisiones')
-<a href="#" class="item item_main">
-    <i class="marker icon"></i>
+  <a href=" {{ route('home') }} " class="item item_main">
+    <i class="large home icon"></i>
     <div class="content">
       Inicio
     </div>
   </a>
+@role('admissions')
   <a href="#1" class="item item_main">
-    <i class="mail icon"></i>
+    <i class="large plus square outline icon"></i>
     <div class="content">
-      otro item
+      Nuevo Radicado
     </div>
   </a>
   <a href="#2" class="item item_main">
-    <i class="linkify icon"></i>
+    <i class="large linkify icon"></i>
     <div class="content">
-      otro item
+      asasd
     </div>
   </a>
-  @endrole
+@endrole
+
+@role('super admin')
+<a href="#1" class="item item_main">
+  <i class="large star outline icon"></i>
+  <div class="content">
+    Permisos de Usuario
+  </div>
+</a>
+@endrole
+
+@include('components.permissions')
   
 </div>

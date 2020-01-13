@@ -12,9 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    if (Auth::check()) {
+        return view('home');
+    }else{
+        return view('auth.login');
+    }
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/example', 'HomeController@example')->name('example');
+
+Route::group(['middleware' => 'permission:create program'], function () {
+    Route::get('/program-setings', 'FunctionsController@createProgram')->name('createProgram');
+});
+
+Route::get('/program', 'AdminController@program')->name('program');
