@@ -7,3 +7,11 @@
 @hasrole('super admin')
 @include('superAdmin.home')
 @endhasrole
+
+@hasrole('direction')
+@include('direction.home')
+@endhasrole
+
+@hasrole('admission')
+@include('admission.home')
+@endhasrole

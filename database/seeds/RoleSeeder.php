@@ -47,5 +47,13 @@ class RoleSeeder extends Seeder
 
                 $user_admin = User::where('id',1)->first();
                 $user_admin->assignRole('super admin');
+
+                $user_direction = User::where('id',2)->first();
+                $user_direction->assignRole('direction');
+                
+                $user_admissions = User::where('id',3)->first();
+                $user_admissions->assignRole('admissions');
+
+
             }
 }

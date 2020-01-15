@@ -11,6 +11,8 @@ class ProgramaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('programs')->insert(['name'=>'Sistemas','id_sede'=>2]);        
+        DB::table('programs')->insert(['name'=>'Psicologia','id_sede'=>2]);        
+        DB::table('programs')->insert(['name'=>'Electronica','id_sede'=>2]);        
     }
 }

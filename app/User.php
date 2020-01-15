@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use App\Models\Sede;
 
 class User extends Authenticatable
 {
@@ -15,12 +16,12 @@ class User extends Authenticatable
 
     public function role(): MorphToMany
     {
-        return $this->morphedByMany('Spatie\Permission\Models\Role', 'model_has_role'
+        return $this->morphedByMany(Role::class, 'model_has_role'
         );
     }
     public function sede()
     {
-        return $this->belongsTo('App\Models\Sede','id_sede');
+        return $this->belongsTo(Sede::class,'id_sede');
     }
     /**
      * The attributes that are mass assignable.

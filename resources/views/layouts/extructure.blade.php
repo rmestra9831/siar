@@ -3,7 +3,7 @@
 @section('content')
   <div class="body_content">
     {{-- seccion del main --}}
-    <div class="@auth main_section @role('admissions') bg-info @endrole @role('super admin') bg-secondary @endrole @else main_section_log @endauth">
+    <div class="@auth main_section @role('direction') bg-direction @endrole @role('super admin') bg-secondary @endrole @role('admissions') bg-admissions @endrole @else main_section_log @endauth">
       <div class="container @auth pan @else pan_login @endauth">
         {{-- validación de lo que muesta el menu si esta autenticado --}}
         @auth
@@ -12,9 +12,11 @@
               <div class="col">
                 @yield('img')
               </div>
-              <h4 class="ui horizontal divider header">
-                Admisiones y Registro
-              </h4>
+              <h3 class="c-white ui horizontal divider header">
+                @role('super admin') Super Administrador @endrole
+                @role('direction') Dirección @endrole
+                @role('admissions') Admisiones y Registro @endrole
+              </h3>
             </div>
           {{-- cuerpo del main --}}
             <div class="row body">

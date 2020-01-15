@@ -4,9 +4,9 @@
 @include('components.Main')
 
 @section('title_content')
-  Programas
+  Motivos
 @endsection
 
 @section('body_main')
-    aasdasda
+    adhejssl sask
 @endsection

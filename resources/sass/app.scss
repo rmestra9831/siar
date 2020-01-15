@@ -9,6 +9,11 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// aplicando colores de fondo
+.bg-direction{ background: $color-direction !important;}
+.bg-admissions{ background: $color-admissions !important;}
+.c-white{ color: white !important;}
+
 #app {
   display: block !important;
   position: relative !important;
@@ -109,7 +114,7 @@
       height: 100%;
       overflow: auto;
       position: relative;
-      padding: 10px 20px;
+      padding: 25px 20px 10px;
     }
   }
 
@@ -146,16 +151,19 @@
 
 .item_main {
   height: 35px;
+  padding: 20px 10px !important;
+  font-size: 1.1rem !important;
   border-bottom: 1px solid;
   display: flex !important;
   position: relative !important;
   align-items: center !important;
-  color: black !important;
+  color: $white !important;
   transition: 0.5s;
 
   &:hover {
     text-decoration: none;
-    background: rgba(134, 134, 134, 0.17);
+    background: rgba(134, 134, 134, 0.473);
     transition: 0.5;
+    padding-left: 20px !important;
   }
 }
