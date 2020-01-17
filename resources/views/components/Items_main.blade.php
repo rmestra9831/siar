@@ -7,7 +7,7 @@
     </div>
   </a>
 
-@role('super admin')
+@role('Super Admin')
 <a href="#1" class="item item_main">
   <i class="c-white large star outline icon"></i>
   <div class="content">
@@ -16,7 +16,7 @@
 </a>
 @endrole
 
-@role('direction')
+@role('Dirección')
 <a href="#1" class="item item_main">
   <i class="c-white large star outline icon"></i>
   <div class="content">
@@ -25,7 +25,7 @@
 </a>
 @endrole
 
-@role('admissions')
+@role('Admisiones')
   <a href="#1" class="item item_main">
     <i class="c-white large plus square outline icon"></i>
     <div class="content">

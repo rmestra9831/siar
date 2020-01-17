@@ -10,10 +10,10 @@ class Sede extends Model
 {
     public function user()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany(User::class);
     }
     public function programs()
     {
-        return $this->hasMany(Program::class);
+        return $this->HasMany(Program::class);
     }
 }

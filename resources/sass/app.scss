@@ -13,6 +13,7 @@
 .bg-direction{ background: $color-direction !important;}
 .bg-admissions{ background: $color-admissions !important;}
 .c-white{ color: white !important;}
+.bg-input-login{ background: $bg-input !important;}
 
 #app {
   display: block !important;
@@ -163,7 +164,32 @@
   &:hover {
     text-decoration: none;
     background: rgba(134, 134, 134, 0.473);
-    transition: 0.5;
-    padding-left: 20px !important;
+  }
+}
+.item_main_accordion{
+  height: auto;
+  padding: 0px 10px !important;
+  font-size: 1.1rem !important;
+  border-bottom: 1px solid;
+  display: block !important;
+  position: relative !important;
+  align-items: center !important;
+  color: $white !important;
+  &:hover {
+    text-decoration: none;
+    background: rgba(134, 134, 134, 0.473);
+  }
+  .item{
+    &:hover{
+      background: silver;
+    }
+  }
+}
+
+tbody{
+  tr{
+    td{
+      text-align: center !important;
+    }
   }
 }

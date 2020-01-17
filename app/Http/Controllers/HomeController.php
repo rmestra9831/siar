@@ -32,14 +32,6 @@ class HomeController extends Controller
     }
 
     public function example(){
-        $user = User::find(1);
-        $role = Role::find(1);
-
-        $data = Arr::add(
-            ['name' => $role->permissions, 'price' => null],
-            'price', 100
-        );
-
-        dd($data);
+      return view('welcome');
     }
 }

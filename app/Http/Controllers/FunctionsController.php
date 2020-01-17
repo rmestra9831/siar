@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\Models\Sede;
 use App\Models\Program;
+use App\User;
 use DataTables;
 class FunctionsController extends Controller
 {
@@ -12,30 +15,77 @@ class FunctionsController extends Controller
     {
         $this->middleware('auth');
         $this->sedes = Sede::get(); 
-        $this->programas = Program::get(); 
+        $this->programas = Program::all(); 
     }
     //funciones de administrador
     // vistas previas de configuración
     public function settingUser(){
-        return view('pages.settingsUsers');
+        $er = User::get();
+
+        $ex = $er;
+        return view('pages.settingsUsers', compact('ex'));
     }
+    // USUARIOS
+    public function getUser(){
+        return datatables()->eloquent(User::query())
+            ->addColumn('sede', function($data){
+                return $data->sede->name;
+            })
+            ->addColumn('program', function($data){ //MOTRANDO NOMBRE DE LA SEDE A LA QUE PERTENCE
+                if (!$data->program_id) {
+                    return 'Null';
+                }else{
+                    return $data->program->name;
+                }
+            })
+            ->addColumn('rol', function($data){ //MOSTRANDO NOMBRE DE LOS ROLES DEL USUARIO
+                $name = $data->getRoleNames();
+                $char_delete = array('[', '"' , ']');
+                $data_format = str_replace($char_delete, "", $name);
+                return $data_format;
+            })
+            ->addColumn('permissions', 'buttons.BtnShowPermissions')
+            ->addColumn('action', 'buttons.BtnsActionsUser')
+            ->rawColumns(['action','permissions'])
+            ->toJson();
+    } 
+    public function editUser(){}
+    public function deleteUser(){}
+    // PROGRAMAS
     public function settingsProgram(){
         $program = $this->programas;
         return view('pages.settingsPrograms', compact('program'));
     }
+    public function editProgram($id){
+
+    }
+    public function deleteProgram($id){
+
+    }
+    public function getProgram(){
+        return datatables()->eloquent(Program::query())
+            ->addColumn('sede', function($data){
+                return $data->sedes->name;
+            })
+            ->addColumn('action', 'buttons.BtnsActionsProgram')
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+    // MOTIVOS
     public function settingsMotivo(){
         return view('pages.settingsMotivos');
     }
+
+    // SEDES
     public function settingsSede(){
-        $sede = $this->sedes;
-        return view('pages.settingsSedes', compact('sedes'));
+        $sede = Sede::all();
+        return view('pages.settingsSedes', compact('sede'));
     }
-
-    public function getProgram(){
-
-        $programs = Program::select(['name','id_sede']);
-
-        return DataTables::of($programs)->make(true);
+    public function getSede(){
+        return datatables()->eloquent(Sede::query())
+            ->addColumn('action', 'buttons.BtnsActionsSede')
+            ->rawColumns(['action'])
+            ->toJson();
     }
     
 }

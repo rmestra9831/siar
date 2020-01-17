@@ -14,4 +14,8 @@ class AdmissionControler extends Controller
     public function create(){
         
     }
+
+    public function createRadic($admission){
+
+    }
 }

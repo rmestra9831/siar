@@ -14,11 +14,15 @@ class CreateProgramsTable extends Migration
     public function up()
     {
         Schema::create('programs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
-            $table->integer('id_sede')->unsigned()->nullable();
+            $table->integer('sede_id')->unsigned();
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
+
+            // relaciones
+            $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
         });
     }
 

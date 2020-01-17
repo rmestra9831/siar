@@ -3,7 +3,7 @@
 @section('content')
   <div class="body_content">
     {{-- seccion del main --}}
-    <div class="@auth main_section @role('direction') bg-direction @endrole @role('super admin') bg-secondary @endrole @role('admissions') bg-admissions @endrole @else main_section_log @endauth">
+    <div class="@auth main_section @role('Direccion') bg-direction @endrole @role('Super Admin') bg-secondary @endrole @role('admissions') bg-admissions @endrole @else main_section_log @endauth">
       <div class="container @auth pan @else pan_login @endauth">
         {{-- validación de lo que muesta el menu si esta autenticado --}}
         @auth
@@ -13,9 +13,9 @@
                 @yield('img')
               </div>
               <h3 class="c-white ui horizontal divider header">
-                @role('super admin') Super Administrador @endrole
-                @role('direction') Dirección @endrole
-                @role('admissions') Admisiones y Registro @endrole
+                @role('Super Admin') Super Administrador @endrole
+                @role('Direccion') Dirección @endrole
+                @role('Admisiones') Admisiones y Registro @endrole
               </h3>
             </div>
           {{-- cuerpo del main --}}
@@ -40,9 +40,9 @@
           <div class="marca">
                 <p class="container-fluid">
                   Copyright © 2019 Universidad de Investigación Y Desarrollo - UDI - <br>
-                  Desarrollado: <br>
-                  <strong>Richard Andres Mestra A.</strong> - Webmaster <br>
+                  Autores: <br>
                   <strong>Ing Martha Cecilia Guarnizo García.</strong> Dirección ORI <br>
+                  <strong>Richard Andres Mestra Alvarez</strong> - Programador <br>
                   Todos los derechos reservados.
                 </p>
           </div>

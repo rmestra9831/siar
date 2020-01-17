@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use App\Models\Program;
 use App\Models\Sede;
 
 class User extends Authenticatable
@@ -21,7 +22,11 @@ class User extends Authenticatable
     }
     public function sede()
     {
-        return $this->belongsTo(Sede::class,'id_sede');
+        return $this->belongsTo(Sede::class);
+    }
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id');
     }
     /**
      * The attributes that are mass assignable.
@@ -29,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'slug'
     ];
 
     /**

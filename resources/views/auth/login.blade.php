@@ -7,7 +7,7 @@
             <h3 class="ui dividing header">Iniciar Sesión</h3>
             <div class="field">
                 <div class="ui large left icon input fluid">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo de usuario">
+                    <input id="email" type="email" class="form-control bg-input-login @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo de usuario">
                     <i class="user circle outline icon"></i>
                     {{-- @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -19,7 +19,7 @@
 
             <div class="field">
                 <div class="ui large left icon input fluid">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Contraseña">
+                    <input id="password" type="password" class="form-control bg-input-login @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Contraseña">
                     <i class="terminal icon"></i>
                     {{-- @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -50,7 +50,7 @@
 
 @section('content_body')
     <div id="login_body">     
-        <h2><img src="{{ asset('img\logo.png') }}" alt=""> SIAR</h2>
+        <h2><img src="{{ asset('img\logo.png') }}" alt=""> SIC</h2>
         <h6><div class="bar"></div> Sistema de Información Admisiones y Registro</h6>   
     </div>
 @endsection

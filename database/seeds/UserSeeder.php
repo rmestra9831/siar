@@ -14,23 +14,26 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'superadmin',
             'email'=>'r@r.r',
-            'id_sede'=>'2',
+            'sede_id'=>'2',
+            'slug'=>'superadmin',
             'password'=> bcrypt('123123123'),
-            'id_program'=>null
+            'program_id'=>null
         ]);
         DB::table('users')->insert([
             'name'=>'dirección',
             'email'=>'d@d.d',
-            'id_sede'=>'2',
+            'sede_id'=>'2',
+            'slug'=>'direccion',
             'password'=> bcrypt('123456789'),
-            'id_program'=>null
+            'program_id'=>null
         ]);
         DB::table('users')->insert([
             'name'=>'admissions',
             'email'=>'a@a.a',
-            'id_sede'=>'2',
+            'sede_id'=>'2',
+            'slug'=>'admiciones',
             'password'=> bcrypt('123456789'),
-            'id_program'=>null
+            'program_id'=>null
         ]);
     }
 }
