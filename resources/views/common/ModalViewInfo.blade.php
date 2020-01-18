@@ -1,7 +1,7 @@
 <div class="ui modal" style="position: sticky;
 height: auto;">
     <i class="close icon"></i>
-    <div class="header">
+    <div class="header" id="info_title">
       Modal Title
     </div>
     <div class="image content">
@@ -9,7 +9,7 @@ height: auto;">
         An image can appear on left or an icon
       </div>
       <div class="description">
-        A description can appear on the right
+        
       </div>
     </div>
     <div class="actions">

@@ -27,6 +27,7 @@ Route::get('/example', 'HomeController@example')->name('example');
 
 // Permisos de crear programas, motivos y docentes
 Route::get('getUsers', 'FunctionsController@getUser')->name('getUser')->middleware('permission:settings user');
+Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
 Route::get('user-settings', 'FunctionsController@settingUser')->name('settingUser')->middleware('permission:create user');
 Route::put('/user-settings/user/{id}/edit', 'FunctionsController@editUser')->name('editUser')->middleware('permission:edit user');
 Route::delete('/user-settings/{id}/delete', 'FunctionsController@deleteUser')->name('deleteUser')->middleware('permission:delete user');

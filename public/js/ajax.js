@@ -81,53 +81,62 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/scripts.js":
-/*!*********************************!*\
-  !*** ./resources/js/scripts.js ***!
-  \*********************************/
+/***/ "./resources/js/ajax.js":
+/*!******************************!*\
+  !*** ./resources/js/ajax.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// menu desplegable para crear correspondencia
-$('.ui.accordion').accordion(); //**** NOTA ****//
-
-/** Como los botones se esstan cargando dentro de la tabla todas las funcions js que se generen deben estar 
- * dentro de la FUNCION setTimeout para que se pueda ejecutar
- **/
-// inicialización del modals despues que se ejecuta la pag
-
 setTimeout(function () {
-  $('.ui.modal').modal({
-    inverted: true,
-    blurring: true
-  }).modal('attach events', '.permission.button', 'show');
-}, 500); // $('.ui.basic.modal').modal('show');
-// cambiado icono de menu de correspondencia
+  //cargando todas las funciones ajax
+  $('.permission').click(function () {
+    // configurando token de laravel en ajax
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    }); // opciones ajax para traer los permsos que tiene un usuario
 
-$('#btnsCorrespondence').click(function () {
-  if ($('#btnsCorrespondence .title').attr('class') == 'c-white title active') {
-    icon_correspondence = document.querySelector('#btnsCorrespondence .title #icon-main-c');
-    icon_correspondence.setAttribute('class', 'c-white large folder open outline icon');
-  } else {
-    icon_correspondence.setAttribute('class', 'c-white large folder outline icon');
-  }
-});
+    $.ajax({
+      type: "GET",
+      url: "getPermissions/" + this.value + "",
+      success: function success(response) {
+        var users = response[0];
+        var permissions = response[1]; // console.log(permissions);
+
+        for (p = 0; p < permissions.length; p++) {
+          console.log(permissions[p]);
+        } // if ($.isEmptyObject(response)) {
+        //     $('#info_title').html('Sin permisos de Usuario');
+        //     console.log('sin datos');
+        // } else {
+        //     $('#info_title').html('Permisos de Usuario');
+        //     for(i=0; i<response.length; i++){
+        //         console.log(response[i].name);
+        //     }
+        // }
+
+      }
+    });
+  });
+}, 500);
 
 /***/ }),
 
-/***/ 1:
-/*!***************************************!*\
-  !*** multi ./resources/js/scripts.js ***!
-  \***************************************/
+/***/ 2:
+/*!************************************!*\
+  !*** multi ./resources/js/ajax.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\siar\resources\js\scripts.js */"./resources/js/scripts.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\siar\resources\js\ajax.js */"./resources/js/ajax.js");
 
 
 /***/ })

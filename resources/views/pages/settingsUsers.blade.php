@@ -27,7 +27,6 @@
     {{ dd($exs->getRoleNames()) }}
     @endforeach --}}
 </div>
-<div class="ui primary test button">Launch modal</div>
 @endsection
 
 @section('scripts')
@@ -64,9 +63,7 @@
             "infoEmpty": "",
             "infoFiltered": "",
           }
-        });
-    });
-
-    
+      })
+    });   
   </script>
 @endsection

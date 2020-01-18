@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
-use App\Models\Sede;
+use Illuminate\Support\Arr;
 use App\Models\Program;
+use App\Models\Sede;
 use App\User;
 use DataTables;
 class FunctionsController extends Controller
@@ -48,7 +49,17 @@ class FunctionsController extends Controller
             ->addColumn('action', 'buttons.BtnsActionsUser')
             ->rawColumns(['action','permissions'])
             ->toJson();
-    } 
+    }
+    public function getPermissions($id){
+        $users = User::findOrFail($id);
+
+        $data = [
+            ['users' => $users->name],
+            ['permissions' => $users->getAllPermissions()]
+        ];
+
+        return response()->json($data);
+    }
     public function editUser(){}
     public function deleteUser(){}
     // PROGRAMAS
