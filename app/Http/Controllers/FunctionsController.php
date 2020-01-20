@@ -50,16 +50,6 @@ class FunctionsController extends Controller
             ->rawColumns(['action','permissions'])
             ->toJson();
     }
-    public function getPermissions($id){
-        $users = User::findOrFail($id);
-
-        $data = [
-            ['users' => $users->name],
-            ['permissions' => $users->getAllPermissions()]
-        ];
-
-        return response()->json($data);
-    }
     public function editUser(){}
     public function deleteUser(){}
     // PROGRAMAS
@@ -98,5 +88,45 @@ class FunctionsController extends Controller
             ->rawColumns(['action'])
             ->toJson();
     }
-    
+
+    //TRAYENDO LOS DATOS DE PERMISOS DIRECTOS DE CADA USUARIO
+    public function Permissions(){
+        $role = Role::findByName('Direccion')->permissions();
+        $data = $role;
+        return view('pages.TablePermissions', compact('data'));
+    }
+    public function getUserPermissions(){
+        return datatables()->eloquent(User::query())
+            ->addColumn('sede', function($data){
+                return $data->sede->name;
+            })
+            ->addColumn('rol', function($data){ //MOSTRANDO NOMBRE DE LOS ROLES DEL USUARIO
+                $name = $data->getRoleNames();
+                $char_delete = array('[', '"' , ']');
+                $data_format = str_replace($char_delete, "", $name);
+                return $data_format;
+            })
+            ->addColumn('permissions', 'buttons.BtnShowPermissions')
+            ->rawColumns(['permissions'])
+            ->toJson();
+    }
+    public function getPermissions($id){
+        $users = User::findOrFail($id);
+        $data = [
+            'users' => $users->name,
+            'permissions' => $users->getDirectPermissions()
+        ];
+        return response()->json($data);
+    }
+    public function getPermissionsOnRole($id){ //obteniendo los permisos dados a los roles
+        $role = Role::find($id);
+        $data = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+        ->where("role_has_permissions.role_id",$id)
+        ->get();
+        return response()->json($data);
+    }
+    public function getRole(){ 
+        $roles = Role::get();  
+        return response()->json($roles); 
+    }
 }

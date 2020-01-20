@@ -27,7 +27,6 @@ Route::get('/example', 'HomeController@example')->name('example');
 
 // Permisos de crear programas, motivos y docentes
 Route::get('getUsers', 'FunctionsController@getUser')->name('getUser')->middleware('permission:settings user');
-Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
 Route::get('user-settings', 'FunctionsController@settingUser')->name('settingUser')->middleware('permission:create user');
 Route::put('/user-settings/user/{id}/edit', 'FunctionsController@editUser')->name('editUser')->middleware('permission:edit user');
 Route::delete('/user-settings/{id}/delete', 'FunctionsController@deleteUser')->name('deleteUser')->middleware('permission:delete user');
@@ -40,9 +39,17 @@ Route::delete('/program-settings/{id}/delete', 'FunctionsController@deleteProgra
 
 Route::get('/sedes-settings', 'FunctionsController@settingsSede')->name('settingsSede')->middleware('permission:settings sede');
 Route::get('getSedes', 'FunctionsController@getSede')->name('getSede')->middleware('permission:create motivo');
-Route::put('/sede-settings/sede{$id}/edit', 'FunctionsController@editSede')->name('editSede')->middleware('permission:create motivo');
-Route::delete('/sede-settings/{$id}/delete', 'FunctionsController@deleteSede')->name('deleteSede')->middleware('permission:create motivo');
+Route::put('/sede-settings/sede{id}/edit', 'FunctionsController@editSede')->name('editSede')->middleware('permission:create motivo');
+Route::delete('/sede-settings/{id}/delete', 'FunctionsController@deleteSede')->name('deleteSede')->middleware('permission:create motivo');
 
 Route::get('/motivos-setings', 'FunctionsController@settingsMotivo')->name('settingsMotivo')->middleware('permission:settings motivo');
+
+//trayendo permisos segun usuario
+Route::get('/Permissions', 'FunctionsController@Permissions')->name('Permissions')->middleware('auth');
+Route::get('getUserPermissions', 'FunctionsController@getUserPermissions')->name('getUserPermissions')->middleware('auth');
+Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
+Route::get('getPermissionsOnRole/{id}', 'FunctionsController@getPermissionsOnRole')->name('getPermissionsOnRole')->middleware('auth');
+Route::get('getRole', 'FunctionsController@getRole')->name('getRole')->middleware('auth');
+
 
 // Route::get('/program', 'AdminController@program')->name('program');

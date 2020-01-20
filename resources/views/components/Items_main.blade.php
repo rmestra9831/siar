@@ -8,7 +8,7 @@
   </a>
 
 @role('Super Admin')
-<a href="#1" class="item item_main">
+<a href=" {{route('Permissions')}} " class="item item_main">
   <i class="c-white large star outline icon"></i>
   <div class="content">
     Permisos de Usuario

@@ -62,8 +62,8 @@
             "zeroRecords": "No hay coincidencias",
             "infoEmpty": "",
             "infoFiltered": "",
-          }
-      })
+          },
+        })
     });   
   </script>
 @endsection
