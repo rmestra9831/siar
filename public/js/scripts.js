@@ -95,7 +95,13 @@
 
 // menu desplegable para crear correspondencia
 $('.ui.accordion').accordion();
-$('select.dropdown').dropdown(); //**** NOTA ****//
+$('select.dropdown').dropdown();
+$('.tag.example .ui.dropdown').dropdown({
+  allowAdditions: true
+});
+$('.message .close').on('click', function () {
+  $(this).closest('.message').transition('fade');
+}); //**** NOTA ****//
 
 /** Como los botones se esstan cargando dentro de la tabla todas las funcions js que se generen deben estar 
  * dentro de la FUNCION setTimeout para que se pueda ejecutar

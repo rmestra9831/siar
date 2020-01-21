@@ -50,6 +50,8 @@ Route::get('getUserPermissions', 'FunctionsController@getUserPermissions')->name
 Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
 Route::get('getPermissionsOnRole/{id}', 'FunctionsController@getPermissionsOnRole')->name('getPermissionsOnRole')->middleware('auth');
 Route::get('getRole', 'FunctionsController@getRole')->name('getRole')->middleware('auth');
+Route::get('getAllPermissions/{id}', 'FunctionsController@getAllPermissions')->name('getAllPermissions')->middleware('auth');
+Route::get('permission/{id}/delete', 'FunctionsController@deletePermission')->name('deletePermission')->middleware('auth');
 
 
 // Route::get('/program', 'AdminController@program')->name('program');

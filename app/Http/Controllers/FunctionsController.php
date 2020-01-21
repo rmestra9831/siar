@@ -72,6 +72,7 @@ class FunctionsController extends Controller
             ->rawColumns(['action'])
             ->toJson();
     }
+    
     // MOTIVOS
     public function settingsMotivo(){
         return view('pages.settingsMotivos');
@@ -123,10 +124,26 @@ class FunctionsController extends Controller
         $data = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
         ->where("role_has_permissions.role_id",$id)
         ->get();
-        return response()->json($data);
+        return datatables()->collection($data)
+        ->addColumn('opciones', function ($data) {
+                        
+            return  '
+            <a href="permission/'.$data->id.'/delete" data-tooltip="Eliminar" data-position="top center" id="" class="circular ui icon red button"><i class="icon trash"></i></a>';
+        })  
+        ->rawColumns(['opciones'])
+        ->toJson();
     }
     public function getRole(){ 
         $roles = Role::get();  
         return response()->json($roles); 
+    }
+    public function getAllPermissions($id){
+        $permissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+        ->where("role_has_permissions.role_id","!=",$id)
+        ->get();  
+        return response()->json($permissions); 
+    }
+    public function deletePermission($id){
+        return 'eliminado permiso '. $id;
     }
 }

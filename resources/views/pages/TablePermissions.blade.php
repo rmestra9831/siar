@@ -35,6 +35,7 @@
 
   <div class="tab-pane fade p-3" id="nav-permissions-role" role="tabpanel" aria-labelledby="nav-permissions-role-tab">
     <div class="container">
+      @include('common.Info')
       {{-- Muestra los roles y sus permisos correspondientes --}}
       <div class="ui form">
         <div class="inline field">
@@ -44,7 +45,6 @@
           </select>
         </div>
       </div>
-      
       {{-- tabla e muestra de usuarios --}}
       <div class="m-4">
           <table id="permisos-rol" class="ui single line celled table">
@@ -56,10 +56,13 @@
             </thead>
           </table>
       </div>
-
+      <div id="btn_add_permission"></div>
     </div>
   </div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+  </div>
 </div>
 @endsection
 
