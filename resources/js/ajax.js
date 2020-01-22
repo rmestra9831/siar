@@ -1,40 +1,5 @@
-setTimeout(function (){ //cargando todas las funciones ajax
-
-    $('.permission').click(function () {
-        // configurando token de laravel en ajax
-        $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
-        
-        // opciones ajax para traer los permsos que tiene un usuario
-        $.ajax({
-          type: "GET",
-          url: "getPermissions/"+this.value+"", 
-          success: function (response) {
-            var users = response.users;
-            var permissions = response.permissions;
-      
-            if ($.isEmptyObject(permissions)) {
-                $('#infoModalTitle').html('Sin permisos de Usuario');
-                $('#infoModalDescription').html('<strong>Este usuario no posee permisos directos</strong>');
-                console.log('sin datos');
-              } else {
-                $('#infoModalTitle').html('Permisos de Usuario');
-                $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');
-
-
-                for(p=0; p<permissions.length; p++){
-                    permissions_name = permissions[p].name;
-                    console.log(permissions_name);
-              }
-            }
-          }
-        });
-      
-      });
-
-},500);
-
 // TRAYENDO LOS PERMISOS DEL ROL SELCCIONADO EN LA VISTA TABLEPERMISSIONS
-$.ajax({
+$.ajax({ //obteniendo los roles 
   type: "GET",
   url: "getRole",
   beforeSend(){
@@ -48,6 +13,7 @@ $.ajax({
     });
   }
 });
+
 // EVENTOS AL CAMBIAR LOS ROLES
 $('#rolesWithPermissions').change(function (){
   var id_rol = this.value;

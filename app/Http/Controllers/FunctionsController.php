@@ -107,7 +107,13 @@ class FunctionsController extends Controller
                 $data_format = str_replace($char_delete, "", $name);
                 return $data_format;
             })
-            ->addColumn('permissions', 'buttons.BtnShowPermissions')
+            ->addColumn('permissions', function ($data) {
+                if(auth()->user()->can('settings user')){ //BOTO PARA MOSTRAR MODAL
+                    return  '
+                     <button id="'.$data->id.'" value="'.$data->id.'"  data-tooltip="Ver Permisos" data-position="top center" class="ui basic permission button"><i class="icon eye"></i> Ver </button>';
+                 }
+            }) 
+            // ->addColumn('permissions', 'buttons.BtnShowPermissions')
             ->rawColumns(['permissions'])
             ->toJson();
     }
@@ -125,8 +131,7 @@ class FunctionsController extends Controller
         ->where("role_has_permissions.role_id",$id)
         ->get();
         return datatables()->collection($data)
-        ->addColumn('opciones', function ($data) {
-                        
+        ->addColumn('opciones', function ($data) {                
             return  '
             <a href="permission/'.$data->id.'/delete" data-tooltip="Eliminar" data-position="top center" id="" class="circular ui icon red button"><i class="icon trash"></i></a>';
         })  

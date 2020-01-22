@@ -5,8 +5,8 @@
  */
 
 require('./jquery-3.4.1.min');
-require('./bootstrap');
 require('./dataTables.semanticui.min');
+require('./bootstrap');
 require('./semantic.min');
 
 window.Vue = require('vue');
