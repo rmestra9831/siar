@@ -106,14 +106,7 @@ $('.message .close').on('click', function () {
 /** Como los botones se esstan cargando dentro de la tabla todas las funcions js que se generen deben estar 
  * dentro de la FUNCION setTimeout para que se pueda ejecutar
  **/
-// inicialización del modals despues que se ejecuta la pag
-
-setTimeout(function () {
-  $('.ui.modal').modal({
-    inverted: true,
-    blurring: true
-  }).modal('attach events', '.permission.button', 'show');
-}, 500); // $('.ui.basic.modal').modal('show');
+// $('.ui.basic.modal').modal('show');
 // cambiado icono de menu de correspondencia
 
 $('#btnsCorrespondence').click(function () {

@@ -7,6 +7,7 @@
 require('./jquery-3.4.1.min');
 require('./dataTables.semanticui.min');
 require('./bootstrap');
+require('./jquery-confirm');
 require('./semantic.min');
 
 window.Vue = require('vue');

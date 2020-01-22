@@ -80,12 +80,29 @@
                   $('.modal_permissions.modal').modal({ // inicialización del modals despues que se ejecuta la pag
                   inverted: true,
                   blurring: true,
-                  onApprove : function() {
-                    window.alert('Approved!');
-                  }
-                  }).modal('attach events', '.permission.button');
+                  onApprove : function() { //confirmar
+                    $.confirm({ //aqui va el alerta personalizado
+                        title: 'Confirm!',
+                        content: 'Simple confirm!',
+                        buttons: {
+                            confirm: function () {
+                                $.alert('Confirmed!');
+                            },
+                            cancel: function () {
+                                $.alert('Canceled!');
+                            },
+                            somethingElse: {
+                                text: 'Something else',
+                                btnClass: 'btn-blue',
+                                keys: ['enter', 'shift'],
+                                action: function(){
+                                    $.alert('Something else?');
+                                }
+                            }
+                        }
+                    });
+                  }}).modal('attach events', '.permission.button');
                   
-
                   $('.permission').click(function () {
                     // configurando token de laravel en ajax
                     $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
@@ -105,12 +122,12 @@
                           } else {
                             $('#infoModalTitle').html('Permisos de Usuario');
                             $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');                   
-                            $.each(data, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+                            $.each(permissions, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
                               permission_select = 
                               '<div class="column">'+
                                 '<div class="ui test slider checkbox">'+
-                                  '<input value="'+data[p].id+'" type="checkbox">'+
-                                  '<label>'+data[p].name+'</label>'+
+                                  '<input value="'+permissions[p].id+'" type="checkbox">'+
+                                  '<label>'+permissions[p].name+'</label>'+
                                 '</div>'+
                               '</div>';
                               $('#content_view_permissions').append(permission_select);

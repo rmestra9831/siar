@@ -74,7 +74,6 @@ $('#rolesWithPermissions').change(function (){
           });  
         }
 
-        
       console.log(data);
       }
     );

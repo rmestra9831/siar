@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "datatables.net": "^1.10.20",
+        "jquery-confirm": "^3.3.4",
         "run": "^1.4.0"
     }
 }

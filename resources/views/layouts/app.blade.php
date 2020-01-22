@@ -17,6 +17,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet"/>
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-confirm.css') }}" rel="stylesheet">
     {{-- estilos de DataTable --}}
     <link href="{{ asset('css/DataTables-1.10.20/css/dataTables.semanticui.min.css') }}" rel="stylesheet">
     <!-- Scripts -->    
