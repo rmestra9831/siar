@@ -98,9 +98,6 @@ $.ajax({
   //obteniendo los roles 
   type: "GET",
   url: "getRole",
-  beforeSend: function beforeSend() {
-    $('#rolesWithPermissions').html('<option value="">Cargando...</option>');
-  },
   success: function success(response) {
     var rol_select = '<option value="">Seleccione el rol</option>';
     $.each(response, function (r) {
@@ -152,10 +149,16 @@ $('#rolesWithPermissions').change(function () {
       var str = arr_permissions.join(',');
       $.confirm({
         //aqui va el alerta personalizado
+        animation: 'zoom',
+        closeAnimation: 'zoom',
+        theme: 'modern',
+        icon: 'lh exclamation triangle icon',
+        backgroundDismissAnimation: 'glow',
         title: 'Confirmación!',
         content: 'Esta seguro que desea agregar estos permisos al rol seleccionado?' + str,
+        type: 'orange',
         buttons: {
-          confirm: function confirm() {
+          aceptar: function aceptar() {
             $.alert('Confirmed!');
           },
           cancel: function cancel() {}
@@ -165,8 +168,8 @@ $('#rolesWithPermissions').change(function () {
   }).modal('attach events', '.add_permissions.button', 'show'); // mostrando select de los permisos
 
   $('.add_permissions.button').click(function () {
-    $.getJSON("getAllPermissions/" + id_rol + "", function (data) {
-      $('#content_add_permissions').empty();
+    $.getJSON("getAddPermissions/" + id_rol + "", function (data) {
+      $('#content_add_permissions').empty().fadeIn();
 
       if ($.isEmptyObject(data)) {
         $('#title_add_permissions').html('Este rol cuenta con todos los permisos');
@@ -174,12 +177,21 @@ $('#rolesWithPermissions').change(function () {
         $('#title_add_permissions').html('Asignando permisos al rol');
         $.each(data, function (p) {
           //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
-          permission_select = '<div class="column">' + '<div class="ui test slider checkbox">' + '<input name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' + '<label>' + data[p].name + '</label>' + '</div>' + '</div>';
-          $('#content_add_permissions').append(permission_select);
+          permission_select = '<div class="column">' + '<div class="ui slider checkbox">' + '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' + '<label for="check' + data[p].id + '">' + data[p].name + '</label>' + '</div>' + '</div>';
+          $('#content_add_permissions').append(permission_select).fadeIn();
         });
       }
+    });
+  });
+}); //Cargando permisos directamente de la base de datos para CREAR NUEVO ROL
 
-      console.log(data);
+$('#nav-create-rol-tab').click(function () {
+  $('#chech_permissions').empty();
+  $.get("getAllPermissions", function (data) {
+    $.each(data, function (p) {
+      //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+      permission_select = '<div class="column">' + '<div class="ui slider checkbox">' + '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' + '<label for="check' + data[p].id + '">' + data[p].name + '</label>' + '</div>' + '</div>';
+      $('#chech_permissions').append(permission_select).fadeIn();
     });
   });
 }); // tabla de permisos

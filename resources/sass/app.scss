@@ -8,12 +8,15 @@
 @import "mediaQuery";
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+// Ribbons
+@import "ribbons";
 
 // aplicando colores de fondo
 .bg-direction{ background: $color-direction !important;}
 .bg-admissions{ background: $color-admissions !important;}
 .c-white{ color: white !important;}
 .bg-input-login{ background: $bg-input !important;}
+.lh{line-height: normal;}
 
 #app {
   display: block !important;

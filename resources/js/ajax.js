@@ -2,9 +2,6 @@
 $.ajax({ //obteniendo los roles 
     type: "GET",
     url: "getRole",
-    beforeSend() {
-        $('#rolesWithPermissions').html('<option value="">Cargando...</option>');
-    },
     success: function(response) {
         var rol_select = '<option value="">Seleccione el rol</option>';
         $.each(response, function(r) {
@@ -13,7 +10,6 @@ $.ajax({ //obteniendo los roles
         });
     }
 });
-
 // EVENTOS AL CAMBIAR LOS ROLES
 $('#rolesWithPermissions').change(function() {
     var id_rol = this.value;
@@ -48,8 +44,8 @@ $('#rolesWithPermissions').change(function() {
             "infoFiltered": "",
         },
     });
-
     $('#btn_add_permission').html('<button id="' + id_rol + '" class="ui violet add_permissions button"><i class="plus icon"></i>Asignar nuevo permiso</button>');
+
     $('.ui.longer.modal').modal({
         inverted: true,
         blurring: true,
@@ -59,10 +55,16 @@ $('#rolesWithPermissions').change(function() {
               }).get();
               var str = arr_permissions.join(',');
             $.confirm({ //aqui va el alerta personalizado
+                animation: 'zoom',
+                closeAnimation: 'zoom',
+                theme: 'modern',
+                icon: 'lh exclamation triangle icon',
+                backgroundDismissAnimation: 'glow',
                 title: 'Confirmación!',
                 content: 'Esta seguro que desea agregar estos permisos al rol seleccionado?' + str,
+                type: 'orange',
                 buttons: {
-                    confirm: function() {
+                    aceptar: function() {
                         $.alert('Confirmed!');
                     },
                     cancel: function() {
@@ -75,30 +77,44 @@ $('#rolesWithPermissions').change(function() {
 
     // mostrando select de los permisos
     $('.add_permissions.button').click(function() {
-        $.getJSON("getAllPermissions/" + id_rol + "", function(data) {
-            $('#content_add_permissions').empty();
-
+        $.getJSON("getAddPermissions/" + id_rol + "", function(data) {
+            $('#content_add_permissions').empty().fadeIn();
             if ($.isEmptyObject(data)) {
                 $('#title_add_permissions').html('Este rol cuenta con todos los permisos');
 
-            } else {
+                } else {
                 $('#title_add_permissions').html('Asignando permisos al rol');
                 $.each(data, function(p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
                     permission_select =
                         '<div class="column">' +
-                        '<div class="ui test slider checkbox">' +
-                        '<input name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' +
-                        '<label>' + data[p].name + '</label>' +
+                        '<div class="ui slider checkbox">' +
+                        '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' +
+                        '<label for="check' + data[p].id + '">' + data[p].name + '</label>' +
                         '</div>' +
                         '</div>';
-                    $('#content_add_permissions').append(permission_select);
+                    $('#content_add_permissions').append(permission_select).fadeIn();
                 });
             }
-
-            console.log(data);
         });
     });
 
 });
 
+//Cargando permisos directamente de la base de datos para CREAR NUEVO ROL
+$('#nav-create-rol-tab').click(function () { 
+    $('#chech_permissions').empty();
+    $.get("getAllPermissions", function (data) {
+        $.each(data, function(p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+            permission_select =
+                '<div class="column">' +
+                '<div class="ui slider checkbox">' +
+                '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' +
+                '<label for="check' + data[p].id + '">' + data[p].name + '</label>' +
+                '</div>' +
+                '</div>';
+            $('#chech_permissions').append(permission_select).fadeIn();
+        });
+    });
+    
+});
 // tabla de permisos

@@ -45,13 +45,16 @@ Route::delete('/sede-settings/{id}/delete', 'FunctionsController@deleteSede')->n
 Route::get('/motivos-setings', 'FunctionsController@settingsMotivo')->name('settingsMotivo')->middleware('permission:settings motivo');
 
 //trayendo permisos segun usuario
-Route::get('/Permissions', 'FunctionsController@Permissions')->name('Permissions')->middleware('auth');
-Route::get('getUserPermissions', 'FunctionsController@getUserPermissions')->name('getUserPermissions')->middleware('auth');
-Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
-Route::get('getPermissionsOnRole/{id}', 'FunctionsController@getPermissionsOnRole')->name('getPermissionsOnRole')->middleware('auth');
-Route::get('getRole', 'FunctionsController@getRole')->name('getRole')->middleware('auth');
-Route::get('getAllPermissions/{id}', 'FunctionsController@getAllPermissions')->name('getAllPermissions')->middleware('auth');
-Route::get('permission/{id}/delete', 'FunctionsController@deletePermission')->name('deletePermission')->middleware('auth');
+Route::group(['middleware' => ['role:Super Admin']], function () {
+    Route::get('/Permissions', 'FunctionsController@Permissions')->name('Permissions')->middleware('auth');
+    Route::get('getUserPermissions', 'FunctionsController@getUserPermissions')->name('getUserPermissions')->middleware('auth');
+    Route::get('getPermissions/{id}', 'FunctionsController@getPermissions')->name('getPermissions')->middleware('auth');
+    Route::get('getPermissionsOnRole/{id}', 'FunctionsController@getPermissionsOnRole')->name('getPermissionsOnRole')->middleware('auth');
+    Route::get('getRole', 'FunctionsController@getRole')->name('getRole')->middleware('auth');
+    Route::get('getAllPermissions', 'FunctionsController@getAllPermissions')->name('getAllPermissions')->middleware('auth');
+    Route::get('getAddPermissions/{id}', 'FunctionsController@getAddPermissions')->name('getAddPermissions')->middleware('auth');
+    Route::get('permission/{id}/delete', 'FunctionsController@deletePermission')->name('deletePermission')->middleware('auth');
+});
 
 
 // Route::get('/program', 'AdminController@program')->name('program');

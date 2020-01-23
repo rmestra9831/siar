@@ -10,13 +10,16 @@
 @section('body_main')
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Permisos de usuarios</a>
+    <a class="nav-item nav-link active" id="nav-permissions-users-tab" data-toggle="tab" href="#nav-permissions-users" role="tab" aria-controls="nav-permissions-users" aria-selected="true">Permisos de usuarios</a>
+
     <a class="nav-item nav-link" id="nav-permissions-role-tab" data-toggle="tab" href="#nav-permissions-role" role="tab" aria-controls="nav-permissions-role" aria-selected="false">Permisos de roles</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+
+    <a class="nav-item nav-link" id="nav-create-rol-tab" data-toggle="tab" href="#nav-create-rol" role="tab" aria-controls="nav-create-rol" aria-selected="false">Nuevo Rol</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+  <div class="tab-pane fade show active p-3" id="nav-permissions-users" role="tabpanel" aria-labelledby="nav-permissions-users-tab">
     {{-- aqui van todos los usuarios con permisos --}}
     <div class="container">
       {{-- tabla e muestra de usuarios --}}
@@ -32,7 +35,7 @@
         </table>
     </div>
   </div>
-
+  {{-- cuerpo 2 --}}
   <div class="tab-pane fade p-3" id="nav-permissions-role" role="tabpanel" aria-labelledby="nav-permissions-role-tab">
     <div class="container">
       @include('common.Info')
@@ -60,9 +63,27 @@
     </div>
   </div>
 
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
+  <div class="tab-pane fade p-3" id="nav-create-rol" role="tabpanel" aria-labelledby="nav-create-rol-tab">
+    <div class="container">
+      {{-- formulario para crear un nuevo rol con sus permisos --}}
+      <div class="ui center aligned basic segment">
+        <div class="ui left icon action input">
+          <i class="search icon"></i>
+          <input type="text" placeholder="Order #">
+          <div class="ui blue submit button">Search</div>
+        </div>
+        <div class="ui horizontal divider">Permisos</div> {{--divisor--}}
+        <div class="container">
+          <div class="ui form three column grid">
+            <div class="left aligned grouped fields row" id="chech_permissions">
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 @endsection
 
@@ -82,23 +103,19 @@
                   blurring: true,
                   onApprove : function() { //confirmar
                     $.confirm({ //aqui va el alerta personalizado
-                        title: 'Confirm!',
-                        content: 'Simple confirm!',
+                        theme: 'Modern',
+                        title: 'Eliminar',
+                        content: 'Seguro que desea quitar el/los permiso/s a este usuario?',
+                        icon: 'lh exclamation triangle icon',
+                        backgroundDismissAnimation: 'glow',
+                        type: 'red',
                         buttons: {
-                            confirm: function () {
+                            Elimiar: function () {
                                 $.alert('Confirmed!');
                             },
                             cancel: function () {
                                 $.alert('Canceled!');
                             },
-                            somethingElse: {
-                                text: 'Something else',
-                                btnClass: 'btn-blue',
-                                keys: ['enter', 'shift'],
-                                action: function(){
-                                    $.alert('Something else?');
-                                }
-                            }
                         }
                     });
                   }}).modal('attach events', '.permission.button');
@@ -116,13 +133,17 @@
                         var permissions = response.permissions;
 
                         if ($.isEmptyObject(permissions)) {
+                            $('#content_view_permissions').empty().fadeIn();             
                             $('#infoModalTitle').html('Sin permisos de Usuario');
                             $('#infoModalDescription').html('<strong>Este usuario no posee permisos directos</strong>');
                             console.log('sin datos');
                           } else {
-                            console.log(permissions);
+                            // console.log(permissions);
                             $('#infoModalTitle').html('Permisos de Usuario');
-                            $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');                   
+                            $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');
+                            // console.log(permissions);
+                            $('#content_view_permissions').empty();             
+                            $('#content_view_permissions').append('<div class="ui icon message"><i class="check square outline icon"></i><div class="content"><div class="header">Seleccione el/los rol/es que desea <strong>eliminar</strong></div></div></div>').fadeIn();
                             $.each(permissions, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
                               permission_select = 
                               '<div class="column">'+
@@ -131,7 +152,7 @@
                                   '<label>'+permissions[p].name+'</label>'+
                                 '</div>'+
                               '</div>';
-                              $('#content_view_permissions').append(permission_select);
+                              $('#content_view_permissions').append(permission_select).fadeIn();
                             });  
                         }
 

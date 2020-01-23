@@ -21,6 +21,7 @@
     {{-- estilos de DataTable --}}
     <link href="{{ asset('css/DataTables-1.10.20/css/dataTables.semanticui.min.css') }}" rel="stylesheet">
     <!-- Scripts -->    
+    <script src="https://kit.fontawesome.com/0892879507.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>

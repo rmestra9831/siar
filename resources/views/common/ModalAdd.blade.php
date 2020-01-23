@@ -11,8 +11,8 @@ height: auto;">
               <label>Permisos</label>
 
               <div class="container">
-                <div class="ui two column grid">
-                    <div class="row " id="content_add_permissions">
+                <div class="ui form two column grid">
+                    <div class="grouped fields row" id="content_add_permissions">
                         
                     </div>
                   </div>

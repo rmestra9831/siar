@@ -7,9 +7,7 @@ height: auto;">
         
         <div class="container">
           <div class="ui two column grid">
-              <div class="row " id="content_view_permissions">
-                  
-              </div>
+              <div class="row " id="content_view_permissions"></div>
             </div>
         </div>
 

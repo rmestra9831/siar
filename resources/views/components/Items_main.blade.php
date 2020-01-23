@@ -7,14 +7,14 @@
     </div>
   </a>
 
-@role('Super Admin')
+@can('Super Admin')
 <a href=" {{route('Permissions')}} " class="item item_main">
   <i class="c-white large star outline icon"></i>
   <div class="content">
     Permisos de Usuario
   </div>
 </a>
-@endrole
+@endcan
 
 @role('Dirección')
 <a href="#1" class="item item_main">

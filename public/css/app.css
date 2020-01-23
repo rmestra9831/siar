@@ -11380,6 +11380,41 @@ a.text-dark:focus {
   }
 }
 
+.ribbon3 {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 15px;
+  position: absolute;
+  left: -8px;
+  top: 20px;
+  background: #59324C;
+}
+
+.ribbon3:before,
+.ribbon3:after {
+  content: "";
+  position: absolute;
+}
+
+.ribbon3:before {
+  height: 0;
+  width: 0;
+  top: -8.5px;
+  left: 0.1px;
+  border-bottom: 9px solid black;
+  border-left: 9px solid transparent;
+}
+
+.ribbon3:after {
+  height: 0;
+  width: 0;
+  right: -14.5px;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-left: 15px solid #59324C;
+}
+
 .bg-direction {
   background: #47994B !important;
 }
@@ -11394,6 +11429,10 @@ a.text-dark:focus {
 
 .bg-input-login {
   background: #0c649a1f !important;
+}
+
+.lh {
+  line-height: normal;
 }
 
 #app {

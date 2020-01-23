@@ -92,8 +92,6 @@ class FunctionsController extends Controller
 
     //TRAYENDO LOS DATOS DE PERMISOS DIRECTOS DE CADA USUARIO
     public function Permissions(){
-        $role = Role::findByName('Direccion')->permissions();
-        $data = $role;
         return view('pages.TablePermissions', compact('data'));
     }
     public function getUserPermissions(){
@@ -142,11 +140,15 @@ class FunctionsController extends Controller
         $roles = Role::get();  
         return response()->json($roles); 
     }
-    public function getAllPermissions($id){
-        $permissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-        ->where("role_has_permissions.role_id","!=",$id)
+    public function getAddPermissions($id){
+        $permissions = Permission::leftJoin("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+        // ->where("role_has_permissions.permission_id",null)
         ->get();  
         return response()->json($permissions); 
+    }
+    public function getAllPermissions(){
+        $allPermissions = Permission::get();
+        return response()->json($allPermissions);   
     }
     public function deletePermission($id){
         return 'eliminado permiso '. $id;
