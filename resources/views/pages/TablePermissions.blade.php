@@ -120,6 +120,7 @@
                             $('#infoModalDescription').html('<strong>Este usuario no posee permisos directos</strong>');
                             console.log('sin datos');
                           } else {
+                            console.log(permissions);
                             $('#infoModalTitle').html('Permisos de Usuario');
                             $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');                   
                             $.each(permissions, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS

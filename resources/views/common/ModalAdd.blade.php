@@ -26,7 +26,7 @@ height: auto;">
       <div class="ui black deny button">
         Cancelar
       </div>
-      <div class="ui positive right labeled icon button">
+      <div class="ui positive ok right labeled icon button">
         Guardar Cambios
         <i class="checkmark icon"></i>
       </div>

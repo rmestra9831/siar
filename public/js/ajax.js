@@ -142,7 +142,26 @@ $('#rolesWithPermissions').change(function () {
   $('#btn_add_permission').html('<button id="' + id_rol + '" class="ui violet add_permissions button"><i class="plus icon"></i>Asignar nuevo permiso</button>');
   $('.ui.longer.modal').modal({
     inverted: true,
-    blurring: true
+    blurring: true,
+    onApprove: function onApprove() {
+      //confirmar
+      var arr_permissions = $('[name="check_add_permissions_on_rol[]"]:checked').map(function () {
+        //obteniendo los datos de los checkers add_permissions to rol
+        return this.value;
+      }).get();
+      var str = arr_permissions.join(',');
+      $.confirm({
+        //aqui va el alerta personalizado
+        title: 'Confirmación!',
+        content: 'Esta seguro que desea agregar estos permisos al rol seleccionado?' + str,
+        buttons: {
+          confirm: function confirm() {
+            $.alert('Confirmed!');
+          },
+          cancel: function cancel() {}
+        }
+      });
+    }
   }).modal('attach events', '.add_permissions.button', 'show'); // mostrando select de los permisos
 
   $('.add_permissions.button').click(function () {
@@ -155,7 +174,7 @@ $('#rolesWithPermissions').change(function () {
         $('#title_add_permissions').html('Asignando permisos al rol');
         $.each(data, function (p) {
           //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
-          permission_select = '<div class="column">' + '<div class="ui test slider checkbox">' + '<input value="' + data[p].id + '" type="checkbox">' + '<label>' + data[p].name + '</label>' + '</div>' + '</div>';
+          permission_select = '<div class="column">' + '<div class="ui test slider checkbox">' + '<input name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' + '<label>' + data[p].name + '</label>' + '</div>' + '</div>';
           $('#content_add_permissions').append(permission_select);
         });
       }
