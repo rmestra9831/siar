@@ -57,7 +57,9 @@ Route::group(['middleware' => ['role:Super Admin']], function () {
     Route::get('getAllPermissions', 'FunctionsController@getAllPermissions')->name('getAllPermissions')->middleware('auth');
     Route::get('getAddPermissions/{id}', 'FunctionsController@getAddPermissions')->name('getAddPermissions')->middleware('auth');
     Route::get('permission/{id}/delete', 'FunctionsController@deletePermission')->name('deletePermission')->middleware('auth');
-});
 
+    //POST
+    Route::get('assingPermissionsOnRole/{id}','FunctionsController@assingPermissionsOnRole')->name('assingPermissionsOnRole')->middleware('auth');
+});
 
 // Route::get('/program', 'AdminController@program')->name('program');

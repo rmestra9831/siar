@@ -92,30 +92,7 @@ class FunctionsController extends Controller
 
     //TRAYENDO LOS DATOS DE PERMISOS DIRECTOS DE CADA USUARIO
     public function Permissions(){
-
-        //prueba de datos
-        $permissions = Permission::leftJoin("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-        ->where("role_has_permissions.role_id", 1)
-        ->get();
-        
-        $allP = Permission::select('id')->get()->toArray();
-        $PoR = $permissions->toArray();
-        
-        $arr_PoR = array();     // Aqui se obtiene una matriz con los datos
-        $arr_allP = array();    //
-        $arr_final_for_find = array();
-        
-        foreach ($PoR as $datos) {array_push($arr_PoR, $datos['id']);} //recorro los datos de los permisos que contiene el rol
-        foreach ($allP as $datos) {array_push($arr_allP, $datos['id']);} //recorro los datos de los permisos que contiene el rol
-        $arr_permissions_restantes = array_diff ($arr_allP, $arr_PoR);
-        foreach ($arr_permissions_restantes as $data) {array_push($arr_final_for_find, $data);}
-
-        $conver_to_string = implode(',',$arr_permissions_restantes);
-        $permissions_faltantes = Permission::find($arr_final_for_find);
-        // return $conver_to_string;
-        return json_encode($permissions_faltantes);
-
-        // return view('pages.TablePermissions', compact('data', 'rr'));
+        return view('pages.TablePermissions', compact('data', 'rr'));
     }
     public function getUserPermissions(){
         return datatables()->eloquent(User::query())
@@ -167,10 +144,22 @@ class FunctionsController extends Controller
         $permissions = Permission::leftJoin("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
         ->where("role_has_permissions.role_id", $id)
         ->get();
+        
+        $allP = Permission::select('id')->get()->toArray();
+        $PoR = $permissions->toArray();
+        
+        $arr_PoR = array();     // Aqui se obtiene una matriz con los datos
+        $arr_allP = array();    //
+        $arr_final_for_find = array(); //Esto guarda los datos finales que se serán pasados a la consulta del metodo ::find()
+        
+        foreach ($PoR as $datos) {array_push($arr_PoR, $datos['id']);} //recorro los datos de los permisos que contiene el rol
+        foreach ($allP as $datos) {array_push($arr_allP, $datos['id']);} //Obtiene Todos los roles y los almacena por separado en el arr_allP
+        $arr_permissions_restantes = array_diff ($arr_allP, $arr_PoR);
+        foreach ($arr_permissions_restantes as $data) {array_push($arr_final_for_find, $data);} //Obtiene la consulta anterior y agrega por datos al arrat final que será consultado
 
-        $rr = Permission::find([1,2,3]);
-        // return json_encode($permissions->except(['name','guard_name','created_at','updated_at','role_id','permissions_id']));
-        return response()->json($permissions); 
+        $permissions_faltantes = Permission::find($arr_final_for_find);
+
+        return response()->json($permissions_faltantes); 
     }
     public function getAllPermissions(){
         $allPermissions = Permission::get();
@@ -178,5 +167,35 @@ class FunctionsController extends Controller
     }
     public function deletePermission($id){
         return 'eliminado permiso '. $id;
+    }
+
+    // Asignando, eliminando o editando permisos
+    public function assingPermissionsOnRole($id){
+        $permissions = Permission::leftJoin("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+        ->where("role_has_permissions.role_id", $id)
+        ->get();
+        
+        $allP = Permission::select('id')->get()->toArray();
+        $PoR = $permissions->toArray();
+        
+        $arr_PoR = array();     // Aqui se obtiene una matriz con los datos
+        $arr_allP = array();    //
+        $arr_final_for_find = array(); //Esto guarda los datos finales que se serán pasados a la consulta del metodo ::find()
+        
+        foreach ($PoR as $datos) {array_push($arr_PoR, $datos['id']);} //recorro los datos de los permisos que contiene el rol
+        foreach ($allP as $datos) {array_push($arr_allP, $datos['id']);} //Obtiene Todos los roles y los almacena por separado en el arr_allP
+        $arr_permissions_restantes = array_diff ($arr_allP, $arr_PoR);
+        foreach ($arr_permissions_restantes as $data) {array_push($arr_final_for_find, $data);} //Obtiene la consulta anterior y agrega por datos al arrat final que será consultado
+
+        $prob = array(); //obtener los nombres de los permisos a agregar al rol
+        $bandera = false;
+        $permissions_faltantes = Permission::select('name')->find($arr_final_for_find);
+
+        foreach ($permissions_faltantes as $data) {array_push($prob, $data['name']);}//llenando el arreglo
+        $role_actual = Role::findOrFail($id);
+        // $role_actual = givePermissionTo($prob);
+        $rr = implode(",",$prob);
+        
+        return response()->json($role_actual); 
     }
 }
