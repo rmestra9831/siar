@@ -25,6 +25,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/example', 'HomeController@example')->name('example');
 
+
+
+
 // Permisos de crear programas, motivos y docentes
 Route::get('getUsers', 'FunctionsController@getUser')->name('getUser')->middleware('permission:settings user');
 Route::get('user-settings', 'FunctionsController@settingUser')->name('settingUser')->middleware('permission:create user');

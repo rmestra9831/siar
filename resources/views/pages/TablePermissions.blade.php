@@ -8,6 +8,7 @@
 @endsection
 
 @section('body_main')
+
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-permissions-users-tab" data-toggle="tab" href="#nav-permissions-users" role="tab" aria-controls="nav-permissions-users" aria-selected="true">Permisos de usuarios</a>
@@ -156,6 +157,12 @@
                             });  
                         }
 
+                      },
+                      error: function() {
+                        $.alert({
+                            title: 'Oh lo siento!',
+                            content: 'Ocurrió un error al momento de traer los datos, por favor vuelve a recargar la página',
+                        });
                       }
                     });
                   

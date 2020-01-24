@@ -73,28 +73,31 @@ $('#rolesWithPermissions').change(function() {
                 }
             });
         }
-    }).modal('attach events', '.add_permissions.button', 'show');
+    }).modal('attach events', '.addpermissions.button', 'show');
 
     // mostrando select de los permisos
     $('.add_permissions.button').click(function() {
         $.getJSON("getAddPermissions/" + id_rol + "", function(data) {
-            $('#content_add_permissions').empty().fadeIn();
-            if ($.isEmptyObject(data)) {
-                $('#title_add_permissions').html('Este rol cuenta con todos los permisos');
+            // $('#content_add_permissions').empty().fadeIn();
+            // if ($.isEmptyObject(data)) {
+            //     $('#title_add_permissions').html('Este rol cuenta con todos los permisos');
 
-                } else {
-                $('#title_add_permissions').html('Asignando permisos al rol');
-                $.each(data, function(p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
-                    permission_select =
-                        '<div class="column">' +
-                        '<div class="ui slider checkbox">' +
-                        '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' +
-                        '<label for="check' + data[p].id + '">' + data[p].name + '</label>' +
-                        '</div>' +
-                        '</div>';
-                    $('#content_add_permissions').append(permission_select).fadeIn();
-                });
-            }
+            //     } else {
+            //     $('#title_add_permissions').html('Asignando permisos al rol');
+            //     $.each(data, function(p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+            //         permission_select =
+            //             '<div class="column">' +
+            //             '<div class="ui slider checkbox">' +
+            //             '<input class="hidden" id="check' + data[p].id + '" name="check_add_permissions_on_rol[]" value="' + data[p].id + '" type="checkbox">' +
+            //             '<label for="check' + data[p].id + '">' + data[p].name + '</label>' +
+            //             '</div>' +
+            //             '</div>';
+            //         $('#content_add_permissions').append(permission_select).fadeIn();
+            //     });
+            // }
+
+            console.log(data)
+
         });
     });
 
