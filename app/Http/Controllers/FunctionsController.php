@@ -170,32 +170,28 @@ class FunctionsController extends Controller
     }
 
     // Asignando, eliminando o editando permisos
-    public function assingPermissionsOnRole($id){
-        $permissions = Permission::leftJoin("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-        ->where("role_has_permissions.role_id", $id)
-        ->get();
-        
-        $allP = Permission::select('id')->get()->toArray();
-        $PoR = $permissions->toArray();
-        
-        $arr_PoR = array();     // Aqui se obtiene una matriz con los datos
-        $arr_allP = array();    //
-        $arr_final_for_find = array(); //Esto guarda los datos finales que se serán pasados a la consulta del metodo ::find()
-        
-        foreach ($PoR as $datos) {array_push($arr_PoR, $datos['id']);} //recorro los datos de los permisos que contiene el rol
-        foreach ($allP as $datos) {array_push($arr_allP, $datos['id']);} //Obtiene Todos los roles y los almacena por separado en el arr_allP
-        $arr_permissions_restantes = array_diff ($arr_allP, $arr_PoR);
-        foreach ($arr_permissions_restantes as $data) {array_push($arr_final_for_find, $data);} //Obtiene la consulta anterior y agrega por datos al arrat final que será consultado
+    public function assingPermissionsOnRole(Request $request){
+        if ($request->ajax()) {
+            $rol = $request->idRol;
+            $permissions = $request->array;
+            $bandera = true;
+            $role_actual = Role::findOrFail($rol);
+            
+            $arr_permissions = explode(",",$permissions);
 
-        $prob = array(); //obtener los nombres de los permisos a agregar al rol
-        $bandera = false;
-        $permissions_faltantes = Permission::select('name')->find($arr_final_for_find);
+            foreach ($arr_permissions as $permission) {
+                $role_actual->givePermissionTo($permission);
+            }
+            return json_encode($arr_permissions);
 
-        foreach ($permissions_faltantes as $data) {array_push($prob, $data['name']);}//llenando el arreglo
-        $role_actual = Role::findOrFail($id);
-        // $role_actual = givePermissionTo($prob);
-        $rr = implode(",",$prob);
+        }else{
+            return json_encode($request);
+        }
+
+    }
+
+    //crear un nuevo rol
+    public function createRol(){
         
-        return response()->json($role_actual); 
     }
 }

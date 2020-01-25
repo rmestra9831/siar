@@ -59,7 +59,7 @@ Route::group(['middleware' => ['role:Super Admin']], function () {
     Route::get('permission/{id}/delete', 'FunctionsController@deletePermission')->name('deletePermission')->middleware('auth');
 
     //POST
-    Route::get('assingPermissionsOnRole/{id}','FunctionsController@assingPermissionsOnRole')->name('assingPermissionsOnRole')->middleware('auth');
+    Route::post('/assingPermissionsOnRole','FunctionsController@assingPermissionsOnRole')->name('assingPermissionsOnRole')->middleware('auth');
 });
 
 // Route::get('/program', 'AdminController@program')->name('program');
