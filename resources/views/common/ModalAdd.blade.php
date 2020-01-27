@@ -13,7 +13,7 @@ height: auto;">
               <div class="container">
                 <div class="ui form two column grid">
                     <div class="grouped fields row" id="content_add_permissions">
-                        
+                        tabl
                     </div>
                   </div>
               </div>

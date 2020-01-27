@@ -35,5 +35,14 @@ class UserSeeder extends Seeder
             'password'=> bcrypt('123456789'),
             'program_id'=>null
         ]);
+        DB::table('users')->insert([
+            'name'=>'Paola Arciniegas',
+            'email'=>'sistemas@udi.com',
+            'ident'=>'SIS',
+            'sede_id'=>'2',
+            'slug'=>'paola_arciniegas',
+            'password'=> bcrypt('123456789'),
+            'program_id'=>1
+        ]);
     }
 }

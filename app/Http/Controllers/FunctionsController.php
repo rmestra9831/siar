@@ -228,9 +228,19 @@ class FunctionsController extends Controller
         }
     }
 
-    public function DeleteDirectPermissionsOnUser($id){
+    public function deleteViewDirectPermissionsOnUser($id){
+        $user = User::findOrFail($id)->getDirectPermissions();
+        return response()->json($user);
+    }
+    public function deleteDirectPermissionsOnUser(Request $request){
         if ($request->ajax()) {
-            return response()->json($id);
+            $user = User::findOrFail($request->idUser);
+            $arr_delete_permissions = explode(",",$request->array);
+
+            foreach ($arr_delete_permissions as $permissions) {
+                $user->revokePermissionTo($permissions);
+            }
+            return response()->json(true);
         }
     }
 

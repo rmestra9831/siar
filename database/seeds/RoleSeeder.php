@@ -39,21 +39,20 @@ class RoleSeeder extends Seeder
                 Permission::create(['name' => 'check response']);
 
                 //permisos de creados
-                Permission::create(['name' => 'create correspondence']);
-                Permission::create(['name' => 'create internal correspondence']);
-                Permission::create(['name' => 'create external correspondence']);
-                Permission::create(['name' => 'create received correspondence']);
+                Permission::create(['name' => 'create radicado']);
         
                 // creando roles
                 $role_superadmin = Role::create(['name' => 'Super Admin']);
                 $role_direction = Role::create(['name' => 'Direccion']);
                 $role_admissions = Role::create(['name' => 'Admisiones']);
-                $role_program_boss = Role::create(['name' => 'Jef. Programa']);
-                $role_direction_aux = Role::create(['name' => 'Aux. Direción']);
+                $role_program_boss = Role::create(['name' => 'Jef Programa']);
+                $role_direction_aux = Role::create(['name' => 'Aux Direción']);
                 $role_direction_secretary = Role::create(['name' => 'Secretaria de Dirección']);
         
                 // dando los permisos
-                $role_superadmin->givePermissionTo(['settings user','settings program','settings motivo','settings sede','create user', 'delete user','edit user','create program','delete program','edit program','create motivo','edit motivo','create sede','delete sede','edit sede','create correspondence','create internal correspondence','create external correspondence']); 
+                $role_superadmin->givePermissionTo(['settings user','settings program','settings motivo','settings sede','create user', 'delete user','edit user','create program','delete program','edit program','create motivo','edit motivo','create sede','delete sede','edit sede']); 
+                $role_admissions->givePermissionTo(['create radicado']);
+                $role_direction->givePermissionTo(['assign delegate','check response']);
 
                 $user_admin = User::where('id',1)->first();
                 $user_admin->assignRole('Super Admin');
@@ -63,6 +62,9 @@ class RoleSeeder extends Seeder
                 
                 $user_admissions = User::where('id',3)->first();
                 $user_admissions->assignRole('Admisiones');
+                
+                $user_jef_sis = User::where('id',4)->first();
+                $user_admissions->assignRole('Jef Programa');
 
 
             }

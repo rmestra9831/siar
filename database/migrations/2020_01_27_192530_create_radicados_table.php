@@ -14,19 +14,21 @@ class CreateRadicadosTable extends Migration
     public function up()
     {
         Schema::create('radicados', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('radic_id')->nullable();
-            $table->string('radic_year')->nullable();
+            $table->increments('id');
+            $table->string('consecutive')->nullable();
+            // $table->string('radic_year')->nullable();
             $table->string('atention')->nullable();
-            $table->integer('sede')->unsigned();
+            $table->integer('origin_id')->unsigned(); //define el tipo de origen si es EST - DOC - GEN
+            $table->integer('sede_id')->unsigned();
             $table->integer('program_id')->unsigned()->nullable();
-            $table->integer('delegate_id')->unsigned()->nullable();
             $table->string('name',100);
             $table->string('last_name',100);
             $table->string('origen_correo')->nullable();
             $table->string('origen_cel',14)->nullable();
             $table->integer('motivo_id')->unsigned()->nullable();
             $table->string('asunto')->nullable();
+            $table->integer('createBy_id')->unsigned()->nullable();
+            $table->integer('delegate_id')->unsigned()->nullable();
             $table->integer('respon_id')->unsigned()->nullable();
             $table->string('respuesta_file')->nullable();
             $table->string('respuesta_text')->nullable();
@@ -45,6 +47,11 @@ class CreateRadicadosTable extends Migration
             $table->date('answered')->nullable();
             $table->string('aproved')->nullable();
             $table->timestamps();
+
+            // relaciones
+            $table->foreign('origin_id')->references('id')->on('origins')->onDelete('cascade');
+            $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
+            $table->foreign('createBy_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

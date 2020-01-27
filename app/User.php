@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
 use App\Models\Program;
 use App\Models\Sede;
+use App\Models\Radicado;
 
 class User extends Authenticatable
 {

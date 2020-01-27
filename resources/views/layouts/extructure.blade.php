@@ -3,7 +3,7 @@
 @section('content')
   <div class="body_content">
     {{-- seccion del main --}}
-    <div class="@auth main_section @role('Direccion') bg-direction @endrole @role('Super Admin') bg-secondary @endrole @role('admissions') bg-admissions @endrole @else main_section_log @endauth">
+    <div class="@auth main_section @role('Direccion') bg-direction @endrole @role('Super Admin') bg-secondary @endrole @role('Admisiones') bg-admissions @endrole @else main_section_log @endauth">
       <div class="container @auth pan @else pan_login @endauth">
         {{-- validación de lo que muesta el menu si esta autenticado --}}
         @auth

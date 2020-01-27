@@ -1,4 +1,4 @@
-@can('create correspondence')
+{{-- @can('create correspondence')
   <a id="btnsCorrespondence" class="item item_main_accordion ui accordion field">
     <div class="c-white title">
       <i id="icon-main-c" class="c-white large folder outline icon"></i>
@@ -28,6 +28,16 @@
     </div>
   
   </a>
+@endcan --}}
+
+
+@can('create radicado')
+<a href="" class="item item_main">
+  <i class="c-white large clipboard outline icon"></i>
+  <div class="content">
+    Nuevo Radicado
+  </div>
+</a>
 @endcan
 
 @can('settings user')

@@ -57,7 +57,7 @@ height: auto;">
     </div>
     <div class="actions">
       <div class="ui cancel button">Cancel</div>
-      <div class="ui green ok button">Continuar</div>
+      <div class="ui red ok button">Eliminar</div>
     </div>
 </div>
 

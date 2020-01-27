@@ -2,7 +2,7 @@
 @section('img')
     <img class="ui centered image"
     @role('Super Admin') src=" {{asset('icon/stadistics.svg')}} " @endrole
-    @role('Dirección') src=" {{asset('icon/boss.svg')}} " @endrole
+    @role('Direccion') src=" {{asset('icon/boss.svg')}} " @endrole
     @role('Admisiones') src=" {{asset('icon/stadistics.svg')}} " @endrole
     alt="">
 @endsection

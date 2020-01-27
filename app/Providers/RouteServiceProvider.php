@@ -46,7 +46,15 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPermissionsRoutes();
         //
+    }
+
+    public function mapPermissionsRoutes(){
+        Route::prefix('permissions')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/permissions/permissions.php'));
     }
 
     /**

@@ -17,8 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('ident')->nullable();
             $table->integer('sede_id')->nullable()->unsigned();
             $table->integer('program_id')->nullable()->unsigned();
+            $table->integer('origin_est')->nullable()->unsigned();  // asignando el consecutivo individaul de respuesta
+            $table->integer('origin_doc')->nullable()->unsigned();  // asignando el consecutivo individaul de respuesta
+            $table->integer('origin_gen')->nullable()->unsigned();  // asignando el consecutivo individaul de respuesta
             $table->string('slug');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
