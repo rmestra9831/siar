@@ -11435,6 +11435,10 @@ a.text-dark:focus {
   line-height: normal;
 }
 
+.d-content {
+  display: contents !important;
+}
+
 #app {
   display: block !important;
   position: relative !important;

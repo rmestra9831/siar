@@ -5,7 +5,7 @@ height: auto;">
       Profile Picture
     </div>
     <div class="image content" style="height: 400px !important; overflow: auto !important;">
-      <div class="description" style="width: inherit">
+      <div class="description " style="width: inherit">
         <div class="ui form">
             <div class="field">
               <label>Permisos</label>
@@ -26,9 +26,6 @@ height: auto;">
       <div class="ui black deny button">
         Cancelar
       </div>
-      <div class="ui positive ok right labeled icon button">
-        Guardar Cambios
-        <i class="checkmark icon"></i>
-      </div>
+      <div class="ui positive ok right labeled icon button"> Guardar Cambios <i class="checkmark icon"></i></div>
     </div>
 </div>

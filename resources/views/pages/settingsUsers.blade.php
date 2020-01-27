@@ -18,7 +18,6 @@
           <th class="ui center aligned">Sede</th>
           <th class="ui center aligned">Programa</th>
           <th class="ui center aligned">Rol</th>
-          <th class="ui center aligned">Permisos</th>
           <th class="ui center aligned justify-content-center"style="width: 20%;" >Acción</th>
         </tr>
       </thead>
@@ -41,7 +40,6 @@
               {data: 'sede'},
               {data: 'program'},
               {data: 'rol'},
-              {data: 'permissions'},
               {data: 'action'},
           ],
           "language": {

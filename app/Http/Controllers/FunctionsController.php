@@ -12,8 +12,10 @@ use App\User;
 use DataTables;
 class FunctionsController extends Controller
 {
+    protected $permissions;
     public function __construct()
     {
+        $this->permissions = Permission::get();
         $this->middleware('auth');
         $this->sedes = Sede::get(); 
         $this->programas = Program::all(); 
@@ -108,7 +110,10 @@ class FunctionsController extends Controller
             ->addColumn('permissions', function ($data) {
                 if(auth()->user()->can('settings user')){ //BOTO PARA MOSTRAR MODAL
                     return  '
-                     <button id="'.$data->id.'" value="'.$data->id.'"  data-tooltip="Ver Permisos" data-position="top center" class="ui basic permission button"><i class="icon eye"></i> Ver </button>';
+                    <button data-tooltip="Ver" data-position="top center" id="'.$data->id.'" value="'.$data->id.'" class="circular ui icon teal permission button"><i class="icon eye"></i></button>
+                    <button data-tooltip="Agregar" data-position="top center" id="'.$data->id.'" value="'.$data->id.'" class="circular ui icon blue add_direct_permission button"><i class="icon plus circle"></i></button>
+                    <button href="permission/'.$data->id.'/delete" value="'.$data->id.'" data-tooltip="Eliminar" data-position="top center" id="" class="circular ui icon red delete_direct_permission button"><i class="icon trash"></i></button>';
+                     
                  }
             }) 
             // ->addColumn('permissions', 'buttons.BtnShowPermissions')
@@ -174,7 +179,6 @@ class FunctionsController extends Controller
         if ($request->ajax()) {
             $rol = $request->idRol;
             $permissions = $request->array;
-            $bandera = true;
             $role_actual = Role::findOrFail($rol);
             
             $arr_permissions = explode(",",$permissions);
@@ -188,6 +192,46 @@ class FunctionsController extends Controller
             return json_encode($request);
         }
 
+    }
+    public function DirectPermissionsOnUser($id){
+        $user = User::findOrFail($id);
+        $permission = $this->permissions;
+        $permissions_on_user = $user->getPermissionsViaRoles();
+        $permissions_direct = $user->getDirectPermissions();
+
+        $arr_permissions = array();
+        $arr_all_permissions_on_user = array();
+        $arr_permissions_direct = array();
+        $arr_sub_result = array();
+        $arr_result = array();
+
+        foreach ($permission as $data) {array_push($arr_permissions, $data['id']);}
+        foreach ($permissions_direct as $data) {array_push($arr_permissions_direct, $data['id']);}
+        foreach ($permissions_on_user as $data) {array_push($arr_all_permissions_on_user, $data['id']);}
+        foreach (array_diff($arr_permissions, $arr_all_permissions_on_user) as $data) { array_push($arr_sub_result, $data);}
+        foreach (array_diff($arr_sub_result, $arr_permissions_direct) as $data) { array_push($arr_result, $data);}
+        
+        $permissions_for_add = Permission::find($arr_result);
+
+            return response()->json($permissions_for_add);
+    }
+
+    public function assignDirectPermissionsOnUser(Request $request){
+        if ($request->ajax()) {
+            $user = User::findOrFail($request->idUser);
+            $arr_permissions_select = explode(",", $request->array);
+
+            foreach ($arr_permissions_select as $data) {
+                $user->givePermissionTo($data);
+            }
+            return response()->json($arr_permissions_select);
+        }
+    }
+
+    public function DeleteDirectPermissionsOnUser($id){
+        if ($request->ajax()) {
+            return response()->json($id);
+        }
     }
 
     //crear un nuevo rol

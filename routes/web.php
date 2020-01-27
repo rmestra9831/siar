@@ -60,6 +60,12 @@ Route::group(['middleware' => ['role:Super Admin']], function () {
 
     //POST
     Route::post('/assingPermissionsOnRole','FunctionsController@assingPermissionsOnRole')->name('assingPermissionsOnRole')->middleware('auth');
+    Route::post('/assignDirectPermissionsOnUser','FunctionsController@assignDirectPermissionsOnUser')->name('assignDirectPermissionsOnUser')->middleware('auth');
+
+    //DELETE
+    Route::delete('DeleteDirectPermissionsOnUser/{id}/delete','FunctionsController@DeleteDirectPermissionsOnUser')->name('DeleteDirectPermissionsOnUser')->middleware('auth');
+    //Traer  permisos directos e indirectos
+    Route::get('DirectPermissionsOnUser/{id}','FunctionsController@DirectPermissionsOnUser')->name('DirectPermissionsOnUser');
 });
 
 // Route::get('/program', 'AdminController@program')->name('program');

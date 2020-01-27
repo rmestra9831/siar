@@ -227,6 +227,292 @@ $('#nav-create-rol-tab').click(function () {
       $('#chech_permissions').append(permission_select).fadeIn();
     });
   });
+}); //TABLA DE PERMISOS DE USUARIOS
+
+$('#table-permisos').DataTable({
+  "serverSide": false,
+  "scrollCollapse": true,
+  "ajax": {
+    "type": "GET",
+    "url": "getUserPermissions",
+    "complete": function complete() {
+      $('.modal_permissions.modal').modal({
+        // inicialización del modals despues que se ejecuta la pag
+        inverted: true,
+        blurring: true,
+        onApprove: function onApprove() {
+          //confirmar
+          $.confirm({
+            //aqui va el alerta personalizado
+            theme: 'Modern',
+            title: 'Eliminar',
+            content: 'Seguro que desea quitar el/los permiso/s a este usuario?',
+            icon: 'lh exclamation triangle icon',
+            backgroundDismissAnimation: 'glow',
+            type: 'red',
+            buttons: {
+              Elimiar: function Elimiar() {
+                $.alert('Confirmed!');
+              },
+              cancel: function cancel() {
+                $.alert('Canceled!');
+              }
+            }
+          });
+        }
+      }).modal('attach events', '.permission.button'); //trayendo los permissos para agregar
+
+      $('.modal_add_direct_permission.modal').modal({
+        // inicialización del modals despues que se ejecuta la pag
+        inverted: true,
+        blurring: true,
+        onApprove: function onApprove() {
+          //confirmar
+          var arr_permissions_direct = $('[name="check_add_permissions_on_user"]:checked').map(function () {
+            //obteniendo los datos de los checkers add_permissions to rol
+            return this.value;
+          }).get();
+          var str_apd = String(arr_permissions_direct);
+
+          if ($.isEmptyObject(arr_permissions_direct)) {
+            $.alert({
+              title: 'No se han encontrado datos',
+              content: 'Por favor selecciona los permisos a ser añadadidos a este rol'
+            });
+          } else {
+            $.confirm({
+              //aqui va el alerta personalizado
+              animation: 'zoom',
+              closeAnimation: 'zoom',
+              theme: 'modern',
+              icon: 'lh exclamation triangle icon',
+              backgroundDismissAnimation: 'glow',
+              title: 'Confirmación!',
+              content: 'Esta seguro que desea agregar estos permisos al rol seleccionado?',
+              type: 'orange',
+              buttons: {
+                aceptar: function aceptar() {
+                  var data = "array=" + str_apd + "&idUser=" + id_user + "";
+                  $.ajax({
+                    type: "post",
+                    url: "assignDirectPermissionsOnUser",
+                    data: data,
+                    success: function success(response) {
+                      console.log(response);
+                      $.alert({
+                        theme: 'Modern',
+                        icon: 'lh check circle outline icon',
+                        title: 'Está Hecho',
+                        content: 'Permiso/s ' + response + ' asignado correctamente',
+                        type: 'blue',
+                        typeAnimated: true
+                      });
+                      $('#table-permisos').DataTable().ajax.reload(); //recargando la tabla de los datos                               
+                    },
+                    error: function error() {
+                      console.log('error al enviar los datos');
+                    }
+                  });
+                },
+                cancel: function cancel() {}
+              }
+            });
+          }
+        }
+      }).modal('attach events', '.add_direct_permission.button'); //trayendo los permissos directos para eleiminarlos
+
+      $('.modal_add_direct_permission.modal').modal({
+        // inicialización del modals despues que se ejecuta la pag
+        inverted: true,
+        blurring: true,
+        onApprove: function onApprove() {
+          //confirmar
+          var arr_permissions_direct = $('[name="check_add_permissions_on_user"]:checked').map(function () {
+            //obteniendo los datos de los checkers add_permissions to rol
+            return this.value;
+          }).get();
+          var str_apd = String(arr_permissions_direct);
+
+          if ($.isEmptyObject(arr_permissions_direct)) {
+            $.alert({
+              title: 'No se han encontrado datos',
+              content: 'Por favor selecciona los permisos a ser añadadidos a este rol'
+            });
+          } else {
+            $.confirm({
+              //aqui va el alerta personalizado
+              animation: 'zoom',
+              closeAnimation: 'zoom',
+              theme: 'modern',
+              icon: 'lh exclamation triangle icon',
+              backgroundDismissAnimation: 'glow',
+              title: 'Confirmación!',
+              content: 'Esta seguro que desea agregar estos permisos al rol seleccionado?',
+              type: 'orange',
+              buttons: {
+                aceptar: function aceptar() {
+                  var data = "array=" + str_apd + "&idUser=" + id_user + "";
+                  $.ajax({
+                    type: "post",
+                    url: "assignDirectPermissionsOnUser",
+                    data: data,
+                    success: function success(response) {
+                      console.log(response);
+                      $.alert({
+                        theme: 'Modern',
+                        icon: 'lh check circle outline icon',
+                        title: 'Está Hecho',
+                        content: 'Permiso/s ' + response + ' asignado correctamente',
+                        type: 'blue',
+                        typeAnimated: true
+                      });
+                      $('#table-permisos').DataTable().ajax.reload(); //recargando la tabla de los datos                               
+                    },
+                    error: function error() {
+                      console.log('error al enviar los datos');
+                    }
+                  });
+                },
+                cancel: function cancel() {}
+              }
+            });
+          }
+        }
+      }).modal('attach events', '.delete_direct_permission.button');
+      $('.permission').click(function () {
+        // configurando token de laravel en ajax
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }); // opciones ajax para traer los permsos que tiene un usuario
+
+        $.ajax({
+          type: "GET",
+          url: "getPermissions/" + this.value + "",
+          success: function success(response) {
+            var users = response.users;
+            var permissions = response.permissions;
+
+            if ($.isEmptyObject(permissions)) {
+              $('#content_view_permissions').empty().fadeIn();
+              $('#infoModalTitle').html('Sin permisos de Usuario');
+              $('#infoModalDescription').html('<strong>Este usuario no posee permisos directos</strong>');
+              console.log('sin datos');
+            } else {
+              // console.log(permissions);
+              $('#infoModalTitle').html('Permisos de Usuario');
+              $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>'); // console.log(permissions);
+
+              $('#content_view_permissions').empty();
+              $.each(permissions, function (p) {
+                //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+                permission_select = '<div class="column">' + '<div class="ui test slider checkbox">' + '<input value="' + permissions[p].id + '" type="checkbox">' + '<label>' + permissions[p].name + '</label>' + '</div>' + '</div>';
+                $('#content_view_permissions').append(permission_select).fadeIn();
+              });
+            }
+          },
+          error: function error() {
+            $.alert({
+              title: 'Oh lo siento!',
+              content: 'Ocurrió un error al momento de traer los datos, por favor vuelve a recargar la página'
+            });
+          }
+        });
+      });
+      $('.add_direct_permission.button').click(function () {
+        id_user = this.value;
+        $.ajax({
+          type: "GET",
+          url: "DirectPermissionsOnUser/" + this.value + "",
+          success: function success(response) {
+            if (response == false) {
+              $('#content_add_direct_permissions').empty().fadeIn();
+              $('#infoModalTitle_add_direct_permission').html('Este usuario cuenta con todos los permisos');
+            } else {
+              $('#infoModalTitle_add_direct_permission').html('Añadir permisos');
+              $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>'); //cuerpo del modal
+
+              $('#content_add_direct_permissions').empty();
+              $('#content_add_direct_permissions').append('<div class="ui icon info message"><i class="exclamation icon"></i><div class="content"><div class="header">Los permisos que no vea en pantalla, ya hacen parte de las funcionalidades del rol que tenga asignado cada usuario</div></div></div>').fadeIn(); // impresion de los check
+
+              $.each(response, function (p) {
+                //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+                permission_select = '<div class="column">' + '<div class="ui slider checkbox">' + '<input class="hidden" id="check' + response[p].id + '" name="check_add_permissions_on_user" value="' + response[p].name + '" type="checkbox">' + '<label for="check' + response[p].id + '">' + response[p].name + '</label>' + '</div>' + '</div>';
+                $('#content_add_direct_permissions').append(permission_select).fadeIn();
+              });
+            }
+          },
+          error: function error() {
+            $.alert({
+              title: 'Oh lo siento!',
+              content: 'Ocurrió un error al momento de traer los datos, por favor vuelve a recargar la página'
+            });
+          }
+        });
+      });
+      $('.delete_direct_permission.button').click(function () {
+        id_user = this.value;
+        alert('das' + id_user);
+        $.ajax({
+          type: "delete",
+          url: "DeleteDirectPermissionsOnUser/" + this.value + "/delete",
+          success: function success(response) {
+            console.log(response); // if (response == false) {
+            //   $('#content_delete_direct_permissions').empty().fadeIn();             
+            //   $('#infoModalTitle_delete_direct_permission').html('Este usuario cuenta con todos los permisos');
+            // } else {
+            //   $('#infoModalTitle_delete_direct_permission').html('Añadir permisos');
+            //   $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');
+            //   //cuerpo del modal
+            //   $('#content_delete_direct_permissions').empty();             
+            //   $('#content_delete_direct_permissions').append('<div class="ui icon info message"><i class="exclamation icon"></i><div class="content"><div class="header">Los permisos que no vea en pantalla, ya hacen parte de las funcionalidades del rol que tenga asignado cada usuario</div></div></div>').fadeIn();
+            //   // impresion de los check
+            //   $.each(response, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
+            //     permission_select = 
+            //       '<div class="column">' +
+            //       '<div class="ui slider checkbox">' +
+            //       '<input class="hidden" id="check' + response[p].id + '" name="check_add_permissions_on_user" value="' + response[p].name + '" type="checkbox">' +
+            //       '<label for="check' + response[p].id + '">' + response[p].name + '</label>' +
+            //       '</div>' +
+            //       '</div>';
+            //     $('#content_delete_direct_permissions').append(permission_select).fadeIn();
+            //   });
+            // }
+          },
+          error: function error() {
+            $.alert({
+              title: 'Oh lo siento!',
+              content: 'Ocurrió un error al momento de traer los datos, por favor vuelve a recargar la página'
+            });
+          }
+        });
+      });
+    }
+  },
+  //traigo los usuarios para mirar sus permisos
+  "columns": [{
+    data: 'name'
+  }, {
+    data: 'sede'
+  }, {
+    data: 'rol'
+  }, {
+    data: 'permissions'
+  }],
+  "language": {
+    "info": "_TOTAL_ Registros",
+    "search": "Buscar",
+    "paginate": {
+      "next": "Siguiente",
+      "previous": "Anterior"
+    },
+    "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="-1">Todos</option>' + '</select> registros',
+    "emptyTable": "No se encontraron datos",
+    "zeroRecords": "No hay coincidencias",
+    "infoEmpty": "",
+    "infoFiltered": ""
+  }
 }); // tabla de permisos
 
 /***/ }),

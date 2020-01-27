@@ -13,6 +13,7 @@
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-permissions-users-tab" data-toggle="tab" href="#nav-permissions-users" role="tab" aria-controls="nav-permissions-users" aria-selected="true">Permisos de usuarios</a>
 
+    {{-- menu para editar los roles --}}
     <a class="nav-item nav-link" id="nav-permissions-role-tab" data-toggle="tab" href="#nav-permissions-role" role="tab" aria-controls="nav-permissions-role" aria-selected="false">Permisos de roles</a>
 
     <a class="nav-item nav-link" id="nav-create-rol-tab" data-toggle="tab" href="#nav-create-rol" role="tab" aria-controls="nav-create-rol" aria-selected="false">Nuevo Rol</a>
@@ -30,7 +31,7 @@
               <th class="ui center aligned">Nombre</th>
               <th class="ui center aligned">Sede</th>
               <th class="ui center aligned">Rol</th>
-              <th class="ui center aligned">Permisos</th>
+              <th class="ui center aligned">Acciones</th>
             </tr>
           </thead>
         </table>
@@ -89,111 +90,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-          $('#table-permisos').DataTable({
-              "serverSide": false,
-              "scrollCollapse": true,
-              "ajax": {
-                "type": "GET",
-                "url": "{{ route('getUserPermissions') }}",
-                "complete":function () {
-                  
-                  $('.modal_permissions.modal').modal({ // inicialización del modals despues que se ejecuta la pag
-                  inverted: true,
-                  blurring: true,
-                  onApprove : function() { //confirmar
-                    $.confirm({ //aqui va el alerta personalizado
-                        theme: 'Modern',
-                        title: 'Eliminar',
-                        content: 'Seguro que desea quitar el/los permiso/s a este usuario?',
-                        icon: 'lh exclamation triangle icon',
-                        backgroundDismissAnimation: 'glow',
-                        type: 'red',
-                        buttons: {
-                            Elimiar: function () {
-                                $.alert('Confirmed!');
-                            },
-                            cancel: function () {
-                                $.alert('Canceled!');
-                            },
-                        }
-                    });
-                  }}).modal('attach events', '.permission.button');
-                  
-                  $('.permission').click(function () {
-                    // configurando token de laravel en ajax
-                    $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
-                              
-                    // opciones ajax para traer los permsos que tiene un usuario
-                    $.ajax({
-                      type: "GET",
-                      url: "getPermissions/"+this.value+"", 
-                      success: function (response) {
-                        var users = response.users;
-                        var permissions = response.permissions;
 
-                        if ($.isEmptyObject(permissions)) {
-                            $('#content_view_permissions').empty().fadeIn();             
-                            $('#infoModalTitle').html('Sin permisos de Usuario');
-                            $('#infoModalDescription').html('<strong>Este usuario no posee permisos directos</strong>');
-                            console.log('sin datos');
-                          } else {
-                            // console.log(permissions);
-                            $('#infoModalTitle').html('Permisos de Usuario');
-                            $('#infoModalDescription').html('<strong>Este TIENE permisos directos</strong>');
-                            // console.log(permissions);
-                            $('#content_view_permissions').empty();             
-                            $('#content_view_permissions').append('<div class="ui icon message"><i class="check square outline icon"></i><div class="content"><div class="header">Seleccione el/los rol/es que desea <strong>eliminar</strong></div></div></div>').fadeIn();
-                            $.each(permissions, function (p) { //TRAYENDO TODOS LOS PERMISOS QUE NO ESTAN ASIGNADOS
-                              permission_select = 
-                              '<div class="column">'+
-                                '<div class="ui test slider checkbox">'+
-                                  '<input value="'+permissions[p].id+'" type="checkbox">'+
-                                  '<label>'+permissions[p].name+'</label>'+
-                                '</div>'+
-                              '</div>';
-                              $('#content_view_permissions').append(permission_select).fadeIn();
-                            });  
-                        }
-
-                      },
-                      error: function() {
-                        $.alert({
-                            title: 'Oh lo siento!',
-                            content: 'Ocurrió un error al momento de traer los datos, por favor vuelve a recargar la página',
-                        });
-                      }
-                    });
-                  
-                  });
-
-                }
-              }, //traigo los usuarios para mirar sus permisos
-              "columns": [
-                  {data: 'name'},
-                  {data: 'sede'},
-                  {data: 'rol'},
-                  {data: 'permissions'},               
-              ],
-              "language": {
-                "info":"_TOTAL_ Registros",
-                "search": "Buscar",
-                "paginate":{
-                  "next": "Siguiente",
-                  "previous": "Anterior",
-                },
-                "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">'+
-                              '<option value="5">5</option>'+
-                              '<option value="10">10</option>'+
-                              '<option value="-1">Todos</option>'+
-                              '</select> registros',
-                "emptyTable": "No se encontraron datos",
-                "zeroRecords": "No hay coincidencias",
-                "infoEmpty": "",
-                "infoFiltered": "",
-              },
-          })
-        });
-    </script>
 @endsection
