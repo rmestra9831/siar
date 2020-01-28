@@ -30,7 +30,6 @@ Route::get('/example', 'HomeController@example')->name('example');
 
 // Permisos de crear programas, motivos y docentes
 Route::prefix('admin')->middleware('auth')->group(function(){
-
     Route::get('getUsers', 'FunctionsController@getUser')->name('getUser')->middleware('permission:settings user');
     Route::get('user-settings', 'FunctionsController@settingUser')->name('settingUser')->middleware('permission:create user');
     Route::put('/user-settings/user/{id}/edit', 'FunctionsController@editUser')->name('editUser')->middleware('permission:edit user');
@@ -48,9 +47,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::delete('/sede-settings/{id}/delete', 'FunctionsController@deleteSede')->name('deleteSede')->middleware('permission:create motivo');
 
     Route::get('motivos-setings', 'FunctionsController@settingsMotivo')->name('settingsMotivo')->middleware('permission:settings motivo');
-
 });
 
-// Route::resource('/user', 'UserController');
-
 //RUTA DE CREACIOM DE RADICADO
+    Route::resource('radicado', 'RadicadoController', ['only' => ['index', 'store']])->middleware('permission:create radicado');

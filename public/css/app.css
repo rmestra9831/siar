@@ -11617,3 +11617,16 @@ tbody tr td {
   text-align: center !important;
 }
 
+.create_radic {
+  margin: auto;
+}
+
+.ui.upload_radic.input input[type=file] {
+  display: none;
+}
+
+#uploadRadic,
+label {
+  cursor: pointer;
+}
+

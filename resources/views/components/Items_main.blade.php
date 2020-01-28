@@ -26,8 +26,8 @@
 @endrole
 
 @role('Admisiones')
-  <a href="#1" class="item item_main">
-    <i class="c-white large plus square outline icon"></i>
+  <a href="{{route('radicado.index')}}" class="item item_main">
+    <i class="c-white large clipboard outline icon"></i>
     <div class="content">
       Nuevo Radicado
     </div>

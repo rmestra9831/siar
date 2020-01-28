@@ -32,7 +32,7 @@
 
 
 @can('create radicado')
-<a href="" class="item item_main">
+<a href="{{route('radicado.index')}}" class="item item_main">
   <i class="c-white large clipboard outline icon"></i>
   <div class="content">
     Nuevo Radicado

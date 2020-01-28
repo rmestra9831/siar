@@ -197,3 +197,11 @@ tbody{
     }
   }
 }
+
+.create_radic{
+  margin: auto;
+}.ui.upload_radic.input input[type="file"] { //diseo del boton upload_radic
+  display: none;
+}#uploadRadic, label{
+    cursor: pointer;
+}

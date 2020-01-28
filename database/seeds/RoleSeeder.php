@@ -51,7 +51,7 @@ class RoleSeeder extends Seeder
         
                 // dando los permisos
                 $role_superadmin->givePermissionTo(['settings user','settings program','settings motivo','settings sede','create user', 'delete user','edit user','create program','delete program','edit program','create motivo','edit motivo','create sede','delete sede','edit sede']); 
-                $role_admissions->givePermissionTo(['create radicado']);
+                $role_admissions->givePermissionTo(['check response']);
                 $role_direction->givePermissionTo(['assign delegate','check response']);
 
                 $user_admin = User::where('id',1)->first();

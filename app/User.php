@@ -29,6 +29,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Program::class, 'program_id');
     }
+
+    //RELACION CON EL RADICADO 
+    public function radicadoDelegate()
+    {
+        return $this->hasOne(Radicado::class, 'delegate_id');
+    }
+    public function radicadoCreateBy()
+    {
+        return $this->hasOne(Radicado::class, 'createBy_id');
+    }
+    public function radicadoAnswered()
+    {
+        return $this->hasOne(Radicado::class, 'answered_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -19,3 +19,15 @@ $('#btnsCorrespondence').click(function () {
         icon_correspondence.setAttribute('class','c-white large folder outline icon'); 
     }
 });
+
+//VALIDACION DE LOS FORMULARIOS
+$("input:text").click(function() {
+    $(this).parent().find("input:file").click();
+});
+  
+$('input:file', '.ui.upload_radic.input')
+    .on('change', function(e) {
+      var name = e.target.files[0].name;
+      $('input:text', $(e.target).parent()).val(name);  //validando el boton de carga del archivo
+});
+  
