@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     public function mapPermissionsRoutes(){
-        Route::prefix('permissions')
+        Route::prefix('admin')
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/permissions/permissions.php'));
