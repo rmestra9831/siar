@@ -32,6 +32,10 @@ Vue.component('main-menu', require('./components/MainComponent.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+var d_view_vue = document.getElementById('d-view-vue');
+if (d_view_vue) {
+  const app = new Vue({
+      el: '#d-view-vue',
+  });
+
+}

@@ -4,14 +4,14 @@
 
 {{-- contenedor principal --}}
 {{-- En esta vista se cargan todos los contenidos home de todos los usuarios y de cada rol --}}
-@hasrole('super admin')
+@hasrole('Super Admin')
 @include('superAdmin.home')
 @endhasrole
 
-@hasrole('direction')
+@hasrole('Direction')
 @include('direction.home')
 @endhasrole
 
-@hasrole('admission')
+@hasrole('Admission')
 @include('admission.home')
 @endhasrole

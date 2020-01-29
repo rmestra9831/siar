@@ -64870,9 +64870,13 @@ Vue.component('main-menu', __webpack_require__(/*! ./components/MainComponent.vu
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-  el: '#app'
-});
+var d_view_vue = document.getElementById('d-view-vue');
+
+if (d_view_vue) {
+  var app = new Vue({
+    el: '#d-view-vue'
+  });
+}
 
 /***/ }),
 
