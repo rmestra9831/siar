@@ -1,6 +1,7 @@
 // menu desplegable para crear correspondencia
 $('.ui.accordion').accordion();
 $('select.dropdown').dropdown();
+$('.labeled.icon.dropdown').dropdown();
 $('.tag.example .ui.dropdown').dropdown({
     allowAdditions: true});
 $('.message .close').on('click', function() {$(this).closest('.message').transition('fade') ;});
@@ -19,8 +20,6 @@ $('#btnsCorrespondence').click(function () {
         icon_correspondence.setAttribute('class','c-white large folder outline icon'); 
     }
 });
-
-//VALIDACION DE LOS FORMULARIOS
 $("input:text").click(function() {
     $(this).parent().find("input:file").click();
 });

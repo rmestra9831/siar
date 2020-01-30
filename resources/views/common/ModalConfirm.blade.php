@@ -11,9 +11,9 @@
       <i class="remove icon"></i>
       No
     </div>
-    <div class="ui green ok inverted button">
+    <button  type="submit"  id="" class="ui green ok inverted button">
       <i class="checkmark icon"></i>
       Si
-    </div>
+    </button>
   </div>
 </div>

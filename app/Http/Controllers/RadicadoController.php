@@ -25,7 +25,7 @@ class RadicadoController extends Controller
 
     public function getDataSelects(){
         $select_program = Program::all();
-        $select_destino = Program::where('name','Direccion');
+        $select_destino = Program::where('name','Direccion')->get();
         $select_motivo = Motivo::all();
         $select_origen = Origin::get();
 
@@ -36,5 +36,11 @@ class RadicadoController extends Controller
             "select_origen"=> $select_origen,
         );
         return response()->json($data);
+    }
+
+    public function store(Request $request){
+        if($request->ajax()){
+            return response()->json($request);
+        }
     }
 }

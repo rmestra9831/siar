@@ -96,6 +96,7 @@
 // menu desplegable para crear correspondencia
 $('.ui.accordion').accordion();
 $('select.dropdown').dropdown();
+$('.labeled.icon.dropdown').dropdown();
 $('.tag.example .ui.dropdown').dropdown({
   allowAdditions: true
 });
@@ -116,8 +117,7 @@ $('#btnsCorrespondence').click(function () {
   } else {
     icon_correspondence.setAttribute('class', 'c-white large folder outline icon');
   }
-}); //VALIDACION DE LOS FORMULARIOS
-
+});
 $("input:text").click(function () {
   $(this).parent().find("input:file").click();
 });
