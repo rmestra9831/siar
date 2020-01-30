@@ -56,15 +56,24 @@
                      <option value="2">Seleccione un programa</option>
                   </select>
                </div>
-               <div class="four wide field"> {{-- select del motivo (reason) --}}
+
+               <div class="six wide field"> {{-- select del motivo (reason) --}}
                   <label>Motivo</label>
+                  <div class="ui menu m-0">
+                  <select class="ui fluid dropdown" id="type_reason_radic">
+                     <option value="">Tipo</option>
+                     <option value="1">Academico</option>
+                     <option value="2">Administrativo</option>
+                     <option value="3">Otro</option>
+                  </select>
                   <select class="ui fluid dropdown" id="reason_radic">
                      <option value="">Motivo</option>
                      <option value="1">Seleccione un programa</option>
                      <option value="2">Seleccione un programa</option>
                   </select>
+                  </div>
                </div>
-               <div class="eleven wide field"> {{-- asunto (affair)--}}
+               <div class="six wide field"> {{-- asunto (affair)--}}
                   <label>Asunto</label>
                   <textarea rows="1" name="affair" placeholder="Asunto" spellcheck="false" data-gramm="false"></textarea>
                </div>
@@ -77,8 +86,8 @@
                   <label>Atención</label>
                   <select class="ui fluid dropdown" id="atention_radic">
                      <option value="">Tipo de atención</option>
-                     <option value="2">Normal</option>
-                     <option value="1">Urgende</option>
+                     <option value="1">Normal</option>
+                     <option value="2">Urgende</option>
                   </select>
                </div>
                <div class="field"> {{-- select origen--}}
