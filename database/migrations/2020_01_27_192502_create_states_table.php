@@ -15,17 +15,17 @@ class CreateStatesTable extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->increments('id',false);
-            $table->boolean('radic_id',false);
-            $table->boolean('start',false);
-            $table->boolean('sent_dir',false);
-            $table->boolean('recived_dir',false);
-            $table->boolean('delegated',false);
-            $table->boolean('answered',false);
-            //estados de revisi,falseon
-            $table->boolean('redirection',false);
-            $table->boolean('answer_redirection',false);
-            $table->boolean('sent_to_check',false);
-            $table->boolean('aproved',false);
+            $table->boolean('radic_id',false)->nullable();
+            $table->boolean('start',false)->nullable();
+            $table->boolean('sent_dir',false)->nullable();
+            $table->boolean('recived_dir',false)->nullable();
+            $table->boolean('delegated',false)->nullable();
+            $table->boolean('answered',false)->nullable();
+            //estados de revisi,falseo->nullable()n
+            $table->boolean('redirection',false)->nullable();
+            $table->boolean('answer_redirection',false)->nullable();
+            $table->boolean('sent_to_check',false)->nullable();
+            $table->boolean('aproved',false)->nullable();
 
             $table->timestamps();
         });

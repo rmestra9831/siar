@@ -8,7 +8,9 @@
 
 @section('body_main')
    <div class="container">
-      <form id="create_radic" class="ui create_radic form">
+      <form id="create_radic" action="#" class="ui create_radic form">
+         {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"> --}}
+         <input type="hidden" name="consecutive" value="{{$number ?? ''}}-{{$name_sede ?? ''}}-{{$year ?? ''}}">
          <div class="ui horizontal divider">Información de Contacto</div>
          {{-- nombres --}}
          <div class="field">
@@ -59,26 +61,21 @@
                         <select class="ui fluid type_reason dropdown" name="type_reason_radic">
                            <div class="menu">
                               <option value="">Tipo</option>
-                              <option value="1">Normal</option>
-                              <option value="2">Urgente</option>
-                              <option value="3">Otro</option>
+                              <option value="1">Administrativo</option>
+                              <option value="2">Academico</option>
                            </div>
                         </select>
                      </div>
                      <div class="eleven wide field">
-                        <select class="ui fluid reason disabled dropdown" name="reason_radic">
-                           <div class="menu">
-                              <option value="">Motivo</option>
-                              <option value="1">Seleccione un programa</option>
-                              <option value="2">Seleccione un programa</option>
-                           </div>
+                        <select class="ui fluid reason disabled bg-secondary dropdown" name="reason_radic">          
+                           <option value="">Motivo</option>
                         </select>
                      </div>
                   </div>
                </div>
-               <div class="three wide  field"> {{-- asunto (affair)--}}
+               <div class="three wide field disabled"> {{-- asunto (affair)--}}
                   <label>Asunto</label>
-                  <textarea rows="1" name="affair" placeholder="Asunto" spellcheck="false" data-gramm="false"></textarea>
+                  <textarea rows="1" name="affair" class="c-white bg-secondary" placeholder="Asunto" spellcheck="false" data-gramm="false"></textarea>
                </div>
             </div>
          </div>
@@ -89,8 +86,8 @@
                   <label>Atención</label>
                   <select class="ui fluid dropdown" name="atention_radic">
                      <option value="">Tipo de atención</option>
-                     <option value="1">Normal</option>
-                     <option value="2">Urgende</option>
+                     <option value="Normal">Normal</option>
+                     <option value="Urgende">Urgende</option>
                   </select>
                </div>
                <div class="field"> {{-- select origen--}}
