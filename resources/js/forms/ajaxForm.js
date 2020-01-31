@@ -5,7 +5,7 @@ $('.ui.create_radic.form') //validacion creacion de radicado
     fields: {
       firstName         : 'empty',
       lastName          : 'empty',
-      email             : 'empty',
+      email             : ['email','empty'],
       celphone          : 'empty',
       program_radic     : 'empty',
       destination_radic : 'empty',
@@ -14,6 +14,38 @@ $('.ui.create_radic.form') //validacion creacion de radicado
       affair            : 'empty',
       atention_radic    : 'empty',
       origin_radic      : 'empty',
+    },onSuccess: function (event){
+        event.preventDefault();
+        $form = $('#create_radic');
+        data_for = $form.form('get values');
+    
+        $.ajax({
+          type: "POST",
+          url: "/radicado",
+          data: data_for,
+          serializeForm: true,
+          beforeSend: function(){
+            spinner_load = '<i class="spinner loading icon" style="font-size: 7em !important"></i> Creando...';
+            $('.icon.header').empty();
+            $('.icon.header').append(spinner_load);
+          },
+          success: function (response) {
+            // $('.ui.create_radic.form').form('clear');
+            console.log(response);
+            $.alert({
+              theme: 'Modern',
+              icon: 'lh check circle outline icon',
+              title: 'Está Hecho',
+              content: 'Radicado creado con exito',
+              type: 'blue',
+              typeAnimated: true,
+            })
+          },complete: function(){
+            spinner_load = '<i class="question circle outline icon" style="font-size: 7em !important"></i>Creando nuevo Radicado';
+            $('.icon.header').empty();
+            $('.icon.header').append(spinner_load);
+          }
+        });
     }
 });
 //seteo del campo de celular
@@ -69,43 +101,10 @@ $('.ui.create_radic.form') //validacion creacion de radicado
 //seteo del campo de celular
 
 // MODAL PARA CONFIRMAR LA CREACION DE UN RADICADO
-$('#create_radic').click(function (e) {
-  e.preventDefault();
-  // $form = $('#create_radic');
-    // data_for = $form.form('get values');
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/radicado",
-    //   data: data_for,
-    //   success: function (response) {
-    //     console.log(response);
-    //   }
-    // });
 
-    console.log('si es es');
-    $form = $('#create_radic');
-    data_for = $form.form('get values');
-    
-    $.ajax({
-      type: "POST",
-      url: "/radicado",
-      data: data_for,
-      success: function (response) {
-        console.log(response);
-        alert('sasd')
-      }
-    });
-  // if (!$('.ui.create_radic.form').form('is vallid')) {
-    
-  // }
-
-});
-$('.ui.basi.create_radic.modal')
+$('.ui.basic.create_radic.modal')
   .modal({
     closable  : false,
-    onApprove : function() {
-      
-    }
   })
 .modal('attach events', '.create_radic.button','show');
 
@@ -127,4 +126,8 @@ if (window.location.pathname == '/radicado') {
     }
   });
 }
+
+$('select[name="type_reason_radic"]').change(function (e) { 
+  $('select[name="reason_radic"]').removeClass('disabled');
+});
 

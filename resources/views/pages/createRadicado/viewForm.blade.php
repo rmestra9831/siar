@@ -66,7 +66,7 @@
                         </select>
                      </div>
                      <div class="eleven wide field">
-                        <select class="ui fluid reason  dropdown" name="reason_radic">
+                        <select class="ui fluid reason disabled dropdown" name="reason_radic">
                            <div class="menu">
                               <option value="">Motivo</option>
                               <option value="1">Seleccione un programa</option>
@@ -113,7 +113,7 @@
          <div class="sixtyn wide field"> {{-- Observaciones--}}
             <textarea rows="3" name="note" placeholder="Nota" spellcheck="false" data-gramm="false"></textarea>
          </div>
-         <div form="create_radic" class="ui fluid submit green create_radic button">Crear</div>
+         <div class="ui fluid green create_radic button">Crear</div>
          <div class="ui error message"></div>
        </form>
    </div>

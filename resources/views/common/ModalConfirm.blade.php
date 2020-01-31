@@ -11,7 +11,7 @@
       <i class="remove icon"></i>
       No
     </div>
-    <button  type="submit"  id="" class="ui green ok inverted button">
+    <button form="create_radic" type="submit"  id="" class="ui green ok inverted button">
       <i class="checkmark icon"></i>
       Si
     </button>
