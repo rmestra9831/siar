@@ -81,7 +81,7 @@
          </div>
 
          <div class="field">
-            <div class="three fields">
+            <div class="two fields">
                <div class="field"> {{-- select tipo de atención--}}
                   <label>Atención</label>
                   <select class="ui fluid dropdown" name="atention_radic">
@@ -96,14 +96,14 @@
                      <option value="">EST - DOC - GEN</option>
                   </select>
                </div>              
-               <div class="field"> {{--carga de documentos--}}
+               {{-- <div class="field"> -carga de documentos
                   <label for="">Cargar Radicado</label>
                   <div class="ui labeled upload_radic input">
                      <input type="text" name="uploadRadic" placeholder="Seleccionar" readonly>
                      <input type="file">
                      <label class="ui label" for="uploadRadic">Cargar</label>
                   </div>
-               </div>
+               </div> --}}
             </div>
          </div>
          <div class="ui horizontal divider">Observaciones</div>

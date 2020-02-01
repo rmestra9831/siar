@@ -1,17 +1,20 @@
 // TRAYENDO LOS PERMISOS DEL ROL SELCCIONADO EN LA VISTA TABLEPERMISSIONS
 $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
 
-$.ajax({ //obteniendo los roles 
-    type: "GET",
-    url: "getRole",
-    success: function(response) {
-        var rol_select = '<option value="">Seleccione el rol</option>';
-        $.each(response, function(r) {
-            rol_select = '<option value="' + response[r].id + '">' + response[r].name + '</option>';
-            $('#rolesWithPermissions').append(rol_select);
-        });
-    }
-});
+if (window.location.pathname == 'admin/Permissions') {
+  $.ajax({ //obteniendo los roles 
+      type: "GET",
+      url: "getRole",
+      success: function(response) {
+          var rol_select = '<option value="">Seleccione el rol</option>';
+          $.each(response, function(r) {
+              rol_select = '<option value="' + response[r].id + '">' + response[r].name + '</option>';
+              $('#rolesWithPermissions').append(rol_select);
+          });
+      }
+  });
+}
+
 // EVENTOS AL CAMBIAR LOS ROLES
 $('#rolesWithPermissions').change(function() {
     var id_rol = this.value;

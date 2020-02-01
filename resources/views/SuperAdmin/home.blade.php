@@ -6,7 +6,7 @@
 <div class="cont-panel-adm">
   <div class="container">
     <div id="d-view-vue">
-      <example-component></example-component>
+      <example-component />
     </div>
           <a href="  " class="col card desing-1">
               <img src=" {{asset('img/radic-2.svg')}} " alt="">

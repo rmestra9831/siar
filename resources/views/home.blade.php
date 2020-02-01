@@ -12,6 +12,6 @@
 @include('direction.home')
 @endhasrole
 
-@hasrole('Admission')
+@hasrole('Admisiones')
 @include('admission.home')
 @endhasrole

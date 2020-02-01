@@ -87,4 +87,9 @@ class RadicadoController extends Controller
         $reasons = Motivo::where('type_motivo',$id)->orWhere('type_motivo',3)->get();
         return response()->json($reasons);
     }
+
+    public function getRadicados(){
+        $data = Radicado::all();
+        return response()->json($data);
+    }
 }
