@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Radicado;
 use Illuminate\Support\Arr;
 use App\User;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -28,10 +30,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        // $radicados =  Cache::rememberForever('radicados', function () {
+        
+        // });
+        $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->get();
+        return view('home', compact('radicados'));
     }
 
     public function example(){
-      return view('welcome');
+        $data = Radicado::where('sede_id',auth()->user()->sede_id)->get();
+
+        // return response()->json($data);
+      return view('welcome', compact('data'));
     }
 }

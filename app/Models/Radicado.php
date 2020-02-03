@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\State;
+use App\Models\Radicado;
+use App\Models\Origin;
 use App\User;
 
 class Radicado extends Model
@@ -12,7 +14,16 @@ class Radicado extends Model
 
     public function state()
     {
-        return $this->hasOne(State::class);
+        return $this->belongsTo(State::class, 'states_id');
+    }
+    
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id');
+    }
+    public function destination()
+    {
+        return $this->belongsTo(Program::class, 'destination_id');
     }
 
     public function sede()
@@ -26,5 +37,13 @@ class Radicado extends Model
 
     public function createById(){
         return $this->belongsTo(User::class, 'createBy_id');
+    }
+    public function reason()
+    {
+        return $this->belongsTo(Motivo::class, 'reason_id');
+    }
+    public function origin()
+    {
+        return $this->belongsTo(Origin::class, 'origin_id');
     }
 }

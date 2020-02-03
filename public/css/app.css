@@ -11415,6 +11415,40 @@ a.text-dark:focus {
   border-left: 15px solid #59324C;
 }
 
+.ribbon4 {
+  width: 98.5%;
+  position: absolute;
+  top: 9px;
+  padding: 8px 10px;
+  background: #00B3ED;
+  box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon4:before,
+.ribbon4:after {
+  content: "";
+  position: absolute;
+}
+
+.ribbon4:before {
+  width: 7px;
+  height: 120%;
+  top: 0;
+  left: -6.5px;
+  padding: 0 0 7px;
+  background: inherit;
+  border-radius: 5px 0 0 5px;
+}
+
+.ribbon4:after {
+  width: 5px;
+  height: 5px;
+  bottom: -5px;
+  left: -4.5px;
+  background: lightblue;
+  border-radius: 5px 0 0 5px;
+}
+
 .bg-direction {
   background: #47994B !important;
 }
@@ -11437,6 +11471,22 @@ a.text-dark:focus {
 
 .d-content {
   display: contents !important;
+}
+
+.w-85 {
+  width: 85% !important;
+  -webkit-transition: 2s;
+  transition: 2s;
+}
+
+.w-85:hover {
+  -webkit-transition: 2s;
+  transition: 2s;
+  box-shadow: 0 5px 12px #80808091 !important;
+}
+
+.as-center {
+  align-self: center !important;
 }
 
 #app {
@@ -11628,5 +11678,10 @@ tbody tr td {
 #uploadRadic,
 label {
   cursor: pointer;
+}
+
+.btns button {
+  padding: 0;
+  height: auto;
 }
 

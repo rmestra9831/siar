@@ -9,6 +9,7 @@
 
 @section('body_main')
   <div class="container">
+
     {{-- tabla e muestra de usuarios --}}
       <table id="table-motivos" class="ui single line celled table">
         <thead>

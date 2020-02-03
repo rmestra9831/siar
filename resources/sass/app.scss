@@ -18,6 +18,15 @@
 .bg-input-login{ background: $bg-input !important;}
 .lh{line-height: normal;}
 .d-content{display: contents !important;}
+.w-85{
+  width: 85% !important;
+  transition: 2s;
+  &:hover{
+    transition: 2s;
+    box-shadow: 0 5px 12px #80808091 !important;
+  }
+}
+.as-center{align-self: center !important;}
 
 #app {
   display: block !important;
@@ -204,4 +213,10 @@ tbody{
   display: none;
 }#uploadRadic, label{
     cursor: pointer;
+}
+
+// CARDS
+.btns button{
+  padding: 0;
+  height:auto ;
 }

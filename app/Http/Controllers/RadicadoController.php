@@ -56,6 +56,7 @@ class RadicadoController extends Controller
             $radicado->consecutive = ''.$number.'-'.$name_sede.'-'.$year.'';
             $radicado->atention = $request->atention_radic;
             $radicado->origin_id = $request->origin_radic;
+            $radicado->destination_id = $request->destination_radic;
             $radicado->sede_id = auth()->user()->sede['id'];
             $radicado->program_id = $request->program_radic;
             $radicado->first_name = $request->firstName;
@@ -89,7 +90,7 @@ class RadicadoController extends Controller
     }
 
     public function getRadicados(){
-        $data = Radicado::all();
-        return response()->json($data);
+        $data = Radicado::get();
+        return $data->toJson();
     }
 }

@@ -14,7 +14,7 @@ use App\Models\Program;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('home');
+        return redirect('home');
     }else{
         return view('auth.login');
     }
@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/example', 'HomeController@example')->name('example');
 
 

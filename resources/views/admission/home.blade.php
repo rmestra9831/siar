@@ -3,5 +3,5 @@
 @endsection
 
 @section('body_main')
-    <cards/>
+    @include('components.Card')
 @endsection

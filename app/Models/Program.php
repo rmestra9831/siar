@@ -16,4 +16,8 @@ class Program extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function radicados()
+    {
+        return $this->hasMany(radicado::class);
+    }
 }

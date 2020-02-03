@@ -1847,18 +1847,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    var _this = this;
+  data: function data() {
+    return {
+      radicados: []
+    };
+  },
+  methods: {
+    getRadicados: function getRadicados() {
+      var _this = this;
 
-    // data(){
-    //   radicados: []
-    // },
-    axios.get('getRadicados').then(function (response) {
-      _this.radicados = response.data;
-      console.log(radicados);
-    }); // console.log("Component mounted.");
+      axios({
+        method: 'get',
+        responseType: 'json',
+        url: 'getRadicados'
+      }).then(function (response) {
+        _this.radicados = response.data;
+        console.log(response);
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getRadicados();
   }
 });
 
@@ -52614,19 +52626,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item" }, [
+  return _c(
+    "div",
+    { staticClass: "item" },
+    [
       _c("i", { staticClass: "users icon" }),
-      _vm._v("\n  sas\n  ")
-    ])
-  }
-]
+      _vm._v(" "),
+      _vm._l(_vm.radicados, function(radicado, index) {
+        return _c("div", { staticClass: "content" }, [
+          _vm._v("\n    " + _vm._s(radicado.consecutive) + "\n  ")
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

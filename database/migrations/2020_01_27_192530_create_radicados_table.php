@@ -18,6 +18,7 @@ class CreateRadicadosTable extends Migration
             $table->string('consecutive')->nullable();
             $table->string('atention')->nullable();
             $table->integer('origin_id')->unsigned(); //define el tipo de origen si es EST - DOC - GEN
+            $table->integer('destination_id')->unsigned(); //define el tipo de origen si es EST - DOC - GEN
             $table->integer('sede_id')->unsigned();
             $table->integer('program_id')->unsigned()->nullable();
             $table->string('first_name',50);
@@ -49,6 +50,7 @@ class CreateRadicadosTable extends Migration
 
             // relaciones
             $table->foreign('origin_id')->references('id')->on('origins')->onDelete('cascade');
+            $table->foreign('destination_id')->references('id')->on('programs')->onDelete('cascade');
             $table->foreign('states_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
             $table->foreign('reason_id')->references('id')->on('motivos')->onDelete('cascade');

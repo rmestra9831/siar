@@ -131,6 +131,7 @@ $('.ui.create_radic.form') //validacion creacion de radicado
         $('.icon.header').append(spinner_load);
       },
       success: function success(response) {
+        console.log(response);
         $.alert({
           theme: 'Modern',
           icon: 'lh check circle outline icon',

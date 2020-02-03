@@ -11,6 +11,6 @@ class State extends Model
 
     public function radicado()
     {
-        return $this->belongsTo(Radicado::class);
+        return $this->hasOne(Radicado::class);
     }
 }

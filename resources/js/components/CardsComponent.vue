@@ -1,26 +1,34 @@
 <template>
   <div class="item">
     <i class="users icon"></i>
-    sas
-    <!-- <div class="content" v-for="(item, index) in radicados" :key="index">
-      sasa
-    </div> -->
+    <div class="content" v-for="(radicado, index) in radicados">
+      {{radicado.consecutive}}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  mounted() {
-    // data(){
-    //   radicados: []
-    // },
-    axios
-    .get('getRadicados')
-    .then(response => {
-      this.radicados = response.data;
-      console.log(radicados)
-    })
-    // console.log("Component mounted.");
+  data(){
+    return {
+      radicados: []
+    }
   },
+  methods: {
+    getRadicados: function(){
+      axios({
+        method: 'get',
+        responseType: 'json',
+        url: 'getRadicados',
+      }).then(response => {
+      this.radicados = response.data;
+      console.log(response)
+    }).catch(e =>  {console.log(e)});
+    
+    }
+  },
+  beforeMount: function() {
+    this.getRadicados();
+  }
 };
 </script>
