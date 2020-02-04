@@ -10,7 +10,7 @@ use App\User;
 
 class Radicado extends Model
 {
-    protected $fillable = ['consecutive','atention','origin_id','sede_id','program_id','first_name','last_name','origin_correo','origin_cel','type_reason','reason_id','affair','notes'];
+    protected $fillable = ['consecutive','atention','origin_id','sede_id','program_id','first_name','last_name','origin_correo','origin_cel','type_reason','reason_id','affair','notes','slug'];
 
     public function state()
     {

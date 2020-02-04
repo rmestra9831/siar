@@ -34,8 +34,8 @@ class HomeController extends Controller
         // $radicados =  Cache::rememberForever('radicados', function () {
         
         // });
-        $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->get();
-        return view('home', compact('radicados'));
+        $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(2);
+        return view('home', ['radicados'=> $radicados]);
     }
 
     public function example(){

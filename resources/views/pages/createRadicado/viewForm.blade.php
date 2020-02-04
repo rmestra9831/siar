@@ -7,7 +7,7 @@
 @endsection
 
 @section('body_main')
-   <div class="container">
+   <div class="container as-center">
       <form id="create_radic" action="#" class="ui create_radic form">
          {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"> --}}
          <input type="hidden" name="consecutive" value="{{$number ?? ''}}-{{$name_sede ?? ''}}-{{$year ?? ''}}">

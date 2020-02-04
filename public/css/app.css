@@ -11418,7 +11418,7 @@ a.text-dark:focus {
 .ribbon4 {
   width: 98.5%;
   position: absolute;
-  top: 9px;
+  top: 6px;
   padding: 8px 10px;
   background: #00B3ED;
   box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.3);
@@ -11457,6 +11457,10 @@ a.text-dark:focus {
   background: #3c5375 !important;
 }
 
+.bg-urgente {
+  background: #e46c09;
+}
+
 .c-white {
   color: white !important;
 }
@@ -11485,8 +11489,20 @@ a.text-dark:focus {
   box-shadow: 0 5px 12px #80808091 !important;
 }
 
+.w-90 {
+  width: 90% !important;
+}
+
 .as-center {
   align-self: center !important;
+}
+
+.b-admissions {
+  border-top: 0.2em solid #3c5375 !important;
+}
+
+.b-urgente {
+  border-top: 0.2em solid #e46c09 !important;
 }
 
 #app {
@@ -11683,5 +11699,19 @@ label {
 .btns button {
   padding: 0;
   height: auto;
+}
+
+.section_paginate {
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  z-index: 20;
+  background: white;
+  width: auto;
+  left: 0;
+  right: 0;
 }
 

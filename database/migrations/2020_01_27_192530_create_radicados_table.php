@@ -29,6 +29,8 @@ class CreateRadicadosTable extends Migration
             $table->integer('reason_id')->unsigned()->nullable(); //rason del docuemnto
             $table->text('affair')->nullable();
             $table->text('notes')->nullable();
+            $table->string('file')->nullable();
+            $table->string('slug')->unique();
             $table->integer('states_id')->unsigned()->nullable();
             $table->integer('createBy_id')->unsigned()->nullable();
             $table->integer('delegate_id')->unsigned()->nullable();

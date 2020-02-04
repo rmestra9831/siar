@@ -52,7 +52,6 @@ class RadicadoController extends Controller
 
             if($request->type_reason_radic == 1){$type_reason = 'Administrativo';}else{ $type_reason = 'Academico';} //formatenado tipo de motivo ADM - ACAD
 
-
             $radicado->consecutive = ''.$number.'-'.$name_sede.'-'.$year.'';
             $radicado->atention = $request->atention_radic;
             $radicado->origin_id = $request->origin_radic;
@@ -69,6 +68,13 @@ class RadicadoController extends Controller
             $radicado->notes = $request->note;
             $radicado->createBy_id = auth()->user()->id;
             
+            //remplazando para el slug
+            $format_slug = array('/',' \ ', '-',' ');
+            $slug = substr($request->firstName, 0, 4).'-'.$request->consecutive.'-'.substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4); ;
+            $final_slug = str_replace($format_slug,'_',$slug);
+            // $radicado->slug = $request->first_name
+            
+            $radicado->slug = $final_slug;
             $radicado->date_creation = Carbon::now();
         
             $radicado->save();
@@ -81,6 +87,7 @@ class RadicadoController extends Controller
             ]);
             DB::table('radicados')->where('id', $radicado->id)->update(['states_id'=> $state->id]);
             DB::table('sedes')->where('id', auth()->user()->sede['id'])->increment('cont_radic',1);
+
             return response()->json($radicado);
         }
     }
@@ -88,9 +95,13 @@ class RadicadoController extends Controller
         $reasons = Motivo::where('type_motivo',$id)->orWhere('type_motivo',3)->get();
         return response()->json($reasons);
     }
-
     public function getRadicados(){
         $data = Radicado::get();
         return $data->toJson();
+    }
+    public function showRadic($slug){
+        $radicado = Radicado::where('slug', $slug)->firstOrFail();
+
+        return view('pages.createRadicado.viewRadic', compact('radicado'));
     }
 }

@@ -54,3 +54,5 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('getDataSelects', 'RadicadoController@getDataSelects')->middleware('permission:create radicado');
     Route::get('getReasons/{id}', 'RadicadoController@getReasons')->middleware('permission:create radicado');
     Route::get('getRadicados', 'RadicadoController@getRadicados')->middleware('auth');
+
+    Route::get('radicado/{slug}/show', 'RadicadoController@showRadic')->name('showRadic')->middleware('auth');
