@@ -102,7 +102,12 @@ $('.tag.example .ui.dropdown').dropdown({
 });
 $('.message .close').on('click', function () {
   $(this).closest('.message').transition('fade');
-}); //**** NOTA ****//
+});
+window.setTimeout(function () {
+  $(".alert").fadeTo(500, 0).slideUp(500, function () {
+    $(this).remove();
+  });
+}, 4000); //**** NOTA ****//
 
 /** Como los botones se esstan cargando dentro de la tabla todas las funcions js que se generen deben estar 
  * dentro de la FUNCION setTimeout para que se pueda ejecutar

@@ -63,9 +63,9 @@
               @yield('body_main')
             </div>
           </div>
-          {{-- <div class="content_foter">
-            @yield('footer')
-          </div> --}}
+          <div class="content_foter">
+            @yield('foter')
+          </div>
         </div>
       @else
         @yield('content_body')

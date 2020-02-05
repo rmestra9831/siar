@@ -42,36 +42,14 @@
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">creado por:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->createById->name}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">asunto<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->affair}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">respondido por:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->delegateId) No respondido @else {{$radicado->delegateId->name}} @endif</p></strong></div>
-              </div>
-              
-              <div class="ui divider"></div>
-              
+              </div>              
+              <div class="ui divider"></div>            
             </div>
           </div>
-
           <div class="ui form extra content">
-            @if (!$radicado->file)
-              <div class="field">
-                <div class="two fields">
-                  <div class="field">
-                    <div class="ui labeled upload_radic input">
-                       <input type="text" id="uploadRadic" name="uploadRadic" placeholder="Seleccionar" readonly>
-                       <input type="file">
-                       <label class="ui label" for="uploadRadic">Cargar</label>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <button class="ui blue inverted fluid button"><i class="cloud upload icon"></i>Subir Archivo</button>
-                  </div>
-                </div>
-              </div>
-            @else
-              <div class="two ui buttons">      
-                  <a href="" class="ui teal  basic button"><i class="eye icon"></i>Visualizar</button>
-                  <a href="" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>
-              </div>
-            @endif
+            @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
 
+            {{--TABLAS--}}
             <div class="ui horizontal divider"><i class="clock outline icon"></i> Fechas de Movimiento</div>
             <table class="ui
               @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
@@ -99,28 +77,26 @@
             </table>
             <div class="ui horizontal divider"><i class="circle icon"></i><i class="circle outline icon"></i> Estados del Radicado <i class="circle outline icon"></i><i class="circle icon"></i></div>
             <table class="ui
-            @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
-            very compact table">
-            <thead>
-              <th>Respondido</th>
-              <th>Rec. Delegado</th>
-              <th>Redireccionado</th>
-              <th>Enviado a Aprovación</th>
-              <th>Entregado</th>
-            </tr></thead>
-            <tbody>
-              <tr>
-                <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-                <td class="">@if($radicado->state->delegated) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-                <td class="">@if($radicado->state->redirection) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-                <td class="">@if($radicado->state->sent_to_check == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-                <td class="">@if($radicado->state->aproved == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
+              @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
+              very compact table">
+              <thead>
+                <th>Respondido</th>
+                <th>Rec. Delegado</th>
+                <th>Redireccionado</th>
+                <th>Enviado a Aprovación</th>
+                <th>Entregado</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->delegated) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->redirection) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->sent_to_check == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->aproved == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

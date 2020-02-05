@@ -8,8 +8,8 @@
 @include('superAdmin.home')
 @endhasrole
 
-@hasrole('Direction')
-@include('direction.home')
+@hasrole('Direccion')
+@include('direccion.home')
 @endhasrole
 
 @hasrole('Admisiones')

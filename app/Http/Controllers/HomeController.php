@@ -30,12 +30,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        // $radicados =  Cache::rememberForever('radicados', function () {
-        
-        // });
-        $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(2);
-        return view('home', ['radicados'=> $radicados]);
+        if (auth()->user()->hasRole('Super Admin')) {
+            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(3);
+            return view('home', ['radicados'=> $radicados]);
+        } elseif(auth()->user()->hasRole('Admisiones')) {
+            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(3);
+            return view('home', ['radicados'=> $radicados]);
+        }elseif(auth()->user()->hasRole('Direccion')){
+            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_sent_dir','!=',null)->paginate(3);
+            return view('home', ['radicados'=> $radicados]);
+        }
     }
 
     public function example(){

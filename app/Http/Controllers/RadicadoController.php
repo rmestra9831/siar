@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UploadPDF;
 use Illuminate\Http\Request;
-use App\Models\Program;
-use App\Models\Motivo;
 use App\Models\Radicado;
-use App\Models\State;
+use App\Models\Program;
 use App\Models\Origin;
+use App\Models\Motivo;
+use App\Models\State;
 use Carbon\Carbon;
 use DB;
 
 class RadicadoController extends Controller
-{
-    
+{  
     public function __constructor(){
     
     }
@@ -99,9 +100,32 @@ class RadicadoController extends Controller
         $data = Radicado::get();
         return $data->toJson();
     }
-    public function showRadic($slug){
+    public function viewRadic($slug){
         $radicado = Radicado::where('slug', $slug)->firstOrFail();
 
         return view('pages.createRadicado.viewRadic', compact('radicado'));
+    }
+    public function uploadFile(UploadPDF $request, $slug){
+        $radic = Radicado::where('slug',$slug)->firstOrFail();
+        // Storage::get($radic->file);
+        $dd = $request->file('uploadRadic')->storeAs('radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf');
+        $radic->file = $dd;
+        $radic->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Radicado subido exitosamente');
+    }
+    public function sentDir($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->date_sent_dir = Carbon::now();
+        $radicado->state->update(['sent_dir'=> true]);
+        $radicado->save();
+
+        return redirect()->route('viewRadic',[$slug])->with('status','Radicado '.$radicado->consecutive.' enviado a dirección');
+    }
+    public function downloadRadic($slug){
+        $data = Radicado::where('slug',$slug)->firstOrFail();
+        return Storage::download($data->file);
+    }
+    public function previewRadic(){
+        
     }
 }

@@ -55,4 +55,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('getReasons/{id}', 'RadicadoController@getReasons')->middleware('permission:create radicado');
     Route::get('getRadicados', 'RadicadoController@getRadicados')->middleware('auth');
 
-    Route::get('radicado/{slug}/show', 'RadicadoController@showRadic')->name('showRadic')->middleware('auth');
+    Route::get('radicado/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth');
+    Route::put('radicado/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadFile')->middleware('auth');
+    Route::put('radicado/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->middleware('auth');
+    Route::get('radicado/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');

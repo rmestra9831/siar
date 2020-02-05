@@ -41,16 +41,19 @@
       <div class="extra content">
         <div class="three ui buttons">
             @if (!$radicado->file)
-              <a href="{{route('showRadic',$radicado->slug)}}" class="ui green button"><i class="external alternate icon"></i> Mirar más...</a>  
-            @else
-              <a href="" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>
-                
+              <a href="{{route('viewRadic',$radicado->slug)}}" class="ui green button"><i class="external alternate icon"></i> Mirar más...</a>  
+              @else
+              <a href="" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>               
+              <a href="{{route('viewRadic',$radicado->slug)}}" class="ui green button"><i class="external alternate icon"></i> Mirar más...</a>  
             @endif
         </div>
       </div>
+      @include('common.dimmer')
     </div>
   </div>
 @endforeach
+@section('foter')
 <div class="container section_paginate">
   {{ $radicados->links() }}
 </div>
+@endsection
