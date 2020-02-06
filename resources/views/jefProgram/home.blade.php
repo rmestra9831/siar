@@ -1,5 +1,5 @@
 @section('title_content')
-    Direccion
+    Jefe de Programa de {{auth()->user()->program->name}}
 @endsection
 
 @section('body_main')

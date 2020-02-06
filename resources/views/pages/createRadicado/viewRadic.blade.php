@@ -49,6 +49,14 @@
           <div class="ui form extra content">
             @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
 
+            @if (!$radicado->date_answered)
+              <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div>
+              @include('forms.delegateForm')
+            @else
+              <div class="ui horizontal divider"><i class="clock outline icon"></i> Respuesta</div>
+              @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
+            @endif
+            
             {{--TABLAS--}}
             <div class="ui horizontal divider"><i class="clock outline icon"></i> Fechas de Movimiento</div>
             <table class="ui

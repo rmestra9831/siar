@@ -58,4 +58,11 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('radicado/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth');
     Route::put('radicado/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadFile')->middleware('auth');
     Route::put('radicado/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->middleware('auth');
+    Route::put('radicado/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middleware('auth');
     Route::get('radicado/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');
+    
+    Route::get('/getOnlyPrograms', 'FunctionsController@onlyPrograms')->name('onlyPrograms');
+//RESPUESTAS DEL RADICADO
+    Route::put('radicado/{slug}/Answertext', 'AnswerController@Answertext')->name('Answertext')->middleware('auth');
+    Route::put('radicado/{slug}/fileAnswer', 'AnswerController@fileAnswer')->name('fileAnswer')->middleware('auth');
+    Route::put('radicado/{slug}/delegateAnswer', 'AnswerController@delegateAnswer')->name('delegateAnswer')->middleware('auth');

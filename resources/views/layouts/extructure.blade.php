@@ -3,7 +3,7 @@
 @section('content')
   <div class="body_content">
     {{-- seccion del main --}}
-    <div class="@auth main_section @role('Direccion') bg-direction @endrole @role('Super Admin') bg-secondary @endrole @role('Admisiones') bg-admissions @endrole @else main_section_log @endauth">
+    <div class="@auth main_section @role('Direccion') bg-direction @endrole @role('Super Admin') bg-secondary @endrole @role('Admisiones') bg-admissions @endrole @role('Jef Programa') bg-jefprogram @endrole @else main_section_log @endauth">
       <div class="container @auth pan @else pan_login @endauth">
         {{-- validación de lo que muesta el menu si esta autenticado --}}
         @auth
@@ -16,6 +16,7 @@
                 @role('Super Admin') Super Administrador @endrole
                 @role('Direccion') Dirección @endrole
                 @role('Admisiones') Admisiones y Registro @endrole
+                @role('Jef Programa') Jef. de Programa @endrole
               </h3>
             </div>
           {{-- cuerpo del main --}}

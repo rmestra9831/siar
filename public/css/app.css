@@ -11457,6 +11457,10 @@ a.text-dark:focus {
   background: #3c5375 !important;
 }
 
+.bg-jefprogram {
+  background: #693c75 !important;
+}
+
 .bg-urgente {
   background: #e46c09;
 }
@@ -11503,6 +11507,11 @@ a.text-dark:focus {
 
 .b-urgente {
   border-top: 0.2em solid #e46c09 !important;
+}
+
+.disabled {
+  background: rgba(179, 179, 179, 0.692) !important;
+  color: white !important;
 }
 
 #app {

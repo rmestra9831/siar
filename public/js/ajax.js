@@ -100,7 +100,7 @@ $.ajaxSetup({
   }
 });
 
-if (window.location.pathname == 'admin/Permissions') {
+if (window.location.pathname == '/admin/Permissions') {
   $.ajax({
     //obteniendo los roles 
     type: "GET",

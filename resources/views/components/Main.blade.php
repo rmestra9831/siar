@@ -4,6 +4,7 @@
     @role('Super Admin') src=" {{asset('icon/stadistics.svg')}} " @endrole
     @role('Direccion') src=" {{asset('icon/boss.svg')}} " @endrole
     @role('Admisiones') src=" {{asset('icon/stadistics.svg')}} " @endrole
+    @role('Jef Programa') src=" {{asset('icon/delegate.svg')}} " @endrole
     alt="">
 @endsection
 {{-- menus --}}

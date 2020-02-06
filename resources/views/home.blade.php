@@ -15,3 +15,7 @@
 @hasrole('Admisiones')
 @include('admission.home')
 @endhasrole
+
+@hasrole('Jef Programa')
+@include('jefProgram.home')
+@endhasrole

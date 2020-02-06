@@ -243,9 +243,12 @@ class FunctionsController extends Controller
             return response()->json(true);
         }
     }
-
     //crear un nuevo rol
     public function createRol(){
         
+    }
+    public function onlyPrograms(){
+        $program = Program::get();
+        return response()->json($program);
     }
 }

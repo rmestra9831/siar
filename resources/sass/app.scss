@@ -14,6 +14,7 @@
 // aplicando colores de fondo
 .bg-direction{ background: $color-direction !important;}
 .bg-admissions{ background: $color-admissions !important;}
+.bg-jefprogram{ background: $color-jefProgram !important;}
 .bg-urgente{background: rgb(228, 108, 9);}
 .c-white{ color: white !important;}
 .bg-input-login{ background: $bg-input !important;}
@@ -30,6 +31,7 @@
 .as-center{align-self: center !important;}
 .b-admissions{border-top: 0.2em solid $color-admissions !important;}
 .b-urgente{border-top: 0.2em solid rgb(228, 108, 9) !important;}
+.disabled{background: rgba(179, 179, 179, 0.692) !important; color: white !important;}
 // .d-contents{display: contents !important;}
 
 #app {

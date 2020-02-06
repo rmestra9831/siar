@@ -121,6 +121,13 @@ class RadicadoController extends Controller
 
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado '.$radicado->consecutive.' enviado a dirección');
     }
+    public function getDir($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->date_get_dir = Carbon::now();
+        $radicado->state->update(['recived_dir'=> true]);
+        $radicado->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Radicado  exitosamente');
+    }
     public function downloadRadic($slug){
         $data = Radicado::where('slug',$slug)->firstOrFail();
         return Storage::download($data->file);

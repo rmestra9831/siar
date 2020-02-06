@@ -33,11 +33,17 @@ class HomeController extends Controller
         if (auth()->user()->hasRole('Super Admin')) {
             $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(3);
             return view('home', ['radicados'=> $radicados]);
+
         } elseif(auth()->user()->hasRole('Admisiones')) {
             $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->paginate(3);
             return view('home', ['radicados'=> $radicados]);
+
         }elseif(auth()->user()->hasRole('Direccion')){
             $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_sent_dir','!=',null)->paginate(3);
+            return view('home', ['radicados'=> $radicados]);
+
+        }elseif(auth()->user()->hasRole('Jef Programa')){
+            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_delegate','!=',null)->paginate(3);
             return view('home', ['radicados'=> $radicados]);
         }
     }

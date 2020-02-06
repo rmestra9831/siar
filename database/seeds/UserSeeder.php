@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'sede_id'=>'2',
             'slug'=>'paola_arciniegas',
             'password'=> bcrypt('123456789'),
-            'program_id'=>1
+            'program_id'=>2
         ]);
     }
 }
