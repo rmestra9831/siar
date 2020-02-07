@@ -44,5 +44,14 @@ class UserSeeder extends Seeder
             'password'=> bcrypt('123456789'),
             'program_id'=>2
         ]);
+        DB::table('users')->insert([
+            'name'=>'Jeniffer Lombana',
+            'email'=>'Psicologia@udi.com',
+            'ident'=>'PSI',
+            'sede_id'=>'2',
+            'slug'=>'jenni_psicologia',
+            'password'=> bcrypt('123456789'),
+            'program_id'=>3
+        ]);
     }
 }

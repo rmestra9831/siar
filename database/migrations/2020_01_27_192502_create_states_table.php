@@ -21,10 +21,11 @@ class CreateStatesTable extends Migration
             $table->boolean('recived_dir',false)->nullable();
             $table->boolean('delegated',false)->nullable();
             $table->boolean('answered',false)->nullable();
+            $table->boolean('answerCheck',false)->nullable();
+            $table->boolean('sentAdmissions',false)->nullable();
             //estados de revisi,falseo->nullable()n
             $table->boolean('redirection',false)->nullable();
             $table->boolean('answer_redirection',false)->nullable();
-            $table->boolean('sent_to_check',false)->nullable();
             $table->boolean('aproved',false)->nullable();
 
             $table->timestamps();

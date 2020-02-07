@@ -1,14 +1,13 @@
-@can('assign delegate')
 <div class="ui grid">
-  <div class="four wide column">
+  <div class="five wide column">
     <div class="ui large buttons">
-      <button id="answerMe" class="ui green active button">Responder</button>
+      <button id="answerRedirect" class="ui red active button">Redireccionar</button>
       <div class="or"></div>
-      <button id="delegateAnswer" class="ui button">Delegar</button>
+      <button id="delegateAnswerUser" class="ui button">Responder</button>
     </div>
   </div>
 
-  <div class="twelve wide column pl-4 as-center row">
+  <div class="eleven wide column pl-4 as-center row">
     {{-- SELECT DE OPCIONES DE RESPUESTA --}}
     <div class="selectMulipleAnswer col">
       <form class="m-0" id="delegateAnswerForm" action="{{action('AnswerController@delegateAnswer', $radicado->slug)}}" method="post">
@@ -52,5 +51,3 @@
   </div>
   
 </div>
-@include('common.denegado') {{--notificacion de error de subida--}}
-@endcan

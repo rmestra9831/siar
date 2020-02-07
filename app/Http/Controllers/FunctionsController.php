@@ -247,8 +247,9 @@ class FunctionsController extends Controller
     public function createRol(){
         
     }
-    public function onlyPrograms(){
-        $program = Program::get();
-        return response()->json($program);
+    public function onlyUsers(){
+
+        $users = user::where([['id','!=',auth()->user()->id],['name','!=','superadmin'],['name','!=','admissions']])->get();
+        return response()->json($users);
     }
 }

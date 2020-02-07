@@ -35,13 +35,14 @@
               </div>
               
               <div class="ui divider"></div>
-              <div class="three column row p-0">
+              <div class="four column row p-0">
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">destino<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->destination->name}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">tipo<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->type_reason}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">motivo<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->reason->name}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">creado por:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->createById->name}}</p></strong></div>
-                  <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">asunto<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->affair}}</p></strong></div>
-                  <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">respondido por:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->delegateId) No respondido @else {{$radicado->delegateId->name}} @endif</p></strong></div>
+                  <div class="left floated column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">asunto<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->affair}}</p></strong></div>
+                  <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">delegado a:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->delegateId) No respondido @else {{$radicado->delegateId->name}} @endif</p></strong></div>
+                  <div class="right floated column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">respondido por:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->userAnswered) No respondido @else {{$radicado->userAnswered->name}} @endif</p></strong></div>
               </div>              
               <div class="ui divider"></div>            
             </div>
@@ -49,12 +50,15 @@
           <div class="ui form extra content">
             @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
 
-            @if (!$radicado->date_answered)
-              <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div>
-              @include('forms.delegateForm')
+            @if ($radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
+              @include('forms.delegateAnswer')
             @else
-              <div class="ui horizontal divider"><i class="clock outline icon"></i> Respuesta</div>
-              @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
+              @if ($radicado->answered_id)
+                @include('forms.answered')
+              @else
+                @if($radicado->file && $radicado->date_sent_dir != false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
+                @include('forms.delegateForm')
+              @endif
             @endif
             
             {{--TABLAS--}}
@@ -91,15 +95,13 @@
                 <th>Respondido</th>
                 <th>Rec. Delegado</th>
                 <th>Redireccionado</th>
-                <th>Enviado a Aprovación</th>
-                <th>Entregado</th>
+                <th>Aprovado</th>
               </tr></thead>
               <tbody>
                 <tr>
                   <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->delegated) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->redirection) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
-                  <td class="">@if($radicado->state->sent_to_check == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->aproved == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                 </tr>
               </tbody>

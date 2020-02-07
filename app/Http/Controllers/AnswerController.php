@@ -20,16 +20,34 @@ class AnswerController extends Controller
 
         $radicado->answer_text = $request->answer;
         $radicado->date_answered = Carbon::now();
-        $radicado->state->update(['delegated'=>true ,'answered'=>true]);
+        $radicado->state->update(['answered'=>true]);
+        //VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
+        if (auth()->user()->hasrole('Direccion')) {
+            $radicado->state->update(['aproved'=>true]);
+        }
+        $radicado->answered_id = auth()->user()->id;
         $radicado->save();
-        return redirect()->route('viewRadic',[$slug])->with('status','Radicado respondido exitosamente');
+        return redirect()->route('viewRadic',[$slug])->with('statusAnswer','Radicado respondido exitosamente');
     }
     public function fileAnswer(UploadWord $request, $slug){
-        // return redirect()->route('viewRadic',[$slug])->with('status','Radicado respondido exitosamente');
-        return redirect()->route('viewRadic',[$slug])->with('status','Radicado subido exitosamente');
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $dd = $request->file('fileAnswer')->storeAs('answers','respuesta_radicado_'.str_replace(['/','-'],'_',$radicado->consecutive).'.docx');
+        $radicado->date_answered = Carbon::now();
+        $radicado->answer_file = $dd;
+        $radicado->state->update(['answered'=>true]);
+        //VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
+        if (auth()->user()->hasrole('Direccion')) {
+            $radicado->state->update(['aproved'=>true]);
+        }
+        $radicado->answered_id = auth()->user()->id;
+        $radicado->save();        
+        return redirect()->route('viewRadic',[$slug])->with('statusAnswer','Radicado subido exitosamente');
     }
     public function delegateAnswer(Request $request, $slug){
-        // return redirect()->route('viewRadic',[$slug])->with('status','Radicado respondido exitosamente');
-        return $request;
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->delegate_id = $request->selectMulipleAnswer;
+        $radicado->state->update(['delegated'=>true]);
+        $radicado->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Radicado delegado exitosamente');
     }
 }

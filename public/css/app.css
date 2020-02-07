@@ -11514,6 +11514,18 @@ a.text-dark:focus {
   color: white !important;
 }
 
+.bgSentDir {
+  background: #6a34ff52 !important;
+}
+
+.bgAproved {
+  background: #3dff3452 !important;
+}
+
+.z-8 {
+  z-index: 8;
+}
+
 #app {
   display: block !important;
   position: relative !important;
@@ -11723,5 +11735,26 @@ label {
   height: 45px;
   left: 0;
   right: 0;
+}
+
+#fileAnswer {
+  cursor: pointer;
+}
+
+.states {
+  display: -webkit-box;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.states .massive {
+  font-size: 13em !important;
+  opacity: 0.5;
 }
 

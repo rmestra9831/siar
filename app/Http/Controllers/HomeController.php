@@ -39,11 +39,11 @@ class HomeController extends Controller
             return view('home', ['radicados'=> $radicados]);
 
         }elseif(auth()->user()->hasRole('Direccion')){
-            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_sent_dir','!=',null)->paginate(3);
+            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_sent_dir','!=',null)->orderBy('date_get_dir', 'asc')->paginate(3);
             return view('home', ['radicados'=> $radicados]);
 
         }elseif(auth()->user()->hasRole('Jef Programa')){
-            $radicados = Radicado::where('sede_id',auth()->user()->sede_id)->where('date_delegate','!=',null)->paginate(3);
+            $radicados = Radicado::where([['sede_id',auth()->user()->sede_id],['delegate_id', auth()->user()->id]])->paginate(3);
             return view('home', ['radicados'=> $radicados]);
         }
     }

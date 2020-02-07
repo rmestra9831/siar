@@ -32,6 +32,11 @@
 .b-admissions{border-top: 0.2em solid $color-admissions !important;}
 .b-urgente{border-top: 0.2em solid rgb(228, 108, 9) !important;}
 .disabled{background: rgba(179, 179, 179, 0.692) !important; color: white !important;}
+.bgSentDir{background: $sent_admisisons_to_dir !important;}
+.bgAproved{background: $aprovado !important;}
+// z-index
+.z-8{z-index: 8;}
+
 // .d-contents{display: contents !important;}
 
 #app {
@@ -236,4 +241,20 @@ tbody{
   height: 45px;
   left: 0;
   right: 0;
+}
+#fileAnswer{
+  cursor: pointer;
+}
+// ESTADOS DEL RADICADO
+.states{
+  display: flex;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  .massive{
+    font-size: 13em !important;
+    opacity: 0.5;
+  }
 }

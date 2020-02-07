@@ -73,9 +73,9 @@
                      </div>
                   </div>
                </div>
-               <div class="three wide field disabled"> {{-- asunto (affair)--}}
+               <div class="three wide field"> {{-- asunto (affair)--}}
                   <label>Asunto</label>
-                  <textarea rows="1" name="affair" class="c-white bg-secondary" placeholder="Asunto" spellcheck="false" data-gramm="false"></textarea>
+                  <textarea rows="1" disabled="" name="affair" class="c-white bg-secondary" placeholder="Asunto" spellcheck="false" data-gramm="false"></textarea>
                </div>
             </div>
          </div>

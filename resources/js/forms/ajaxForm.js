@@ -196,7 +196,7 @@ $('#delegateAnswer').click(function (e) {
   $('.typeAnswer').hide();
   $('select[name="selectMulipleAnswer"]').empty();
   $('.btnFile').show();
-  $.get("/getOnlyPrograms", function (data, p) { //TRAYENDO LOS DATOS DE LOS PROGRAMAS A DELEGAR LA RESPUESTA
+  $.get("/getonlyUsers", function (data, p) { //TRAYENDO LOS DATOS DE LOS PROGRAMAS A DELEGAR LA RESPUESTA
       $.each(data, function (p) { 
         select_motivo = '<option value="'+data[p].id+'">'+data[p].name+'</option>';
         $('select[name="selectMulipleAnswer"]').append(select_motivo);
@@ -258,4 +258,30 @@ $('.delegate.btn').click(function (e) {
         cancel: function() {},
     }
   });
+});
+
+//BOTONES DEL JEFE DE PROGRAMA O OTROS
+$('#delegateAnswerUser').click(function (e) {
+  // console.log('sas');
+  $('.btnFile').hide();
+  $('textarea[name="answer"]').val('');
+  $('.textAnswer.btn').addClass('disabled');
+  $('select[name="selectMulipleAnswer"]').empty();
+  select_motivo = '<option value="1">Texto</option> <option value="2">Archivo</option>';
+  $('textarea[name="answer"]').removeAttr('disabled'); $('textarea[name="answer"]').removeClass('disabled');
+  $('select[name="selectMulipleAnswer"]').append(select_motivo); //AGREGA LOS OPTIONS
+
+  $('select[name="selectMulipleAnswer"]').change(function (e) { //EVENTO QUE CAMBIA EL INPUT PARA AGREGAR LA RESPUESTA
+    value_typeAnswer = $('select[name="selectMulipleAnswer"] option:selected').val();
+    if (value_typeAnswer == 2) {
+      $('.textAnswer').hide();
+      $('.fileAnswer').show();
+    } else {
+      $('.textAnswer.btn').addClass('disabled');
+      $('textarea[name="answer"]').val('');
+      $('.textAnswer').show();
+      $('.fileAnswer').hide();
+    }
+  });
+  $('.typeAnswer').fadeIn().show();
 });

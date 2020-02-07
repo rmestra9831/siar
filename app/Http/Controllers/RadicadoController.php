@@ -107,7 +107,6 @@ class RadicadoController extends Controller
     }
     public function uploadFile(UploadPDF $request, $slug){
         $radic = Radicado::where('slug',$slug)->firstOrFail();
-        // Storage::get($radic->file);
         $dd = $request->file('uploadRadic')->storeAs('radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf');
         $radic->file = $dd;
         $radic->save();

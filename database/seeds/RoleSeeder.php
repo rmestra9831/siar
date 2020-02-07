@@ -65,7 +65,8 @@ class RoleSeeder extends Seeder
                 
                 $user_jef_sis = User::where('id',4)->first();
                 $user_jef_sis->assignRole('Jef Programa');
-
-
+                
+                $user_jef_psi = User::where('id',5)->first();
+                $user_jef_psi->assignRole('Jef Programa');
             }
 }
