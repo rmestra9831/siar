@@ -261,8 +261,11 @@ $('.delegate.btn').click(function (e) {
 });
 
 //BOTONES DEL JEFE DE PROGRAMA O OTROS
+$('.redirectAnswer').hide();
 $('#delegateAnswerUser').click(function (e) {
   // console.log('sas');
+  $('.selectMulipleAnswer').show();
+  $('.redirectAnswer').hide();
   $('.btnFile').hide();
   $('textarea[name="answer"]').val('');
   $('.textAnswer.btn').addClass('disabled');
@@ -285,3 +288,37 @@ $('#delegateAnswerUser').click(function (e) {
   });
   $('.typeAnswer').fadeIn().show();
 });
+
+$('#answerRedirect').click(function (e) {
+  $('.selectMulipleAnswer').hide();
+  $('.redirect.btn').addClass('disabled');
+  $('.typeAnswer').hide();
+  $('.redirectAnswer').show();
+  $('textarea[name="redirectAnswer"]').keydown(function (e) {
+    valorTxtArea = $('textarea[name="redirectAnswer"]').val();
+    if (valorTxtArea.length >= 5) {
+      $('.redirect.btn').removeClass('disabled');
+    } else {
+      $('.redirect.btn').addClass('disabled');
+    }
+  });
+  $('.redirect.btn').click(function (e) { 
+    $.confirm({ //aqui va el alerta personalizado
+      animation: 'zoom',
+      closeAnimation: 'zoom',
+      theme: 'modern',
+      icon: 'lh exclamation triangle icon',
+      backgroundDismissAnimation: 'glow',
+      title: 'Redireccionamiento',
+      content: '¿ Está seguro que desea Redireccionar este radicado ?',
+      type: 'orange',
+      buttons: {
+          aceptar: function() {
+              $('#redirectAnswer').submit();
+          },
+          cancel: function() {},
+      }
+    });
+  });
+});
+

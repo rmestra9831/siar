@@ -46,8 +46,16 @@ class AnswerController extends Controller
     public function delegateAnswer(Request $request, $slug){
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
         $radicado->delegate_id = $request->selectMulipleAnswer;
+        $radicado->date_delegate = Carbon::now();
         $radicado->state->update(['delegated'=>true]);
         $radicado->save();
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado delegado exitosamente');
+    }
+    public function redirectionAnswerPetition(Request $request, $slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->state->update(['redirection'=>true]);
+        $radicado->redirect_txt = $request->redirectAnswer;
+        $radicado->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Petición enviada');
     }
 }

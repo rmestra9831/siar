@@ -56,52 +56,52 @@
               @if ($radicado->answered_id)
                 @include('forms.answered')
               @else
-                @if($radicado->file && $radicado->date_sent_dir != false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
+                @if($radicado->file && $radicado->date_sent_dir != false ||$radicado->date_sent_dir == false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
                 @include('forms.delegateForm')
               @endif
             @endif
             
             {{--TABLAS--}}
-            <div class="ui horizontal divider"><i class="clock outline icon"></i> Fechas de Movimiento</div>
-            <table class="ui
-              @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
-              very compact table">
-              <thead>
-                <tr><th>Creado</th>
-                <th>Env. dirección</th>
-                <th>Rec. dirección</th>
-                <th>Delegado</th>
-                <th>Respondido</th>
-                <th>Email env.</th>
-                <th>Entregado</th>
-              </tr></thead>
-              <tbody>
-                <tr>
-                  <td>@if(!$radicado->date_creation) Null @else{{$radicado->date_creation}}@endif</td>
-                  <td>@if(!$radicado->date_sent_dir) Null @else{{$radicado->date_sent_dir}}@endif</td>
-                  <td>@if(!$radicado->date_get_dir) Null @else{{$radicado->date_get_dir}}@endif</td>
-                  <td>@if(!$radicado->date_delegate) Null @else{{$radicado->date_delegate}}@endif</td>
-                  <td>@if(!$radicado->date_answered) Null @else{{$radicado->date_answered}}@endif</td>
-                  <td>@if(!$radicado->date_sent_mail) Null @else{{$radicado->date_sent_mail}}@endif</td>
-                  <td>@if(!$radicado->date_delivered) Null @else{{$radicado->date_delivered}}@endif</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="ui horizontal divider"><i class="calendar alternate outline icon"></i> Fechas de Movimiento</div>
+              <table class="ui
+                @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
+                very compact table">
+                <thead>
+                  <tr><th>Creado</th>
+                  <th>Env. dirección</th>
+                  <th>Rec. dirección</th>
+                  <th>Delegado</th>
+                  <th>Respondido</th>
+                  <th>Email env.</th>
+                  <th>Entregado</th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td>@if(!$radicado->date_creation) Null @else{{$radicado->date_creation}}@endif</td>
+                    <td>@if(!$radicado->date_sent_dir) Null @else{{$radicado->date_sent_dir}}@endif</td>
+                    <td>@if(!$radicado->date_get_dir) Null @else{{$radicado->date_get_dir}}@endif</td>
+                    <td>@if(!$radicado->date_delegate) Null @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_answered) Null @else{{$radicado->date_answered}}@endif</td>
+                    <td>@if(!$radicado->date_sent_mail) Null @else{{$radicado->date_sent_mail}}@endif</td>
+                    <td>@if(!$radicado->date_delivered) Null @else{{$radicado->date_delivered}}@endif</td>
+                  </tr>
+                </tbody>
+              </table>
             <div class="ui horizontal divider"><i class="circle icon"></i><i class="circle outline icon"></i> Estados del Radicado <i class="circle outline icon"></i><i class="circle icon"></i></div>
             <table class="ui
               @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
               very compact table">
               <thead>
-                <th>Respondido</th>
                 <th>Rec. Delegado</th>
-                <th>Redireccionado</th>
+                <th>Petición de redirección</th>
+                <th>Respondido</th>
                 <th>Aprovado</th>
               </tr></thead>
               <tbody>
                 <tr>
-                  <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->delegated) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->redirection) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->aproved == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                 </tr>
               </tbody>

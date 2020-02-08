@@ -66,3 +66,4 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::put('radicado/{slug}/Answertext', 'AnswerController@Answertext')->name('Answertext')->middleware('auth');
     Route::put('radicado/{slug}/fileAnswer', 'AnswerController@fileAnswer')->name('fileAnswer')->middleware('auth');
     Route::put('radicado/{slug}/delegateAnswer', 'AnswerController@delegateAnswer')->name('delegateAnswer')->middleware('auth');
+    Route::put('radicado/{slug}/redirectionAnswerPetition', 'AnswerController@redirectionAnswerPetition')->name('redirectionAnswerPetition')->middleware('auth');

@@ -38,14 +38,23 @@
         </div>
       </div>
     </div>
+    <div class="col-8 redirectAnswer"> {{--REDIRECCIONAMIENTO--}}
+        <form class="w-100" id="redirectAnswer" method="POST" action="{{action('AnswerController@redirectionAnswerPetition', $radicado->slug)}}">
+          @method('PUT') @csrf
+          <textarea rows="1" name="redirectAnswer" placeholder="Redirección" spellcheck="false"data-gramm="false"></textarea>
+        </form>
+    </div>
     {{-- BOTONES DE ENVIO DE RESPUESTA O DELEGADO --}}
     <div class="col">
       <div class="typeAnswer">
-        <button  class="ui basic blue fluid button textAnswer btn"><i class="icon user"></i>Responder</button>
-        <button  class="ui basic blue fluid button fileAnswer btn"><i class="icon user"></i>Responder</button>
+        <button  class="ui basic blue fluid button textAnswer btn"><i class="i cursor icon"></i>Responder</button>
+        <button  class="ui basic blue fluid button fileAnswer btn"><i class="i cursor icon"></i>Responder</button>
       </div>
       <div class="btnFile">
-        <button class="ui basic blue fluid button delegate btn"><i class="icon user"></i>Delegar</button>
+        <button class="ui basic blue fluid button delegate btn"><i class="share icon"></i>Delegar</button>
+      </div>
+      <div class="redirectAnswer">
+        <button class="ui basic blue fluid button redirect btn"><i class="reply icon"></i>Continuar</button>
       </div>
     </div>
   </div>
