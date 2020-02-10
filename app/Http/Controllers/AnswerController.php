@@ -77,7 +77,7 @@ class AnswerController extends Controller
         $radicado->state->update(['redirection'=>false]);
         $radicado->save();
         //ENVIO DE CORREO
-        $user = User::find($request->selectMulipleAnswer);
+        $user = User::find($radicado->delegate_id);
         $url = $_SERVER['HTTP_HOST'];
         $user->notify(new RedirectionRespon($radicado, $url));
 
