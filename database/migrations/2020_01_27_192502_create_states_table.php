@@ -25,7 +25,6 @@ class CreateStatesTable extends Migration
             $table->boolean('sentAdmissions',false)->nullable();
             //estados de revisi,falseo->nullable()n
             $table->boolean('redirection',false)->nullable();
-            $table->boolean('answer_redirection',false)->nullable();
             $table->boolean('aproved',false)->nullable();
 
             $table->timestamps();

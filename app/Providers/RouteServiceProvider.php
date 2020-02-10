@@ -47,6 +47,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapPermissionsRoutes();
+
+        $this->mapRadicadosRoutes();
         //
     }
 
@@ -55,6 +57,12 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/permissions/permissions.php'));
+    }
+    public function mapRadicadosRoutes(){
+        Route::prefix('radicado')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/radicados/radicados.php'));
     }
 
     /**

@@ -11,6 +11,11 @@
 |
 */
 use App\Models\Program;
+use App\Models\Radicado;
+use App\User;
+use Illuminate\Notifications\Messages\MailMessage;
+use App\Notifications\RedirectionRespon;
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -49,21 +54,23 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('motivos-setings', 'FunctionsController@settingsMotivo')->name('settingsMotivo')->middleware('permission:settings motivo');
 });
 
-//RUTA DE CREACIOM DE RADICADO
+//RUTA DE CREACIOn DE RADICADO
     Route::resource('radicado', 'RadicadoController', ['only' => ['index', 'store']])->middleware('permission:create radicado');
     Route::get('getDataSelects', 'RadicadoController@getDataSelects')->middleware('permission:create radicado');
     Route::get('getReasons/{id}', 'RadicadoController@getReasons')->middleware('permission:create radicado');
     Route::get('getRadicados', 'RadicadoController@getRadicados')->middleware('auth');
-
-    Route::get('radicado/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth');
-    Route::put('radicado/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadFile')->middleware('auth');
-    Route::put('radicado/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->middleware('auth');
-    Route::put('radicado/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middleware('auth');
-    Route::get('radicado/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');
-    
     Route::get('/getonlyUsers', 'FunctionsController@onlyUsers')->name('onlyUsers');
-//RESPUESTAS DEL RADICADO
-    Route::put('radicado/{slug}/Answertext', 'AnswerController@Answertext')->name('Answertext')->middleware('auth');
-    Route::put('radicado/{slug}/fileAnswer', 'AnswerController@fileAnswer')->name('fileAnswer')->middleware('auth');
-    Route::put('radicado/{slug}/delegateAnswer', 'AnswerController@delegateAnswer')->name('delegateAnswer')->middleware('auth');
-    Route::put('radicado/{slug}/redirectionAnswerPetition', 'AnswerController@redirectionAnswerPetition')->name('redirectionAnswerPetition')->middleware('auth');
+
+//vista previa de emails
+Route::get('mail', function () {
+    $radicado = App\Models\Radicado::find(1);
+    return (new MailMessage)->markdown('mail/notify/sentDir', compact('radicado'));
+});
+Route::get('mailSent/{slug}', function ($slug) {
+    $radicado = Radicado::where('slug',$slug)->firstOrFail();
+    $user = User::find(2);
+    $url = $_SERVER['HTTP_HOST'];
+    // $user->notify(new DelegateUser($radicado, $url));
+    // return response()->json($radicado);
+    return (new MailMessage)->markdown('mail/notify/RedirectionRespon', compact('radicado','url'));
+});

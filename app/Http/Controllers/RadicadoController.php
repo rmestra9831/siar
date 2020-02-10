@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UploadPDF;
+use App\Notifications\SentDir;
 use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Origin;
 use App\Models\Motivo;
 use App\Models\State;
+use App\User;
 use Carbon\Carbon;
 use DB;
 
@@ -117,6 +119,10 @@ class RadicadoController extends Controller
         $radicado->date_sent_dir = Carbon::now();
         $radicado->state->update(['sent_dir'=> true]);
         $radicado->save();
+
+        $user = User::find(2);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new sentDir($radicado, $url));
 
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado '.$radicado->consecutive.' enviado a dirección');
     }

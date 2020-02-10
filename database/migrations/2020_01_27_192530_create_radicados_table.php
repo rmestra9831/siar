@@ -44,6 +44,8 @@ class CreateRadicadosTable extends Migration
             $table->timestamp('date_sent_dir')->nullable();
             $table->timestamp('date_get_dir')->nullable();
             $table->timestamp('date_delegate')->nullable();
+            $table->timestamp('date_petition_redirection')->nullable();
+            $table->timestamp('date_update_redirection')->nullable();
             $table->timestamp('date_answered')->nullable();
             $table->timestamp('date_sent_admissions')->nullable();
             $table->timestamp('date_sent_mail')->nullable();

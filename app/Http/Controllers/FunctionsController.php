@@ -244,8 +244,7 @@ class FunctionsController extends Controller
         }
     }
     //crear un nuevo rol
-    public function createRol(){
-        
+    public function createRol(){      
     }
     public function onlyUsers(){
 

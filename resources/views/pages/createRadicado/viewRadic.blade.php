@@ -71,6 +71,8 @@
                   <th>Env. dirección</th>
                   <th>Rec. dirección</th>
                   <th>Delegado</th>
+                  <th>Pet. Redirección</th>
+                  <th>Resp. Redirección</th>
                   <th>Respondido</th>
                   <th>Email env.</th>
                   <th>Entregado</th>
@@ -81,6 +83,8 @@
                     <td>@if(!$radicado->date_sent_dir) Null @else{{$radicado->date_sent_dir}}@endif</td>
                     <td>@if(!$radicado->date_get_dir) Null @else{{$radicado->date_get_dir}}@endif</td>
                     <td>@if(!$radicado->date_delegate) Null @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_petition_redirection) Null @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_update_redirection) Null @else{{$radicado->date_delegate}}@endif</td>
                     <td>@if(!$radicado->date_answered) Null @else{{$radicado->date_answered}}@endif</td>
                     <td>@if(!$radicado->date_sent_mail) Null @else{{$radicado->date_sent_mail}}@endif</td>
                     <td>@if(!$radicado->date_delivered) Null @else{{$radicado->date_delivered}}@endif</td>

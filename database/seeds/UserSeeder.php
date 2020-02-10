@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name'=>'superadmin',
-            'email'=>'r@r.r',
+            'email'=>'sadmin@yopmail.com',
             'sede_id'=>'2',
             'slug'=>'superadmin',
             'password'=> bcrypt('123123123'),
@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name'=>'dirección',
-            'email'=>'d@d.d',
+            'email'=>'d@yopmail.com',
             'sede_id'=>'2',
             'slug'=>'direccion',
             'password'=> bcrypt('123456789'),
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name'=>'admissions',
-            'email'=>'a@a.a',
+            'email'=>'a@yopmail.com',
             'sede_id'=>'2',
             'slug'=>'admiciones',
             'password'=> bcrypt('123456789'),
@@ -37,16 +37,16 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name'=>'Paola Arciniegas',
-            'email'=>'sistemas@udi.com',
+            'email'=>'sistemas@yopmail.com',
             'ident'=>'SIS',
             'sede_id'=>'2',
-            'slug'=>'paola_arciniegas',
+            'slug'=>'paola_sistemas',
             'password'=> bcrypt('123456789'),
             'program_id'=>2
         ]);
         DB::table('users')->insert([
             'name'=>'Jeniffer Lombana',
-            'email'=>'Psicologia@udi.com',
+            'email'=>'psicologia@yopmail.com',
             'ident'=>'PSI',
             'sede_id'=>'2',
             'slug'=>'jenni_psicologia',

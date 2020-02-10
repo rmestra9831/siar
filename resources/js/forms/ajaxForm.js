@@ -321,4 +321,40 @@ $('#answerRedirect').click(function (e) {
     });
   });
 });
-
+//BOTONES DE ACEPTACION DE REDIRECCION
+$('.refuseRedirection').click(function (e) { 
+  $.confirm({ //aqui va el alerta personalizado
+    animation: 'zoom',
+    closeAnimation: 'zoom',
+    theme: 'modern',
+    icon: 'lh exclamation triangle icon',
+    backgroundDismissAnimation: 'glow',
+    title: 'Confirmación!',
+    content: '¿ Está seguro que desea denegar esta solicitud ?',
+    type: 'orange',
+    buttons: {
+        aceptar: function() {
+            $('#refuseRedirectionForm').submit();
+        },
+        cancel: function() {},
+    }
+  });
+});
+$('.acceptRedirection').click(function (e) { 
+  $.confirm({ //aqui va el alerta personalizado
+    animation: 'zoom',
+    closeAnimation: 'zoom',
+    theme: 'modern',
+    icon: 'lh exclamation triangle icon',
+    backgroundDismissAnimation: 'glow',
+    title: 'Confirmación!',
+    content: '¿ Está seguro que desea denegar esta solicitud ?',
+    type: 'orange',
+    buttons: {
+        aceptar: function() {
+            $('#acceptRedirectionForm').submit();
+        },
+        cancel: function() {},
+    }
+  });
+});

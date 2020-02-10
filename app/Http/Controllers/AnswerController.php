@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\RedirectionPetition;
+use App\Notifications\RedirectionRespon;
+use App\Notifications\DelegateUser;
 use App\Http\Requests\UploadWord;
 use Illuminate\Http\Request;
 use App\Models\Radicado;
@@ -10,6 +13,7 @@ use App\Models\Program;
 use App\Models\Origin;
 use App\Models\Motivo;
 use App\Models\State;
+use App\User;
 use Carbon\Carbon;
 use DB;
 
@@ -49,13 +53,48 @@ class AnswerController extends Controller
         $radicado->date_delegate = Carbon::now();
         $radicado->state->update(['delegated'=>true]);
         $radicado->save();
+        //ENVIO DE CORREO
+        $user = User::find($request->selectMulipleAnswer);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new DelegateUser($radicado, $url));
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado delegado exitosamente');
     }
     public function redirectionAnswerPetition(Request $request, $slug){
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->date_petition_redirection = Carbon::now();
         $radicado->state->update(['redirection'=>true]);
         $radicado->redirect_txt = $request->redirectAnswer;
         $radicado->save();
-        return redirect()->route('viewRadic',[$slug])->with('status','Petición enviada');
+        //ENVIO DE CORREO
+        $user = User::find(2);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new RedirectionPetition($radicado, $url));
+
+        return redirect()->route('viewRadic',[$slug])->with('status','Petición Denegada');
+    }
+    public function refuseRedirection($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->state->update(['redirection'=>false]);
+        $radicado->save();
+        //ENVIO DE CORREO
+        $user = User::find($request->selectMulipleAnswer);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new RedirectionRespon($radicado, $url));
+
+        return redirect()->route('viewRadic',[$slug])->with('status','Petición respondida');
+    }
+    public function acceptRedirection($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->state->update(['redirection'=>false]);
+        $radicado->state->update(['delegated'=>false]);
+        $radicado->date_update_redirection = Carbon::now();
+        //ENVIO DE CORREO
+        $user = User::find($radicado->delegate_id);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new RedirectionRespon($radicado, $url));
+
+        $radicado->delegate_id = null;
+        $radicado->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Petición Aceptada');
     }
 }
