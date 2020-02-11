@@ -358,3 +358,13 @@ $('.acceptRedirection').click(function (e) {
     }
   });
 });
+//MODAL PARA MOSTRAR LOS RADICADOS
+$('#previewRadic').click(function (e) {
+  valor =$('#previewRadic').attr('xurl');
+  $.dialog({
+    columnClass: 'col-md-12',
+    heigth: '30%',
+    title: 'Text content!',
+    content: '<iframe class="w-100" src="http://'+location.hostname+valor+'" frameborder="0">asdd</iframe>',
+  });
+});

@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'dirección',
             'email'=>'d@yopmail.com',
+            'ident'=>'DIR',
             'sede_id'=>'2',
             'slug'=>'direccion',
             'password'=> bcrypt('123456789'),
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'name'=>'admissions',
             'email'=>'a@yopmail.com',
             'sede_id'=>'2',
+            'ident'=>'SIC',
             'slug'=>'admiciones',
             'password'=> bcrypt('123456789'),
             'program_id'=>null

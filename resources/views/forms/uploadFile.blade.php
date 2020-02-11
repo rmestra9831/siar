@@ -21,7 +21,7 @@
 @else
   @include('common.success') {{--NOTIFICACION DE ARCHIVO SUBIDO--}}
   <div class="three ui buttons">
-      <a href="" class="ui teal  basic button"><i class="eye icon"></i>Visualizar</a>
+      <a id="previewRadic" xurl="{{Storage::url($radicado->file)}}" class="ui teal  basic button"><i class="eye icon"></i>Visualizar</a>
       <a href="{{route('downloadRadic',$radicado->slug)}}" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>
       @include('forms.sendToDirection')
   </div>

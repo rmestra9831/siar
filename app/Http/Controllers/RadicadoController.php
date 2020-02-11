@@ -43,7 +43,6 @@ class RadicadoController extends Controller
         );
         return response()->json($data);
     }
-
     public function store(Request $request){
         if($request->ajax()){
             $number = str_pad(auth()->user()->sede->cont_radic + 1, 5, "0", STR_PAD_LEFT); //agregando ceros al numero traido de la db
@@ -109,7 +108,7 @@ class RadicadoController extends Controller
     }
     public function uploadFile(UploadPDF $request, $slug){
         $radic = Radicado::where('slug',$slug)->firstOrFail();
-        $dd = $request->file('uploadRadic')->storeAs('radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf');
+        $dd = $request->file('uploadRadic')->storeAs('public/radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf');
         $radic->file = $dd;
         $radic->save();
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado subido exitosamente');
@@ -137,7 +136,14 @@ class RadicadoController extends Controller
         $data = Radicado::where('slug',$slug)->firstOrFail();
         return Storage::download($data->file);
     }
-    public function previewRadic(){
-        
+    public function downloadAnswer($slug){
+        $data = Radicado::where('slug',$slug)->firstOrFail();
+        return Storage::download($data->answer_file);
+    }
+    public function sentAdmissions($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $radicado->state->update(['sentAdmissions'=>true]);
+        $radicado->save();
+        return redirect()->route('viewRadic',[$slug])->with('status','Radicado  enviado a admisiones exitosamente');
     }
 }

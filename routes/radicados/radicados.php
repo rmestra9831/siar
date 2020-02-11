@@ -6,7 +6,9 @@ Route::put('/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadF
 Route::put('/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->middleware('auth');
 Route::put('/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middleware('auth');
 Route::get('/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');
-
+Route::get('/{slug}/downloadAnswer', 'RadicadoController@downloadAnswer')->name('downloadAnswer');
+Route::put('/{slug}/sentAdmissions','RadicadoController@sentAdmissions')->name('sentAdmissions')->middleware('auth');
+// Route::get('/{slug}/previewRadic','RadicadoController@previewRadic')->name('previewRadic')->middleware('auth');
 //RESPUESTAS DEL RADICADO
 Route::put('/{slug}/Answertext', 'AnswerController@Answertext')->name('Answertext')->middleware('auth');
 Route::put('/{slug}/fileAnswer', 'AnswerController@fileAnswer')->name('fileAnswer')->middleware('auth');
@@ -15,3 +17,6 @@ Route::put('/{slug}/redirectionAnswerPetition', 'AnswerController@redirectionAns
 //ACEPTAR O DENEGAR REDIRECCIONAMIENTO
 Route::put('/{slug}/refuseRedirection','AnswerController@refuseRedirection')->name('refuseRedirection')->middleware('auth');
 Route::put('/{slug}/acceptRedirection','AnswerController@acceptRedirection')->name('acceptRedirection')->middleware('auth');
+//EDITAR RESPUESTA DEL RADICADO
+Route::put('/{slug}/EditAnswer','AnswerController@EditAnswer')->name('EditAnswer')->middleware('auth');
+Route::put('/{slug}/aproveAnswer','AnswerController@aproveAnswer')->name('aproveAnswer')->middleware('auth');

@@ -87,7 +87,7 @@
                   <select class="ui fluid dropdown" name="atention_radic">
                      <option value="">Tipo de atención</option>
                      <option value="Normal">Normal</option>
-                     <option value="Urgende">Urgende</option>
+                     <option value="Urgente">Urgente</option>
                   </select>
                </div>
                <div class="field"> {{-- select origen--}}

@@ -53,7 +53,7 @@
             @if ($radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
               @include('forms.delegateAnswer')
             @else
-              @if ($radicado->answered_id)
+              @if ($radicado->answered_id && $radicado->state->aproved)
                 @include('forms.answered')
               @else
                 @if($radicado->file && $radicado->date_sent_dir != false ||$radicado->date_sent_dir == false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
@@ -98,6 +98,7 @@
               <thead>
                 <th>Rec. Delegado</th>
                 <th>Petición de redirección</th>
+                <th>Revisar respuesta</th>
                 <th>Respondido</th>
                 <th>Aprovado</th>
               </tr></thead>
@@ -105,6 +106,7 @@
                 <tr>
                   <td class="">@if($radicado->state->delegated) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->redirection) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
+                  <td class="">@if($radicado->state->answerCheck) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->answered) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                   <td class="">@if($radicado->state->aproved == true) <i class="large checkmark green icon"></i> @else<i class="large close red icon"></i>@endif</td>
                 </tr>

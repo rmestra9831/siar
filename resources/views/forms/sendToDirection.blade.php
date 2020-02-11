@@ -3,6 +3,10 @@
 <button type="submit" form="sentDirForm" class="ui inverted green button"><i class="share icon"></i>Enviar a dirección</button>
 @else
   @hasrole('Admisiones')
-    <a href="" class="ui disabled green button"><i class="spinner loading icon"></i>Enviado a dirección</a>
+    @if (!$radicado->state->sentAdmissions)
+      <a href="" class="ui disabled green button"><i class="spinner loading icon"></i>Enviado a dirección</a>
+    @else
+      <button type="submit" form="sentDirForm" class="ui blue button"><i class="share icon"></i>Entregar</button>
+    @endif
   @endhasrole
 @endif

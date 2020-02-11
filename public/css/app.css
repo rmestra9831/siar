@@ -11522,6 +11522,11 @@ a.text-dark:focus {
   background: #3dff3452 !important;
 }
 
+.ai-center {
+  -webkit-box-align: baseline !important;
+          align-items: baseline !important;
+}
+
 .z-8 {
   z-index: 8;
 }

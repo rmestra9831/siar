@@ -62,10 +62,19 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/getonlyUsers', 'FunctionsController@onlyUsers')->name('onlyUsers');
 
 //vista previa de emails
-Route::get('mail', function () {
-    $radicado = App\Models\Radicado::find(1);
-    return (new MailMessage)->markdown('mail/notify/sentDir', compact('radicado'));
-});
+// Route::get('matriz', function () {
+//     $v1 = [2,4]; $v2 = [3,1]; $vt =[];
+//     for ($i=0; $i < count($v1) ; $i++) { 
+//         for ($j=0; $j < count($v2) ; $j++) { 
+//             if ($v1[$i] + $v2[$j] == 5) {
+//                 array_push($vt, [$v1[$i],$v2[$j]]);
+//             }
+//         }
+//     }
+//     var_dump($vt);
+//     //Esto es para que el profe vea que funciona XD
+   
+// });
 Route::get('mailSent/{slug}', function ($slug) {
     $radicado = Radicado::where('slug',$slug)->firstOrFail();
     $user = User::find(2);
