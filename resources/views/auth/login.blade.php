@@ -1,5 +1,5 @@
 @extends('layouts.extructure')
-
+@section('title','Login')
 @section('main')
     <div class="ui column centered grid">
         <form class="ui form" method="POST" action="{{ route('login') }}">

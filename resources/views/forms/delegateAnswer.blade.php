@@ -1,4 +1,4 @@
-<div class="ui horizontal divider"><i class="clock outline icon"></i> Delegado a {{$radicado->delegateId->name}} @if($radicado->delegateId->program) | {{$radicado->delegateId->program->name}} @endif </div>
+<div class="ui horizontal divider"><i class="clock outline icon"></i> Delegado a {{$radicado->delegateId->name ?? ''}} @if($radicado->delegateId->program ?? '') | {{$radicado->delegateId->program->name}} @endif </div>
 
 @hasrole('Direccion')
   @if($radicado->state->answered && $radicado->state->aproved)

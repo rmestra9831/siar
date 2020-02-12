@@ -50,14 +50,16 @@
           <div class="ui form extra content">
             @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
 
-            @if (!$radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
+            @if ($radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
               @include('forms.delegateAnswer')
             @else
-              @if ($radicado->answered_id && $radicado->state->aproved)
-                @include('forms.answered')
-              @else
-                @if($radicado->file && $radicado->date_sent_dir != false ||$radicado->date_sent_dir == false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
-                @include('forms.delegateForm')
+              @if (!$radicado->delegate_id)          
+                @if ($radicado->answered_id && $radicado->state->aproved)
+                  @include('forms.answered')
+                @else
+                  @if($radicado->file && $radicado->date_sent_dir != false ||$radicado->date_sent_dir == false) <div class="ui horizontal divider"><i class="clock outline icon"></i> Acciones</div> @endif
+                  @include('forms.delegateForm')
+                @endif
               @endif
             @endif
             
