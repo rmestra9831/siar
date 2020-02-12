@@ -7,20 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RadicadoAnswered extends Notification implements ShouldQueue
+class Petitions extends Notification
 {
     use Queueable;
-    public $data;
-    public $url;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($data, $url)
+    public function __construct()
     {
-        $this->data = $data;
-        $this->url = $url;
+        //
     }
 
     /**
@@ -31,7 +29,7 @@ class RadicadoAnswered extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['database'];
     }
 
     /**
@@ -42,16 +40,7 @@ class RadicadoAnswered extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $radicado = $this->data;
-        $url = $this->url;
-        return (new MailMessage)->markdown('mail/notify/RadicadoAnswered', compact('radicado','url'))
-                    ->subject('Respuesta emitida '.$radicado->consecutiveAnswer.' ( '.$radicado->atention.' )');
-    }
-
-    public function toDatabase($notifiable){
-        return [
-            'id' =>5646546,
-        ];
+        return (new MailMessage)->markdown('mail/notify/Petitions');
     }
 
     /**
@@ -63,8 +52,7 @@ class RadicadoAnswered extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'invoice_id' => $this->data->id,
-            'amount' => $this->data->consecutive,
+            'consecutive'=>3213545313
         ];
     }
 }
