@@ -17,8 +17,11 @@
   @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == false)
     <i class="spinner massive loading icon"></i>
   @endif
-  @if ($radicado->state->answered && $radicado->state->aproved == false)
+  @if ($radicado->state->answered && $radicado->state->aproved == false && !$radicado->state->answerCheck)
     <i class="eye massive icon"></i>
+  @endif
+  @if ($radicado->state->answered && $radicado->state->aproved == false && $radicado->state->answerCheck)
+    <i class="spinner massive loading icon"></i>
   @endif
   @if (!$radicado->state->sentAdmissions && $radicado->state->aproved == true)
     <i class="share massive icon"></i>
@@ -32,16 +35,16 @@
   @if ($radicado->state->aproved && $radicado->state->answered)
     <i class="check massive circle outline icon"></i>
   @endif
-  @if ($radicado->state->delegated && !$radicado->state->answered && !$radicado->state->redirection == false)
+  @if ($radicado->state->delegated && !$radicado->state->answered && !$radicado->state->redirection == false || !$radicado->state->aproved)
     <i class="spinner massive loading icon"></i>
   @endif
-  {{-- @if ($radicado->state->answered && $radicado->state->)
-    <i class="spinner massive loading icon"></i>
-  @endif --}}
-  @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == true)
+  @if ($radicado->state->answered && $radicado->state->answerCheck)
+    <i class="exclamation triangle massive icon"></i>
+  @endif
+  @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == false)
     <i class="info circle massive icon"></i>
   @endif
-  @if ($radicado->state->delegated && !$radicado->state->answered )
+  @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == false )
     <i class="edit massive icon"></i>
   @endif
 @endhasrole

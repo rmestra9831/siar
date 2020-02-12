@@ -29,7 +29,6 @@ class Radicado extends Model
     {
         return $this->belongsTo(Sede::class, 'sede_id');
     }
-
     public function delegateId(){
         return $this->belongsTo(User::class, 'delegate_id');
     }

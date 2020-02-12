@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RadicadoAnswered extends Notification
+class RadicadoAnswered extends Notification implements ShouldQueue
 {
     use Queueable;
-
+    public $data;
+    public $url;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data, $url)
     {
-        //
+        $this->data = $data;
+        $this->url = $url;
     }
 
     /**
@@ -40,7 +42,10 @@ class RadicadoAnswered extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail/notify/RadicadoAnswered');
+        $radicado = $this->data;
+        $url = $this->url;
+        return (new MailMessage)->markdown('mail/notify/RadicadoAnswered', compact('radicado','url'))
+                    ->subject('Respuesta emitida '.$radicado->consecutiveAnswer.' ( '.$radicado->atention.' )');
     }
 
     /**

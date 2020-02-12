@@ -44,7 +44,7 @@
               @if (!$radicado->file)
                 <a href="{{route('viewRadic',$radicado->slug)}}" class="ui green button"><i class="external alternate icon"></i> Mirar más...</a>  
                 @else
-                <a href="" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>               
+                <a href="{{route('downloadRadic',$radicado->slug)}}" class="ui brown basic button"><i class="arrow alternate circle down outline icon"></i>Descargar</a>               
                 <a href="{{route('viewRadic',$radicado->slug)}}" class="ui green button"><i class="external alternate icon"></i> Mirar más...</a>  
               @endif
           </div>

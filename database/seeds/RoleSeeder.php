@@ -46,8 +46,8 @@ class RoleSeeder extends Seeder
                 $role_direction = Role::create(['name' => 'Direccion']);
                 $role_admissions = Role::create(['name' => 'Admisiones']);
                 $role_program_boss = Role::create(['name' => 'Jef Programa']);
-                $role_direction_aux = Role::create(['name' => 'Aux Direción']);
-                $role_direction_secretary = Role::create(['name' => 'Secretaria de Dirección']);
+                $role_direction_aux = Role::create(['name' => 'Aux Direcion']);
+                $role_direction_secretary = Role::create(['name' => 'Secretaria de Direccion']);
         
                 // dando los permisos
                 $role_superadmin->givePermissionTo(['settings user','settings program','settings motivo','settings sede','create user', 'delete user','edit user','create program','delete program','edit program','create motivo','edit motivo','create sede','delete sede','edit sede']); 

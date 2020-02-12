@@ -33,7 +33,7 @@ class User extends Authenticatable
     //RELACION CON EL RADICADO 
     public function radicadoDelegate()
     {
-        return $this->hasOne(Radicado::class, 'delegate_id');
+        return $this->hasMany(Radicado::class, 'delegate_id');
     }
     public function radicadoCreateBy()
     {
@@ -42,6 +42,10 @@ class User extends Authenticatable
     public function radicadoAnswered()
     {
         return $this->hasOne(Radicado::class, 'answered_id');
+    }
+    public function radicados()
+    {
+        return $this->hasMany(Radicado::class, 'id');
     }
     /**
      * The attributes that are mass assignable.

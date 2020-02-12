@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\RadicadoAnswered;
 use App\Http\Requests\UploadPDF;
 use App\Notifications\SentDir;
 use Illuminate\Http\Request;
@@ -144,6 +145,10 @@ class RadicadoController extends Controller
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
         $radicado->state->update(['sentAdmissions'=>true]);
         $radicado->save();
+        //ENVIO DE CORREO
+        $user = User::find($radicado->createById->id);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new RadicadoAnswered($radicado, $url));
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado  enviado a admisiones exitosamente');
     }
 }

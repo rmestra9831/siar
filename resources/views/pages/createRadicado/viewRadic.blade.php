@@ -1,5 +1,5 @@
 @extends('layouts.extructure')
-
+@section('title','Radicado')
 {{-- vista del main --}}
 @include('components.Main')
 
@@ -50,7 +50,7 @@
           <div class="ui form extra content">
             @include('forms.uploadFile') {{--BOTONES DE DESCARGAR - VISAULIZAR--}}
 
-            @if ($radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
+            @if (!$radicado->delegate_id)  {{--ESTADOS DEL RADICADO, PARA VER SI FUE RESPONDIDO O NO--}}
               @include('forms.delegateAnswer')
             @else
               @if ($radicado->answered_id && $radicado->state->aproved)

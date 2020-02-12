@@ -15,7 +15,7 @@
             @include('common.waitingResponse') {{--MENSAJE DE ESPERA--}}
           @else
           @if ($radicado->answer_file) {{--VALIDA QUE TIPO DE RESPUESTA ES--}}
-              La respuesta es un archivo <a href="{{route('downloadAnswer',$radicado->slug)}}" class="ui blue button">{{$radicado->consecutiveAnswer}}</a>
+              <strong>Respuesta {{$radicado->consecutiveAnswer}} </strong> <a href="{{route('downloadAnswer',$radicado->slug)}}" class="ui blue button">Descargar</a>
             @else
             <strong>Respuesta: </strong>
               <textarea disabled="" class=" disabled w-25 mr-1" rows="1">{{$radicado->answer_text}}</textarea>

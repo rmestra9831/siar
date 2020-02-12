@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\RedirectionPetition;
 use App\Notifications\RedirectionRespon;
+use App\Notifications\RadicadoAnswered;
 use App\Notifications\DelegateUser;
 use App\Http\Requests\UploadWord;
 use Illuminate\Http\Request;
@@ -28,20 +29,22 @@ class AnswerController extends Controller
         $name_sede = substr($radicado->sede->name, 0, 3); //obteniendo la sede donde se crea el radicado
         if($name_sede == 'bar'){$name_sede = 'BCA';}; if($name_sede == 'bar'){$name_sede = 'BCA';}; //formateando a BCA
         $consecutiveAnswer = auth()->user()->ident.'-'.$radicado->origin->origin_name.'-'.$name_sede.'-'.$number.'-'.Carbon::now()->isoFormat('Y');
-
+        $radicado->answer_file = null;
         $radicado->answer_text = $request->answer;
         $radicado->date_answered = Carbon::now();
         $radicado->consecutiveAnswer = $consecutiveAnswer;
         $radicado->state->update(['answered'=>true]);
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
         //VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
-        if (auth()->user()->hasrole('Direccion')) {
-            $radicado->state->update(['aproved'=>true]);
-        }
+        if (auth()->user()->hasrole('Direccion')) {$radicado->state->update(['aproved'=>true]);}
         $radicado->answered_id = auth()->user()->id;
         $radicado->save();
-
-
+        //ENVIO DE CORREO
+        if ($radicado->state->delegated) {
+            $user = User::find(2);
+            $url = $_SERVER['HTTP_HOST'];
+            $user->notify(new RadicadoAnswered($radicado, $url));
+        }
         return redirect()->route('viewRadic',[$slug])->with('statusAnswer','Radicado respondido exitosamente');
     }
     public function fileAnswer(UploadWord $request, $slug){
@@ -57,6 +60,7 @@ class AnswerController extends Controller
         
         $radicado->date_answered = Carbon::now();
         $radicado->answer_file = $dd;
+        $radicado->answer_text = null;
         $radicado->state->update(['answered'=>true]);
         $radicado->consecutiveAnswer = $consecutiveAnswer;
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
@@ -65,8 +69,13 @@ class AnswerController extends Controller
             $radicado->state->update(['aproved'=>true]);
         }
         $radicado->answered_id = auth()->user()->id;
-        $radicado->save();   
-        // dd($consecutiveAnswer);
+        $radicado->save();  
+        //ENVIO DE CORREO DE RESPUESTA 
+        if ($radicado->state->delegated) {
+            $user = User::find(2);
+            $url = $_SERVER['HTTP_HOST'];
+            $user->notify(new RadicadoAnswered($radicado, $url));
+        }
         return redirect()->route('viewRadic',[$slug])->with('statusAnswer','Radicado subido exitosamente');
     }
     public function delegateAnswer(Request $request, $slug){
@@ -134,7 +143,12 @@ class AnswerController extends Controller
         if ($radicado->origin->origin_name == 'DOC') {$radicado->delegateID->decrement('origin_doc');};//agregando ceros al numero traido de la db  
         $radicado->consecutiveAnswer = null;
         $radicado->state->update(['answerCheck'=> 1]);
+        // dd($radicado->state->answerCheck);
         $radicado->save();
+        //ENVIO DE CORREO
+        $user = User::find($radicado->delegateId->id);
+        $url = $_SERVER['HTTP_HOST'];
+        $user->notify(new RadicadoAnswered($radicado, $url));
         return redirect()->route('viewRadic',[$slug])->with('status','Petición de edición enviada');
     }
     public function aproveAnswer($slug){

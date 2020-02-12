@@ -1,7 +1,7 @@
 <?php
 
 //RUTA DE CREACIOM DE RADICADO
-Route::get('/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth');
+Route::get('/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth','CanViewRadic');
 Route::put('/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadFile')->middleware('auth');
 Route::put('/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->middleware('auth');
 Route::put('/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middleware('auth');

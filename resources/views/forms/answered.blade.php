@@ -28,7 +28,6 @@
       @endif
     </div>
   @else
-    <div class="ui horizontal divider"><i class="wait outline icon"></i> Esperando envio</div>
-    
+    <div class="ui horizontal divider"><i class="wait outline icon"></i> Esperando envio</div> 
   @endif
 @endhasrole
