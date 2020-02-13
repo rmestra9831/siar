@@ -39,6 +39,7 @@ class CreateRadicadosTable extends Migration
             $table->string('answer_text')->nullable();
             $table->string('consecutiveAnswer')->nullable();
             $table->string('redirect_txt')->nullable();
+            $table->string('reasonAnswerCheck')->nullable();
             
             //FECHAS
             $table->timestamp('date_creation')->nullable();

@@ -1,3 +1,4 @@
+@section('title','Admisiones')
 @section('title_content')
     Home
 @endsection

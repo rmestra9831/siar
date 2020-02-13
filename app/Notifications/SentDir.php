@@ -31,7 +31,7 @@ class SentDir extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -43,10 +43,17 @@ class SentDir extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $radicado = $this->data;
-        $url = $this->url;
-        
+        $url = $this->url;  
         return (new MailMessage)->markdown('mail/notify/sentDir', compact('radicado','url'))
                     ->subject('Nuevo Radicado '.$radicado->consecutive.' ( '.$radicado->atention.' )');
+    }
+
+    public function toDatabase($notifiable){
+        return [
+            'title' => 'Nuevo Radicado',
+            'affair' => $this->data->consecutive,
+            'url' => $this->data->slug,
+        ];
     }
 
     /**

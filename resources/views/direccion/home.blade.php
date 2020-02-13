@@ -1,3 +1,4 @@
+@section('title','Dirección')
 @section('title_content')
     Direccion
 @endsection

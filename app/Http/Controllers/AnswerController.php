@@ -34,6 +34,7 @@ class AnswerController extends Controller
         $radicado->date_answered = Carbon::now();
         $radicado->consecutiveAnswer = $consecutiveAnswer;
         $radicado->state->update(['answered'=>true]);
+        if(auth()->user()->id == $radicado->delegate_id){$radicado->update(['reasonAnswerCheck' => null]);};
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
         //VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
         if (auth()->user()->hasrole('Direccion')) {$radicado->state->update(['aproved'=>true]);}
@@ -57,12 +58,13 @@ class AnswerController extends Controller
         if($name_sede == 'bar'){$name_sede = 'BCA';}; if($name_sede == 'bar'){$name_sede = 'BCA';}; //formateando a BCA
         $consecutiveAnswer = auth()->user()->ident.'-'.$radicado->origin->origin_name.'-'.$name_sede.'-'.$number.'-'.Carbon::now()->isoFormat('Y');
         $dd = $request->file('fileAnswer')->storeAs('public/answers','respuesta_radicado_'.$consecutiveAnswer.'.docx');
-        
+        $radicado->reasonAnswerCheck;
         $radicado->date_answered = Carbon::now();
         $radicado->answer_file = $dd;
         $radicado->answer_text = null;
         $radicado->state->update(['answered'=>true]);
         $radicado->consecutiveAnswer = $consecutiveAnswer;
+        if(auth()->user()->id == $radicado->delegate_id){$radicado->reasonAnswerCheck == null;};
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
         // VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
         if (auth()->user()->hasrole('Direccion')) {
@@ -135,13 +137,14 @@ class AnswerController extends Controller
         $radicado->save();
         return redirect()->route('viewRadic',[$slug])->with('status','Petición Aceptada');
     }
-    public function EditAnswer($slug){
+    public function EditAnswer(Request $request, $slug){
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
         //ORGANIZANDO CONSECUTIVO DE RESPUESTA
         if ($radicado->origin->origin_name == 'GEN') {$radicado->delegateID->decrement('origin_gen');};//agregando ceros al numero traido de la db
         if ($radicado->origin->origin_name == 'EST') {$radicado->delegateID->decrement('origin_est');};//agregando ceros al numero traido de la db
         if ($radicado->origin->origin_name == 'DOC') {$radicado->delegateID->decrement('origin_doc');};//agregando ceros al numero traido de la db  
         $radicado->consecutiveAnswer = null;
+        $radicado->reasonAnswerCheck = $request->answerReasonEdit;
         $radicado->state->update(['answerCheck'=> 1]);
         // dd($radicado->state->answerCheck);
         $radicado->save();

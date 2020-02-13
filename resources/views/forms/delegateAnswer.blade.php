@@ -21,7 +21,7 @@
               <textarea disabled="" class=" disabled w-25 mr-1" rows="1">{{$radicado->answer_text}}</textarea>
             @endif
             @if (!$radicado->state->answerCheck )
-              <button form="EditAnswerForm" class="ui pink button">Editar Respuesta</button>     
+              <button id="EditAnswer" class="ui pink button">Editar Respuesta</button>
               <button form="aproveAnswerForm" class="ui green button">Aprobar</button>     
             @endif
           @endif
@@ -30,7 +30,6 @@
     @endif
   @endif
   {{-- FORMULARIOS --}}
-  <form id="EditAnswerForm" action="{{action('AnswerController@EditAnswer', $radicado->slug)}} " method="POST">@method('PUT') @csrf</form>
   <form id="aproveAnswerForm" action="{{action('AnswerController@aproveAnswer', $radicado->slug)}} " method="POST">@method('PUT') @csrf</form>
 @endhasrole
 

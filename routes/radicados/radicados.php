@@ -20,3 +20,6 @@ Route::put('/{slug}/acceptRedirection','AnswerController@acceptRedirection')->na
 //EDITAR RESPUESTA DEL RADICADO
 Route::put('/{slug}/EditAnswer','AnswerController@EditAnswer')->name('EditAnswer')->middleware('auth');
 Route::put('/{slug}/aproveAnswer','AnswerController@aproveAnswer')->name('aproveAnswer')->middleware('auth');
+//NOTIFICACIONES
+Route::put('/{user}/readNotify','RadicadoController@readNotify')->name('readNotify')->middleware('auth');
+Route::put('/{user}/readAllNotify','RadicadoController@readAllNotify')->name('readAllNotify')->middleware('auth');

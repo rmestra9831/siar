@@ -31,7 +31,7 @@ class DelegateUser extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -48,6 +48,16 @@ class DelegateUser extends Notification implements ShouldQueue
                     ->subject('Nuevo Radicado '.$radicado->consecutive.' ( '.$radicado->atention.' )');
     }
 
+    public function toDatabase($notifiable){
+        $state = $this->data['state'];
+        $delegate = $this->data['delegateId'];
+        $url = $this->url;
+        return [
+            'title' => 'Responder radicado #'.$this->data->consecutive,
+            'affair' => 'Se le ha delegado un nuevo radicado',
+            'url' => $this->data->slug,
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *

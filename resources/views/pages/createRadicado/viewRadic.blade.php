@@ -3,13 +3,13 @@
 {{-- vista del main --}}
 @include('components.Main')
 
-@section('title_content')
+@section('title_content')EditAnswerForm
   datos de radicado
 @endsection
-
 @section('body_main')
     <div class="container h-100 d-flex">
       <div class="ui cards m-auto justify-content-center">
+        @if ($radicado->reasonAnswerCheck && auth()->user()->hasrole('Jef Programa|Aux Direccion')) @include('common.InfoReasonEdit') @endif {{--Mensaje de modificacion--}}
         <div class="card w-90 mt-4">
           <div class="ribbon">
             <span class="ribbon4 c-white text-uppercase font-weight-bolder
@@ -118,4 +118,5 @@
         </div>
       </div>
     </div>
+    @hasrole('Direccion')@include('common.ModalReasonAnswerCheck') @endhasrole
 @endsection

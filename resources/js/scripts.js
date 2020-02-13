@@ -5,6 +5,10 @@ $('.labeled.icon.dropdown').dropdown();
 $('.tag.example .ui.dropdown').dropdown({
     allowAdditions: true});
 $('.message .close').on('click', function() {$(this).closest('.message').transition('fade') ;});
+$('.notifications .dropdown')
+  .dropdown({
+    action: 'hide'
+});
 window.setTimeout(function () {
     $(".alert").fadeTo(500, 0).slideUp(500, function () {
       $(this).remove();
@@ -34,5 +38,3 @@ $('input:file', '.ui.upload_radic.input')
       var name = e.target.files[0].name;
       $('input:text', $(e.target).parent()).val(name);  //validando el boton de carga del archivo
 });
-
-  

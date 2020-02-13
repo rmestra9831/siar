@@ -49,9 +49,21 @@ class RadicadoAnswered extends Notification implements ShouldQueue
     }
 
     public function toDatabase($notifiable){
-        return [
-            'id' =>5646546,
-        ];
+        $state = $this->data['state'];
+        $delegate = $this->data['delegateId'];
+        if ($state->answerCheck) {
+            return [
+                'title' => 'Modificación de Radicado'.$this->data->consecutive ,
+                'affair' => 'debe modificar el radicado '.$this->data->consecutive,
+                'url' => $this->data->slug,
+            ];
+        }else{
+            return [
+                'title' => 'Respuesta al Radicado '.$this->data->consecutive,
+                'affair' => $delegate->name.' a emitido una respuesta',
+                'url' => $this->data->slug,
+            ];
+        }
     }
 
     /**
@@ -63,8 +75,6 @@ class RadicadoAnswered extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'invoice_id' => $this->data->id,
-            'amount' => $this->data->consecutive,
         ];
     }
 }

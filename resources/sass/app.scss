@@ -20,6 +20,7 @@
 .bg-input-login{ background: $bg-input !important;}
 .lh{line-height: normal;}
 .d-content{display: contents !important;}
+.p-relative{position: relative ;}
 .w-85{
   width: 85% !important;
   transition: 2s;
@@ -35,6 +36,7 @@
 .bgSentDir{background: $sent_admisisons_to_dir !important;}
 .bgAproved{background: $aprovado !important;}
 .ai-center{align-items: baseline !important;}
+.pointer{cursor: pointer !important;}
 // z-index
 .z-8{z-index: 8;}
 

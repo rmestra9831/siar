@@ -103,6 +103,9 @@ $('.tag.example .ui.dropdown').dropdown({
 $('.message .close').on('click', function () {
   $(this).closest('.message').transition('fade');
 });
+$('.notifications .dropdown').dropdown({
+  action: 'hide'
+});
 window.setTimeout(function () {
   $(".alert").fadeTo(500, 0).slideUp(500, function () {
     $(this).remove();

@@ -364,3 +364,75 @@ $('.modal.previewPdf').modal({
   blurring: true
 })
 .modal('attach events', '#previewRadic', 'show');
+//MODAL PARA FORMULARIO DE EDITAR RESPUESTA
+$('.modal.reasonAnswerCheck').modal({
+  inverted: true,
+})
+.modal('attach events', '#EditAnswer', 'show');
+//ENVIAR FORMULARIO DE EDICION DE RESPUESTA
+$('#EditAnswerFormSend').click(function (e) {
+  if ($('#answerReasonEdit').val()) {
+    $.alert({ //aqui va el alerta personalizado
+      animation: 'zoom',
+      closeAnimation: 'zoom',
+      theme: 'modern',
+      icon: 'lh exclamation triangle icon',
+      backgroundDismissAnimation: 'glow',
+      title: 'Confirmación!',
+      content: '¿ Está seguro que desea enviar la solicitud de modificación a esta respuesta ?',
+      type: 'orange',
+      buttons: {
+          aceptar: function() {
+            $('#EditAnswerForm').submit();
+          },
+          cancel: function() {},
+      }
+    }); 
+  }else{
+    $.alert({ //aqui va el alerta personalizado
+      animation: 'zoom',
+      closeAnimation: 'zoom',
+      theme: 'modern',
+      icon: 'lh exclamation triangle icon',
+      backgroundDismissAnimation: 'glow',
+      title: 'Error!',
+      content: 'El campo se encuentra vacio, por favor ingrese datos correctos',
+      type: 'red',
+      buttons: {
+          aceptar: function() {},
+      }
+    }); 
+  }
+});
+//FUNCIONES DE LOS ITEMS DE NOTIFICACION
+var itemsNotify = document.querySelectorAll('#itemNotify');
+$(itemsNotify).click(function (e) { 
+  // console.log($(this).attr('xvurl'));
+  userAuth = $(this).attr('idUser');
+  idNotify = $(this).attr('idNotidy');
+  url = $(this).attr('xvurl');
+  var data = "idNotify="+idNotify+"&slug="+url+"";
+  location.replace(' ');
+  $.ajax({
+      type: "PUT",
+      url: "radicado/"+userAuth+"/readNotify",
+      data: data,
+      success: function (response) {
+          window.location.assign('/radicado/'+url+'/show');
+      }
+  });
+});
+$('#allNotifyReaded').click(function (e) { 
+  userAuth = $(this).attr('idUser');
+  // location.replace(' ');
+  var data = "userAuth="+userAuth+"";
+  $.ajax({
+      type: "PUT",
+      url: "radicado/"+userAuth+"/readAllNotify",
+      data: data,
+      success: function (response) {
+        // console.log(response);
+          window.location.reload();
+      }
+  });
+});

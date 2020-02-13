@@ -11481,6 +11481,10 @@ a.text-dark:focus {
   display: contents !important;
 }
 
+.p-relative {
+  position: relative;
+}
+
 .w-85 {
   width: 85% !important;
   -webkit-transition: 2s;
@@ -11525,6 +11529,10 @@ a.text-dark:focus {
 .ai-center {
   -webkit-box-align: baseline !important;
           align-items: baseline !important;
+}
+
+.pointer {
+  cursor: pointer !important;
 }
 
 .z-8 {
