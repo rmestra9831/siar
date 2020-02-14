@@ -7,6 +7,7 @@ use App\Notifications\RedirectionPetition;
 use App\Notifications\RedirectionRespon;
 use App\Notifications\RadicadoAnswered;
 use App\Notifications\DelegateUser;
+use App\Notifications\States;
 use App\Http\Requests\UploadWord;
 use Illuminate\Http\Request;
 use App\Models\Radicado;
@@ -32,8 +33,8 @@ class AnswerController extends Controller
         $radicado->answer_file = null;
         $radicado->answer_text = $request->answer;
         $radicado->date_answered = Carbon::now();
-        $radicado->consecutiveAnswer = $consecutiveAnswer;
         $radicado->state->update(['answered'=>true]);
+        $radicado->consecutiveAnswer = $consecutiveAnswer;
         if(auth()->user()->id == $radicado->delegate_id){$radicado->update(['reasonAnswerCheck' => null]);};
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
         //VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
@@ -64,7 +65,7 @@ class AnswerController extends Controller
         $radicado->answer_text = null;
         $radicado->state->update(['answered'=>true]);
         $radicado->consecutiveAnswer = $consecutiveAnswer;
-        if(auth()->user()->id == $radicado->delegate_id){$radicado->reasonAnswerCheck == null;};
+        if(auth()->user()->id == $radicado->delegate_id){$radicado->update(['reasonAnswerCheck' => null]);};
         if($radicado->state->answerCheck == 1){$radicado->state->update(['answerCheck'=> null]);};
         // VALIDANDO QUE SEA EL DIRECTOR QUE GENERE LA RESPUESTA Y AUTOAPROVACIÓN
         if (auth()->user()->hasrole('Direccion')) {
@@ -158,6 +159,12 @@ class AnswerController extends Controller
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
         $radicado->state->update(['aproved'=>true]);
         $radicado->save();
+        //ENVIO DE NOTIFICACION DE RESPUESTA APROVADA
+        if ($radicado->state->delegated) {
+            $user = User::find($radicado->delegateId->id);
+            $url = $_SERVER['HTTP_HOST'];
+            $user->notify(new States($radicado, $url));
+        }
         return redirect()->route('viewRadic',[$slug])->with('status','Respuesta aprobada');
     }
 }

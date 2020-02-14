@@ -61,6 +61,12 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('getRadicados', 'RadicadoController@getRadicados')->middleware('auth');
     Route::get('/getonlyUsers', 'FunctionsController@onlyUsers')->name('onlyUsers');
 
+//FILTROS
+    Route::get('/radicado/filtrado_de_estado', 'FilterController@indexFilterState')->name('indexFilterState')->middleware('auth');
+    Route::get('/radicado/filtrado_general', 'FilterController@indexFilterGeneral')->name('indexFilterGeneral')->middleware('auth');
+    Route::get('/radicado/getFilterRadics', 'FilterController@getFilterRadics')->name('getFilterRadics')->middleware('auth');
+
+
 //vista previa de emails
 // Route::get('matriz', function () {
 //     $v1 = [2,4]; $v2 = [3,1]; $vt =[];

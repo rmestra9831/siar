@@ -1,3 +1,4 @@
+{{--MENU DESPLEGABLE--}}
 {{-- @can('create correspondence')
   <a id="btnsCorrespondence" class="item item_main_accordion ui accordion field">
     <div class="c-white title">
@@ -75,3 +76,17 @@
     </div>
   </a>
 @endcan
+
+<a href="{{route('indexFilterGeneral')}}" class="item item_main">
+  <div class="c-white title">
+    <i id="icon-main-c" class="c-white large filter icon"></i>
+    Filtrado general
+  </div>
+</a>
+
+<a href="{{route('indexFilterState')}}" class="item item_main">
+  <div class="c-white title">
+    <i id="icon-main-c" class="c-white large filter icon"></i>
+    Filtrado de estados
+  </div>
+</a>

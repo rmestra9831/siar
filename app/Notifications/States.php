@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RedirectionRespon extends Notification implements ShouldQueue
+class States extends Notification implements ShouldQueue
 {
     use Queueable;
     public $data;
@@ -44,26 +44,16 @@ class RedirectionRespon extends Notification implements ShouldQueue
     {
         $radicado = $this->data;
         $url = $this->url;
-        return (new MailMessage)->markdown('mail/notify/RedirectionRespon', compact('radicado','url'))
-                    ->subject('Petición de Redireccionamiento '.$radicado->consecutive.' ( '.$radicado->atention.' )');
+        return (new MailMessage)->markdown('mail/notify/Status', compact('radicado','url'))
+                    ->subject('Respuesta aprobada '.$this->data->consecutive);
     }
 
     public function toDatabase($notifiable){
-        $delegate = $this->data['delegateId'];
-        $stateDelegate = $this->data['state'];
-        if (!$stateDelegate->delegated) {
-            return [
-                'title' => 'Redirección aceptada',
-                'affair' => 'Se ha revocado este radicado de su poder',
-                'url' => $this->data->slug,
-            ];
-        }else{
-            return [
-                'title' => 'Redirección Denegada',
-                'affair' => 'Debe responder a este radicado',
-                'url' => $this->data->slug,
-            ];
-        }
+        return [
+            'title' => 'Respuesta Aprobada,'.$this->data->consecutive,
+            'affair' => 'La respuesta fué aprobada por dirección',
+            'url' => $this->data->slug,
+        ];
     }
     /**
      * Get the array representation of the notification.

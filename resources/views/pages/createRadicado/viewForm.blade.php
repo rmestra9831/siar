@@ -96,14 +96,6 @@
                      <option value="">EST - DOC - GEN</option>
                   </select>
                </div>              
-               {{-- <div class="field"> -carga de documentos
-                  <label for="">Cargar Radicado</label>
-                  <div class="ui labeled upload_radic input">
-                     <input type="text" name="uploadRadic" placeholder="Seleccionar" readonly>
-                     <input type="file">
-                     <label class="ui label" for="uploadRadic">Cargar</label>
-                  </div>
-               </div> --}}
             </div>
          </div>
          <div class="ui horizontal divider">Observaciones</div>

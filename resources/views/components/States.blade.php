@@ -35,13 +35,13 @@
   @if ($radicado->state->aproved && $radicado->state->answered)
     <i class="check massive circle outline icon"></i>
   @endif
-  @if ($radicado->state->delegated && !$radicado->state->answered && !$radicado->state->redirection == false || !$radicado->state->aproved)
+  @if (!$radicado->state->aproved && $radicado->state->answerCheck && $radicado->consecutiveAnswer) {{--spinner entrega--}}
     <i class="spinner massive loading icon"></i>
   @endif
-  @if ($radicado->state->answered && $radicado->state->answerCheck)
-    <i class="exclamation triangle massive icon"></i>
+  @if ($radicado->state->answered && !$radicado->state->answerCheck && $radicado->consecutiveAnswer ) {{--spinner entrega--}}
+    <i class="spinner massive loading icon"></i>
   @endif
-  @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == false)
+  @if ($radicado->state->answered && $radicado->state->answerCheck) {{--oculto hasta que tenga que modificar--}}
     <i class="info circle massive icon"></i>
   @endif
   @if ($radicado->state->delegated && !$radicado->state->answered && $radicado->state->redirection == false )

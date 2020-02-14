@@ -44,7 +44,14 @@
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">delegado a:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->delegateId) No respondido @else {{$radicado->delegateId->name}} @endif</p></strong></div>
                   <div class="right floated column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">respondido por:<p class="ml-2 text-capitalize font-weight-light as-center">@if(!$radicado->userAnswered) No respondido @else {{$radicado->userAnswered->name}} @endif</p></strong></div>
               </div>              
-              <div class="ui divider"></div>            
+              <div class="ui divider"></div> 
+              <div class="ui form pt-0 column row ">
+                <div class="right floated column  text-truncate">
+                  <strong data-tooltip="Agregar" data-position="top center" class="text-uppercase justify-content-center d-flex ">notas / observaciones</strong>
+                  <textarea disabled class="" rows="2" name="note" placeholder="@if(!$radicado->notes) Sin notas @endif" spellcheck="false" data-gramm="false">@if($radicado->notes) {{$radicado->notes}} @endif</textarea> 
+                </div>  
+              </div>  
+
             </div>
           </div>
           <div class="ui form extra content">

@@ -518,6 +518,91 @@ $('#table-permisos').DataTable({
   }
 }); // tabla de permisos
 //TRAYENDO DATOS DE MOTIVOS
+//Tabla de filtrado
+
+var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
+  "serverSide": false,
+  "scroller": true,
+  "scrollX": true,
+  "ajax": {
+    "type": "GET",
+    "url": "getFilterRadics",
+    "complete": function complete() {}
+  },
+  //traigo los usuarios para mirar sus permisos
+  "columns": [{
+    data: 'consecutive'
+  }, {
+    data: 'names'
+  }, {
+    data: 'origin_correo'
+  }, {
+    data: 'origin_cel'
+  }, {
+    data: 'programa'
+  }, {
+    data: 'origen'
+  }, {
+    data: 'destino'
+  }, {
+    data: 'caracter'
+  }, {
+    data: 'motivo'
+  }, {
+    data: 'affair'
+  }, {
+    data: 'createBy'
+  }, {
+    data: 'delegateTo'
+  }, {
+    data: 'answerBy'
+  }],
+  "language": {
+    "info": "_TOTAL_ Registros",
+    "search": "Buscar",
+    "paginate": {
+      "next": "Siguiente",
+      "previous": "Anterior"
+    },
+    "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="-1">Todos</option>' + '</select> registros',
+    "emptyTable": "No se encontraron datos",
+    "zeroRecords": "No hay coincidencias",
+    "infoEmpty": "",
+    "infoFiltered": ""
+  }
+});
+$('#tableFilterGeneral tbody').on('click', 'tr', function () {
+  var data = tableFilterGeneral.row(this).data();
+  $.confirm({
+    //aqui va el alerta personalizado
+    animation: 'zoom',
+    closeAnimation: 'zoom',
+    theme: 'modern',
+    icon: 'lh eye icon',
+    backgroundDismissAnimation: 'glow',
+    title: 'Ir al Radicado',
+    content: 'Deseas ver el radicado ' + data['consecutive'],
+    type: 'orange',
+    buttons: {
+      aceptar: function aceptar(data) {},
+      cancel: function cancel() {}
+    }
+  });
+  console.log(data);
+});
+$('#tableFilterGeneral tfoot th').each(function () {
+  //BUSCADOR POR CAMPOS
+  $('.ttt th').html('<div class="ui input"><input type="text" placeholder="Buscar por..."></div>');
+}); // Apply the search
+
+tableFilterGeneral.columns().every(function () {
+  var that = this;
+  $('input', this.footer()).on('keyup change clear', function () {
+    if (that.search() !== this.value) {
+      that.search(this.value).draw();
+    }
+  });
+});
 
 /***/ }),
 

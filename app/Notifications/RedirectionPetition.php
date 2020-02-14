@@ -31,7 +31,7 @@ class RedirectionPetition extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -46,6 +46,15 @@ class RedirectionPetition extends Notification implements ShouldQueue
         $url = $this->url;
         return (new MailMessage)->markdown('mail/notify/RedirectionPetition', compact('radicado','url'))
                     ->subject('Petición de Redireccionamiento '.$radicado->consecutive.' ( '.$radicado->atention.' )');
+    }
+
+    public function toDatabase($notifiable){
+        $delegate = $this->data['delegateId'];
+        return [
+            'title' => 'Petición de redirección a radicado '.$this->data->consecutive,
+            'affair' => $delegate->name.' esta solcitiando una redirección',
+            'url' => $this->data->slug,
+        ];
     }
 
     /**

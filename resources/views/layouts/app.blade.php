@@ -23,7 +23,6 @@
     <!-- Scripts -->    
     <script src="https://kit.fontawesome.com/0892879507.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/ajax.js') }}" defer></script>
     <script src="{{ asset('js/ajaxform.js') }}" defer></script>
@@ -40,7 +39,8 @@
     @include('common.ModalAdd')
     @include('common.ModalPreview')
     @include('common.ModalConfirm')
-    {{-- scripts --}}
+    {{-- scripts --}}    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     @yield('scripts')
 

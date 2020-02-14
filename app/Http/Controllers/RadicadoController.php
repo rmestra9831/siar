@@ -154,13 +154,19 @@ class RadicadoController extends Controller
     public function readNotify(Request $request, $user){
         if ($request->ajax()) {
             $userNotify = User::find($user);
-            if ($userNotify->hasrole('Admisiones')) {
+            $idNotification = $request->idNotify;
+            if ($userNotify->hasrole('Direccion')) {
                 $radicado = Radicado::where('slug',$request->slug)->firstOrFail();
                 $radicado->date_get_dir = Carbon::now();
                 $radicado->state->update(['recived_dir'=> true]);
                 $radicado->save();
+                foreach ($userNotify->unreadNotifications as $notification) {
+                    if ($notification->id == $idNotification) {
+                         $notification->markAsRead();
+                        return response()->json(true);
+                    }
+                 }
             }else{
-                $idNotification = $request->idNotify;
                 foreach ($userNotify->unreadNotifications as $notification) {
                    if ($notification->id == $idNotification) {
                         $notification->markAsRead();

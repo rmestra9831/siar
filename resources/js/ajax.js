@@ -158,8 +158,7 @@ $('#table-permisos').DataTable({
     "ajax": {
       "type": "GET",
       "url": "getUserPermissions",
-      "complete":function () {
-        
+      "complete":function () {      
         $('.modal_permissions.modal').modal({ // inicialización del modals despues que se ejecuta la pag
           inverted: true,
           blurring: true,
@@ -294,8 +293,7 @@ $('#table-permisos').DataTable({
                   }
               });
             }
-        }}).modal('attach events', '.delete_direct_permission.button');
-        
+        }}).modal('attach events', '.delete_direct_permission.button');        
         $('.permission').click(function () {
           // configurando token de laravel en ajax
           $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});                
@@ -339,7 +337,6 @@ $('#table-permisos').DataTable({
             }
           });
         });
-
         $('.add_direct_permission.button').click(function () {
           id_user = this.value;
           $.ajax({
@@ -376,7 +373,6 @@ $('#table-permisos').DataTable({
             }
           });
         });
-
         $('.delete_direct_permission.button').click(function () {
             id_user = this.value;
             $.ajax({
@@ -440,5 +436,87 @@ $('#table-permisos').DataTable({
     },
 })
 // tabla de permisos
-
 //TRAYENDO DATOS DE MOTIVOS
+
+//Tabla de filtrado
+var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
+  "serverSide": false,
+  "scroller": true,
+  "scrollX": true,
+  "ajax": {
+    "type": "GET",
+    "url": "getFilterRadics",
+    "complete":function () {
+      
+    }
+  }, //traigo los usuarios para mirar sus permisos
+  "columns": [
+      {data: 'consecutive'},
+      {data: 'names'},
+      {data: 'origin_correo'},
+      {data: 'origin_cel'},
+      {data: 'programa'},
+      {data: 'origen'},
+      {data: 'destino'},
+      {data: 'caracter'},
+      {data: 'motivo'},
+      {data: 'affair'},
+      {data: 'createBy'},
+      {data: 'delegateTo'},
+      {data: 'answerBy'},
+  ],
+  "language": {
+    "info":"_TOTAL_ Registros",
+    "search": "Buscar",
+    "paginate":{
+      "next": "Siguiente",
+      "previous": "Anterior",
+    },
+    "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">'+
+                  '<option value="5">5</option>'+
+                  '<option value="10">10</option>'+
+                  '<option value="-1">Todos</option>'+
+                  '</select> registros',
+    "emptyTable": "No se encontraron datos",
+    "zeroRecords": "No hay coincidencias",
+    "infoEmpty": "",
+    "infoFiltered": "",
+  },
+});
+
+$('#tableFilterGeneral tbody').on('click', 'tr', function () {
+  var data = tableFilterGeneral.row( this ).data();
+  $.confirm({ //aqui va el alerta personalizado
+    animation: 'zoom',
+    closeAnimation: 'zoom',
+    theme: 'modern',
+    icon: 'lh eye icon',
+    backgroundDismissAnimation: 'glow',
+    title: 'Ir al Radicado',
+    content: 'Deseas ver el radicado '+data['consecutive'],
+    type: 'orange',
+    buttons: {
+        aceptar: function(data) {
+           
+        },
+        cancel: function() {},
+    }
+  }); 
+  console.log(data);
+} );
+
+$('#tableFilterGeneral tfoot th').each( function () { //BUSCADOR POR CAMPOS
+  $('.ttt th').html('<div class="ui input"><input type="text" placeholder="Buscar por..."></div>');
+});
+// Apply the search
+tableFilterGeneral.columns().every( function () {
+  var that = this;
+
+  $( 'input', this.footer() ).on( 'keyup change clear', function () {
+      if ( that.search() !== this.value ) {
+          that
+              .search( this.value )
+              .draw();
+      }
+  } );
+});

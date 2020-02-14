@@ -113,10 +113,8 @@ class FunctionsController extends Controller
                     <button data-tooltip="Ver" data-position="top center" id="'.$data->id.'" value="'.$data->id.'" class="circular ui icon teal permission button"><i class="icon eye"></i></button>
                     <button data-tooltip="Agregar" data-position="top center" id="'.$data->id.'" value="'.$data->id.'" class="circular ui icon blue add_direct_permission button"><i class="icon plus circle"></i></button>
                     <button href="permission/'.$data->id.'/delete" value="'.$data->id.'" data-tooltip="Eliminar" data-position="top center" id="" class="circular ui icon red delete_direct_permission button"><i class="icon trash"></i></button>';
-                     
                  }
             }) 
-            // ->addColumn('permissions', 'buttons.BtnShowPermissions')
             ->rawColumns(['permissions'])
             ->toJson();
     }

@@ -11535,6 +11535,10 @@ a.text-dark:focus {
   cursor: pointer !important;
 }
 
+.text-initial {
+  text-transform: initial !important;
+}
+
 .z-8 {
   z-index: 8;
 }

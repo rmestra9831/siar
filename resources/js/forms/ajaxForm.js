@@ -110,7 +110,6 @@ $('.ui.create_radic.form') //validacion creacion de radicado
 //seteo del campo de celular
 
 // MODAL PARA CONFIRMAR LA CREACION DE UN RADICADO
-
 $('.ui.basic.create_radic.modal')
   .modal({
     closable  : false,
@@ -148,7 +147,15 @@ if (window.location.pathname == '/radicado') {
 
         $('select[name="reason_radic"]').change(function (e) { 
           value_txt_motivo = $('select[name="reason_radic"] option:selected').text();
-          $form_create_radic.form('set value', 'affair', value_txt_motivo)
+          if (value_txt_motivo == 'otro' || value_txt_motivo == 'Otro') {
+            $('textarea[name="affair"]').removeAttr("disabled");
+            $('textarea[name="affair"]').removeAttr("class");
+            $('textarea[name="affair"]').val('');
+          } else {
+            $('textarea[name="affair"]').attr("disabled","disabled");
+            $('textarea[name="affair"]').attr("class","c-white bg-secondary");
+            $form_create_radic.form('set value', 'affair', value_txt_motivo)
+          }
         });
       });
     }
@@ -418,7 +425,8 @@ $(itemsNotify).click(function (e) {
       url: "radicado/"+userAuth+"/readNotify",
       data: data,
       success: function (response) {
-          window.location.assign('/radicado/'+url+'/show');
+        console.log(response);
+        window.location.assign('/radicado/'+url+'/show');
       }
   });
 });
@@ -436,3 +444,9 @@ $('#allNotifyReaded').click(function (e) {
       }
   });
 });
+
+//DATOS DEL FILTRADO POR ESTADOS
+// $(selector).click(function (e) { 
+//   e.preventDefault();
+  
+// });
