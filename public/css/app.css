@@ -11543,6 +11543,13 @@ a.text-dark:focus {
   z-index: 8;
 }
 
+.dt-button-collection {
+  margin: 0 !important;
+  position: absolute;
+  z-index: 1;
+  background: aliceblue;
+}
+
 #app {
   display: block !important;
   position: relative !important;

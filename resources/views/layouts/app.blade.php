@@ -20,13 +20,14 @@
     <link href="{{ asset('css/jquery-confirm.css') }}" rel="stylesheet">
     {{-- estilos de DataTable --}}
     <link href="{{ asset('css/DataTables-1.10.20/css/dataTables.semanticui.min.css') }}" rel="stylesheet">
-    <!-- Scripts -->    
+    <!-- Scripts -->
     <script src="https://kit.fontawesome.com/0892879507.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/ajax.js') }}" defer></script>
     <script src="{{ asset('js/ajaxform.js') }}" defer></script>
     <script src="{{ asset('js/scripts.js') }}" defer></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}" defer></script>
 </head>
 <body>
     <div id="app" style="display: block !important;

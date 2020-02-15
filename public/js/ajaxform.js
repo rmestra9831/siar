@@ -533,13 +533,13 @@ $(itemsNotify).click(function (e) {
   idNotify = $(this).attr('idNotidy');
   url = $(this).attr('xvurl');
   var data = "idNotify=" + idNotify + "&slug=" + url + "";
-  location.replace(' ');
   $.ajax({
     type: "PUT",
-    url: "radicado/" + userAuth + "/readNotify",
+    url: "/radicado/" + userAuth + "/readNotify",
     data: data,
     success: function success(response) {
       console.log(response);
+      location.replace(' ');
       window.location.assign('/radicado/' + url + '/show');
     }
   });
@@ -557,10 +557,7 @@ $('#allNotifyReaded').click(function (e) {
       window.location.reload();
     }
   });
-}); //DATOS DEL FILTRADO POR ESTADOS
-// $(selector).click(function (e) { 
-//   e.preventDefault();
-// });
+});
 
 /***/ }),
 

@@ -26,8 +26,14 @@
     },
     "dependencies": {
         "datatables.net": "^1.10.20",
+        "datatables.net-buttons": "^1.6.1",
+        "datatables.net-buttons-dt": "^1.6.1",
+        "datatables.net-buttons-se": "^1.6.1",
+        "datatables.net-dt": "^1.10.20",
         "datatables.net-se": "^1.10.20",
         "jquery-confirm": "^3.3.4",
+        "jszip": "^3.2.2",
+        "pdfmake": "^0.1.64",
         "run": "^1.4.0"
     }
 }

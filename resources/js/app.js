@@ -3,12 +3,19 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.JSZip = require('jszip');
 require('./jquery-3.4.1.min');
-require('./dataTables.semanticui.min');
 require('./bootstrap');
 require('./jquery-confirm');
-require('./semantic.min');
+require('./semantic.min');  
+require( 'datatables.net' );
+require( 'datatables.net-buttons-se' );
+require( 'datatables.net-buttons' );
+require( 'pdfmake' );
+require( 'datatables.net-buttons/js/buttons.html5.js' )();
+require( 'datatables.net-buttons/js/buttons.colVis.js' )();
+require( 'datatables.net-buttons/js/buttons.flash.js' )();
+require( 'datatables.net-buttons/js/buttons.print.js' )();
 
 window.Vue = require('vue');
 

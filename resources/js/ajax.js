@@ -437,8 +437,10 @@ $('#table-permisos').DataTable({
 })
 // tabla de permisos
 //TRAYENDO DATOS DE MOTIVOS
+var date=new Date();
+var dateReport=date.getDate()+"_"+(date.getMonth()+1)+"_"+date.getFullYear();
 
-//Tabla de filtrado
+
 var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
   "serverSide": false,
   "scroller": true,
@@ -447,7 +449,7 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
     "type": "GET",
     "url": "getFilterRadics",
     "complete":function () {
-      
+    
     }
   }, //traigo los usuarios para mirar sus permisos
   "columns": [
@@ -483,6 +485,21 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
     "infoFiltered": "",
   },
 });
+
+// Display the buttons
+new $.fn.dataTable.Buttons( tableFilterGeneral, [
+  // { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
+  // { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
+  // { extend: "colvis",text: 'Mostrar columnas'},
+  // { extend: 'print',text: 'Imprimir' ,messageBottom: null}
+{ extend: 'excelHtml5', exportOptions: {columns: ':visible'}},
+{ extend: 'pdfHtml5',exportOptions: {columns:  ':visible'},orientation: 'landscape', pageSize: 'LEGAL'},
+{ extend: 'print',text: 'Imprimir' ,messageBottom: null,exportOptions: {columns:  ':visible'}},
+{ extend: "colvis",text: 'Mostrar columnas'}
+] );
+
+tableFilterGeneral.buttons().container()
+  .appendTo( $('div.eight.column:eq(0)', tableFilterGeneral.table().container()) );
 
 $('#tableFilterGeneral tbody').on('click', 'tr', function () {
   var data = tableFilterGeneral.row( this ).data();
