@@ -37,7 +37,6 @@
     </div>
     @include('common.ModalViewInfo')
     @include('common.ModalAdd')
-    @include('common.ModalPreview')
     @include('common.ModalConfirm')
     {{-- scripts --}}    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>

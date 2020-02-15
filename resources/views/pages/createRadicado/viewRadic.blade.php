@@ -125,5 +125,6 @@
         </div>
       </div>
     </div>
+    @include('common.ModalPreview')
     @hasrole('Direccion')@include('common.ModalReasonAnswerCheck') @endhasrole
 @endsection
