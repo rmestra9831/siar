@@ -1,5 +1,5 @@
 @extends('layouts.extructure')
-
+@section('title','Filtrado')
 {{-- vista del main --}}
 @include('components.Main')
 @section('title_content') Filtrado general @endsection
