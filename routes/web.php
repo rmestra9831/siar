@@ -65,6 +65,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/radicado/filtrado_de_estado', 'FilterController@indexFilterState')->name('indexFilterState')->middleware('auth');
     Route::get('/radicado/filtrado_general', 'FilterController@indexFilterGeneral')->name('indexFilterGeneral')->middleware('auth');
     Route::get('/radicado/getFilterRadics', 'FilterController@getFilterRadics')->name('getFilterRadics')->middleware('auth');
+    Route::get('/radicado/getFilterState/{status}', 'FilterController@getFilterState')->name('getFilterState')->middleware('auth');
 
 
 //vista previa de emails

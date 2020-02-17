@@ -98,7 +98,21 @@ $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
-});
+}); //variables universales
+
+var configLanguageDatatable = {
+  "info": "_TOTAL_ Registros",
+  "search": "Buscar",
+  "paginate": {
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+  "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="-1">Todos</option>' + '</select> registros',
+  "emptyTable": "No se encontraron datos",
+  "zeroRecords": "No hay coincidencias",
+  "infoEmpty": "",
+  "infoFiltered": ""
+};
 
 if (window.location.pathname == '/admin/Permissions') {
   $.ajax({
@@ -129,21 +143,7 @@ $('#rolesWithPermissions').change(function () {
     }, {
       data: 'opciones'
     }],
-    "language": {
-      "info": "_TOTAL_ Registros",
-      "search": "Buscar",
-      "paginate": {
-        "next": "Siguiente",
-        "previous": "Anterior"
-      },
-      "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value= "-1">Todos</option>' + '</select> registros',
-      "loadingRecords": "Cargando...",
-      "Processing": "Procesando...",
-      "emptyTable": "No se encontraron datos",
-      "zeroRecords": "No hay coincidencias",
-      "infoEmpty": "",
-      "infoFiltered": ""
-    }
+    "language": configLanguageDatatable
   });
   $('#btn_add_permission').html('<button id="' + id_rol + '" class="ui violet add_permissions button"><i class="plus icon"></i>Asignar nuevo permiso</button>'); //variables para editar, eliminar o agregar permisos
 
@@ -503,21 +503,9 @@ $('#table-permisos').DataTable({
   }, {
     data: 'permissions'
   }],
-  "language": {
-    "info": "_TOTAL_ Registros",
-    "search": "Buscar",
-    "paginate": {
-      "next": "Siguiente",
-      "previous": "Anterior"
-    },
-    "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="-1">Todos</option>' + '</select> registros',
-    "emptyTable": "No se encontraron datos",
-    "zeroRecords": "No hay coincidencias",
-    "infoEmpty": "",
-    "infoFiltered": ""
-  }
+  "language": configLanguageDatatable
 }); // tabla de permisos
-//TRAYENDO DATOS DE MOTIVOS
+//TABLA DE FILTRADO GENERAL -------------------------------------------------------------------
 
 var date = new Date();
 var dateReport = date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getFullYear();
@@ -558,48 +546,39 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
   }, {
     data: 'answerBy'
   }],
-  "language": {
-    "info": "_TOTAL_ Registros",
-    "search": "Buscar",
-    "paginate": {
-      "next": "Siguiente",
-      "previous": "Anterior"
-    },
-    "lengthMenu": 'Mostrar <select class="ui compact selection dropdown">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="-1">Todos</option>' + '</select> registros',
-    "emptyTable": "No se encontraron datos",
-    "zeroRecords": "No hay coincidencias",
-    "infoEmpty": "",
-    "infoFiltered": ""
-  }
-}); // Display the buttons
+  "language": configLanguageDatatable
+}); // Display the buttons tabla filtrado general
 
-new $.fn.dataTable.Buttons(tableFilterGeneral, [// { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
-// { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
-// { extend: "colvis",text: 'Mostrar columnas'},
-// { extend: 'print',text: 'Imprimir' ,messageBottom: null}
-{
-  extend: 'excelHtml5',
-  exportOptions: {
-    columns: ':visible'
-  }
-}, {
-  extend: 'pdfHtml5',
-  exportOptions: {
-    columns: ':visible'
-  },
-  orientation: 'landscape',
-  pageSize: 'LEGAL'
-}, {
-  extend: 'print',
-  text: 'Imprimir',
-  messageBottom: null,
-  exportOptions: {
-    columns: ':visible'
-  }
-}, {
-  extend: "colvis",
-  text: 'Mostrar columnas'
-}]);
+if (window.location.pathname == '/radicado/filtrado_general') {
+  new $.fn.dataTable.Buttons(tableFilterGeneral, [// { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
+  // { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
+  // { extend: "colvis",text: 'Mostrar columnas'},
+  // { extend: 'print',text: 'Imprimir' ,messageBottom: null}
+  {
+    extend: 'excelHtml5',
+    exportOptions: {
+      columns: ':visible'
+    }
+  }, {
+    extend: 'pdfHtml5',
+    exportOptions: {
+      columns: ':visible'
+    },
+    orientation: 'landscape',
+    pageSize: 'LEGAL'
+  }, {
+    extend: 'print',
+    text: 'Imprimir',
+    messageBottom: null,
+    exportOptions: {
+      columns: ':visible'
+    }
+  }, {
+    extend: "colvis",
+    text: 'Mostrar columnas'
+  }]);
+}
+
 tableFilterGeneral.buttons().container().appendTo($('div.eight.column:eq(0)', tableFilterGeneral.table().container()));
 $('#tableFilterGeneral tbody').on('click', 'tr', function () {
   var data = tableFilterGeneral.row(this).data();
@@ -614,11 +593,13 @@ $('#tableFilterGeneral tbody').on('click', 'tr', function () {
     content: 'Deseas ver el radicado ' + data['consecutive'],
     type: 'orange',
     buttons: {
-      aceptar: function aceptar(data) {},
+      aceptar: function aceptar() {
+        location.replace(' ');
+        window.location.assign('/radicado/' + data['slug'] + '/show');
+      },
       cancel: function cancel() {}
     }
-  });
-  console.log(data);
+  }); // console.log(data);
 });
 $('#tableFilterGeneral tfoot th').each(function () {
   //BUSCADOR POR CAMPOS
@@ -631,6 +612,123 @@ tableFilterGeneral.columns().every(function () {
     if (that.search() !== this.value) {
       that.search(this.value).draw();
     }
+  });
+}); //TABLA DE FILTRADOD DE ESTADOS -------------------------------------------------------------------
+
+var btnsFilterState = document.querySelectorAll('.item.filterState');
+var status;
+var tableFilterState;
+$(btnsFilterState).click(function (e) {
+  e.preventDefault();
+  $('.message.viewStates').fadeOut();
+  $(btnsFilterState).removeClass('active');
+  $(this).addClass('active');
+  status = $(this).attr('dataStatus');
+  tableFilterState = $('#tableFilterState').DataTable({
+    "destroy": true,
+    "serverSide": false,
+    "scroller": true,
+    "scrollX": true,
+    "ajax": {
+      "type": "GET",
+      "url": "getFilterState/" + status + "",
+      "complete": function complete(response) {}
+    },
+    //traigo los usuarios para mirar sus permisos
+    "columns": [{
+      data: 'consecutive'
+    }, {
+      data: 'names'
+    }, {
+      data: 'origin_correo'
+    }, {
+      data: 'origin_cel'
+    }, {
+      data: 'programa'
+    }, {
+      data: 'origen'
+    }, {
+      data: 'destino'
+    }, {
+      data: 'caracter'
+    }, {
+      data: 'motivo'
+    }, {
+      data: 'affair'
+    }, {
+      data: 'createBy'
+    }, {
+      data: 'delegateTo'
+    }, {
+      data: 'answerBy'
+    }],
+    "language": configLanguageDatatable
+  }); // Display the buttons tabla filtrado general
+
+  if (window.location.pathname == '/radicado/filtrado_de_estado') {
+    new $.fn.dataTable.Buttons(tableFilterState, [// { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
+    // { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
+    // { extend: "colvis",text: 'Mostrar columnas'},
+    // { extend: 'print',text: 'Imprimir' ,messageBottom: null}
+    {
+      extend: 'excelHtml5',
+      exportOptions: {
+        columns: ':visible'
+      }
+    }, {
+      extend: 'pdfHtml5',
+      exportOptions: {
+        columns: ':visible'
+      },
+      orientation: 'landscape',
+      pageSize: 'LEGAL'
+    }, {
+      extend: 'print',
+      text: 'Imprimir',
+      messageBottom: null,
+      exportOptions: {
+        columns: ':visible'
+      }
+    }, {
+      extend: "colvis",
+      text: 'Mostrar columnas'
+    }]);
+  }
+
+  tableFilterState.buttons().container().appendTo($('div.eight.column:eq(0)', tableFilterState.table().container()));
+  $('#tableFilterState tbody').on('click', 'tr', function () {
+    var data = tableFilterState.row(this).data();
+    $.confirm({
+      //aqui va el alerta personalizado
+      animation: 'zoom',
+      closeAnimation: 'zoom',
+      theme: 'modern',
+      icon: 'lh eye icon',
+      backgroundDismissAnimation: 'glow',
+      title: 'Ir al Radicado',
+      content: 'Deseas ver el radicado ' + data['consecutive'],
+      type: 'orange',
+      buttons: {
+        aceptar: function aceptar() {
+          location.replace(' ');
+          window.location.assign('/radicado/' + data['slug'] + '/show');
+        },
+        cancel: function cancel() {}
+      }
+    });
+  });
+  $('#tableFilterState tfoot th').each(function () {
+    //BUSCADOR POR CAMPOS
+    $('.ttt th').html('<div class="ui input"><input type="text" placeholder="Buscar por..."></div>');
+  }); // Apply the search
+
+  tableFilterState.columns().every(function () {
+    var that = this;
+    $('input', this.footer()).on('keyup change clear', function () {
+      if (that.search() !== this.value) {
+        that.search(this.value).draw();
+      }
+    });
   });
 });
 

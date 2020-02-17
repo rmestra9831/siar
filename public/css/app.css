@@ -11782,3 +11782,8 @@ label {
   opacity: 0.5;
 }
 
+.ui.stackable.grid {
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+

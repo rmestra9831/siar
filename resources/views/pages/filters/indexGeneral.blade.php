@@ -1,12 +1,11 @@
 @extends('layouts.extructure')
-@section('title','Filtrado')
+@section('title','Filtrado General')
 {{-- vista del main --}}
 @include('components.Main')
 @section('title_content') Filtrado general @endsection
 
 @section('body_main')
   <div class="container">
-
     {{-- tabla e muestra de usuarios --}}
       <table id="tableFilterGeneral" class="ui selectable single line celled table">
         <thead>

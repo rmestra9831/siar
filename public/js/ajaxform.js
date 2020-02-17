@@ -538,7 +538,6 @@ $(itemsNotify).click(function (e) {
     url: "/radicado/" + userAuth + "/readNotify",
     data: data,
     success: function success(response) {
-      console.log(response);
       location.replace(' ');
       window.location.assign('/radicado/' + url + '/show');
     }
