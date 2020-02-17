@@ -537,3 +537,4 @@ tableFilterGeneral.columns().every( function () {
       }
   } );
 });
+

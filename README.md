@@ -83,4 +83,8 @@ Los paquetes que se deben instalar antes de empezar a trabajar en este proyecto 
 
 - npm install
 - composer install
+- php artisan key:generate
 - composer require yajra/laravel-datatables-oracle
+- npm install --save jszip
+- npm install --save pdfmake
+- npm install --save datatables.net-buttons-se

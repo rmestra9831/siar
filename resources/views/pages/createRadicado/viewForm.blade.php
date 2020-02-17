@@ -1,7 +1,7 @@
 @extends('layouts.extructure')
 {{-- vista del main --}}
 @include('components.Main')
-
+@section('title','Nuevo Radicado')
 @section('title_content')
   nuevo radicado
 @endsection

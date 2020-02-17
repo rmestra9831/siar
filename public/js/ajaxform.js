@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -561,7 +561,7 @@ $('#allNotifyReaded').click(function (e) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!**********************************************!*\
   !*** multi ./resources/js/forms/ajaxform.js ***!
   \**********************************************/

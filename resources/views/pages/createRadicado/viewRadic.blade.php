@@ -3,7 +3,7 @@
 {{-- vista del main --}}
 @include('components.Main')
 
-@section('title_content')EditAnswerForm
+@section('title_content')
   datos de radicado
 @endsection
 @section('body_main')
