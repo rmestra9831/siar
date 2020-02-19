@@ -16,7 +16,6 @@ class Radicado extends Model
     {
         return $this->belongsTo(State::class, 'states_id');
     }
-    
     public function program()
     {
         return $this->belongsTo(Program::class, 'program_id');
@@ -46,5 +45,8 @@ class Radicado extends Model
     public function origin()
     {
         return $this->belongsTo(Origin::class, 'origin_id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'id');
     }
 }

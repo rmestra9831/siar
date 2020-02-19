@@ -337,7 +337,7 @@ $('.refuseRedirection').click(function (e) {
     icon: 'lh exclamation triangle icon',
     backgroundDismissAnimation: 'glow',
     title: 'Confirmación!',
-    content: '¿ Está seguro que desea denegar esta solicitud ?',
+    content: '¿ Está seguro que desea <strong>DENEGAR</strong> esta solicitud ?',
     type: 'orange',
     buttons: {
         aceptar: function() {
@@ -355,7 +355,7 @@ $('.acceptRedirection').click(function (e) {
     icon: 'lh exclamation triangle icon',
     backgroundDismissAnimation: 'glow',
     title: 'Confirmación!',
-    content: '¿ Está seguro que desea denegar esta solicitud ?',
+    content: '¿ Está seguro que desea <strong>ACEPTAR</strong> esta solicitud ?',
     type: 'orange',
     buttons: {
         aceptar: function() {
@@ -432,7 +432,6 @@ $(itemsNotify).click(function (e) {
 
 $('#allNotifyReaded').click(function (e) { 
   userAuth = $(this).attr('idUser');
-  // location.replace(' ');
   var data = "userAuth="+userAuth+"";
   $.ajax({
       type: "PUT",

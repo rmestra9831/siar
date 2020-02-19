@@ -1,5 +1,4 @@
 <?php
-
 //RUTA DE CREACIOM DE RADICADO
 Route::get('/{slug}/show', 'RadicadoController@viewRadic')->name('viewRadic')->middleware('auth','CanViewRadic');
 Route::put('/{slug}/uploadFile', 'RadicadoController@uploadFile')->name('uploadFile')->middleware('auth');
@@ -7,6 +6,7 @@ Route::put('/{slug}/sentDir', 'RadicadoController@sentDir')->name('sentDir')->mi
 Route::put('/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middleware('auth');
 Route::get('/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');
 Route::get('/{slug}/downloadAnswer', 'RadicadoController@downloadAnswer')->name('downloadAnswer');
+Route::get('/{slug}/downloadTemplateWord', 'RadicadoController@downloadTemplateWord')->name('downloadTemplateWord');
 Route::put('/{slug}/sentAdmissions','RadicadoController@sentAdmissions')->name('sentAdmissions')->middleware('auth');
 // Route::get('/{slug}/previewRadic','RadicadoController@previewRadic')->name('previewRadic')->middleware('auth');
 //RESPUESTAS DEL RADICADO

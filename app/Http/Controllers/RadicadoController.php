@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\RadicadoAnswered;
 use App\Http\Requests\UploadPDF;
@@ -140,6 +141,47 @@ class RadicadoController extends Controller
     public function downloadAnswer($slug){
         $data = Radicado::where('slug',$slug)->firstOrFail();
         return Storage::download($data->answer_file);
+    }
+    public function downloadTemplateWord($slug){
+        $radicado = Radicado::where('slug',$slug)->firstOrFail();
+        $templateWord = new TemplateProcessor('../public/storage/templates/templateAnswer.docx');
+        // PLANTEANDO CONSECUTIVO RESPUESTA RADICADO
+        if ($radicado->origin->origin_name == 'GEN') {$number = str_pad(auth()->user()->origin_gen +1 , 5, "0", STR_PAD_LEFT); DB::table('users')->where('id', auth()->user()->id);};//agregando ceros al numero traido de la db
+        if ($radicado->origin->origin_name == 'EST') {$number = str_pad(auth()->user()->origin_est +1 , 5, "0", STR_PAD_LEFT); DB::table('users')->where('id', auth()->user()->id);};//agregando ceros al numero traido de la db
+        if ($radicado->origin->origin_name == 'DOC') {$number = str_pad(auth()->user()->origin_doc +1 , 5, "0", STR_PAD_LEFT); DB::table('users')->where('id', auth()->user()->id);};//agregando ceros al numero traido de la db  
+        $name_sede = substr($radicado->sede->name, 0, 3); //obteniendo la sede donde se crea el radicado
+        if($name_sede == 'bar'){$name_sede = 'BCA';}; if($name_sede == 'bar'){$name_sede = 'BCA';}; //formateando a BCA
+        $consecutiveAnswer = auth()->user()->ident.'-'.$radicado->origin->origin_name.'-'.$name_sede.'-'.$number.'-'.Carbon::now()->isoFormat('Y');
+
+
+        $firstName = $radicado->first_name;
+        $lastName = $radicado->last_name;
+        if($radicado->delegate_id == null){$delegateId = auth()->user()->name;}else{$delegateId = $radicado->delegateId->name;};
+        $day = Carbon::now()->isoFormat('DD');
+        $monthNumber = Carbon::now()->isoFormat('MM');
+        $month = Carbon::now()->isoFormat('MMMM');
+        $year = Carbon::now()->isoFormat('YYYY');
+        if ($radicado->reason->name == 'Otro') { $reason = $radicado->affair; }else{$reason = $radicado->reason->name;};
+        if ($radicado->delegate_id == null) { $program = 'Dirección';}else{$program = 'Programa de '.$radicado->delegateId->program->name;}
+        if($radicado->delegate_id == null){$correo = auth()->user()->email;}else{$correo = $radicado->delegateId->email;};
+        $city = $radicado->sede->name;
+
+        $templateWord->setValue('consecutivo_respuesta',$consecutiveAnswer);
+        $templateWord->setValue('primer_nombre',ucwords($firstName));
+        $templateWord->setValue('segundo_nombre',ucwords($lastName));
+        $templateWord->setValue('responsable_respuesta',ucwords($delegateId));
+        $templateWord->setValue('responsable_respuesta_footer',strtoupper($delegateId));
+        $templateWord->setValue('correo',strtolower($correo));
+        $templateWord->setValue('program',ucwords($program));
+        $templateWord->setValue('monthNumber',$monthNumber);
+        $templateWord->setValue('city',ucwords($city));
+        $templateWord->setValue('month',ucwords($month));
+        $templateWord->setValue('day',$day);
+        $templateWord->setValue('year',$year);
+        $templateWord->setValue('razon',$reason);
+
+        $templateWord->saveAs('storage/templates/Plantilla_respuesta.docx');
+        return Storage::download('public/templates/Plantilla_respuesta.docx');
     }
     public function sentAdmissions($slug){
         $radicado = Radicado::where('slug',$slug)->firstOrFail();

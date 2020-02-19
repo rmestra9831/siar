@@ -34,6 +34,7 @@
               <input class="@error('filePDF') is-invalid @enderror" type="text" id="fileAnswer" placeholder="Seleccionar" readonly>
               <input class="@error('filePDF') is-invalid @enderror" type="file" name="fileAnswer">
               <label class="ui label" for="uploadRadic">Cargar</label>
+              @if (!$radicado->state->answered) <a class="ui basic brown fluid button" href="{{action('RadicadoController@downloadTemplateWord',$radicado->slug)}}">formato</a> @endif
             </div>
           </form>
         </div>

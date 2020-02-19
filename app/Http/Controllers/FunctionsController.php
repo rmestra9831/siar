@@ -60,10 +60,8 @@ class FunctionsController extends Controller
         return view('pages.settingsPrograms', compact('program'));
     }
     public function editProgram($id){
-
     }
     public function deleteProgram($id){
-
     }
     public function getProgram(){
         return datatables()->eloquent(Program::query())
@@ -73,13 +71,11 @@ class FunctionsController extends Controller
             ->addColumn('action', 'buttons.BtnsActionsProgram')
             ->rawColumns(['action'])
             ->toJson();
-    }
-    
+    }   
     // MOTIVOS
     public function settingsMotivo(){
         return view('pages.settingsMotivos');
     }
-
     // SEDES
     public function settingsSede(){
         $sede = Sede::all();
@@ -91,7 +87,6 @@ class FunctionsController extends Controller
             ->rawColumns(['action'])
             ->toJson();
     }
-
     //TRAYENDO LOS DATOS DE PERMISOS DIRECTOS DE CADA USUARIO
     public function Permissions(){
         return view('pages.TablePermissions', compact('data', 'rr'));
