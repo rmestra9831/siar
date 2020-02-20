@@ -18,11 +18,10 @@ use Carbon\Carbon;
 use DB;
 
 class RadicadoController extends Controller
-{  
+{ 
     public function __constructor(){
     
     }
-
     public function index(){
         $number = str_pad(auth()->user()->sede->cont_radic + 1, 5, "0", STR_PAD_LEFT); //agregando ceros al numero traido de la db
         $name_sede = substr(auth()->user()->sede->name, 0, 3); //obteniendo la sede donde se crea el radicado
@@ -30,7 +29,6 @@ class RadicadoController extends Controller
         if($name_sede == 'bar'){$name_sede = 'BCA';}; if($name_sede == 'bar'){$name_sede = 'BCA';}; //formateando a BCA
         return view('pages.createRadicado.viewForm',compact('number','name_sede','year'));
     }
-
     public function getDataSelects(){
         $select_program = Program::all();
         $select_destino = Program::where('name','Direccion')->get();
@@ -105,7 +103,6 @@ class RadicadoController extends Controller
     }
     public function viewRadic($slug){
         $radicado = Radicado::where('slug', $slug)->firstOrFail();
-
         return view('pages.createRadicado.viewRadic', compact('radicado'));
     }
     public function uploadFile(UploadPDF $request, $slug){
