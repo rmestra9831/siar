@@ -695,27 +695,7 @@ $(btnsFilterState).click(function (e) {
     }]);
   }
 
-  tableFilterState.buttons().container().appendTo($('div.eight.column:eq(0)', tableFilterState.table().container())); // $('#tableFilterState tbody').on('click', 'tr', function () {
-  //   var data = tableFilterState.row( this ).data();
-  //     $.confirm({ //aqui va el alerta personalizado
-  //     animation: 'zoom',
-  //     closeAnimation: 'zoom',
-  //     theme: 'modern',
-  //     icon: 'lh eye icon',
-  //     backgroundDismissAnimation: 'glow',
-  //     title: 'Ir al Radicado',
-  //     content: 'Deseas ver el radicado '+data['consecutive'],
-  //     type: 'orange',
-  //     buttons: {
-  //       aceptar: function() {
-  //         location.replace(' ');
-  //         window.location.assign('/radicado/'+data['slug']+'/show');
-  //       },
-  //       cancel: function() {},
-  //     }
-  //   }); 
-  // });
-
+  tableFilterState.buttons().container().appendTo($('div.eight.column:eq(0)', tableFilterState.table().container()));
   $('#tableFilterState tfoot th').each(function () {
     //BUSCADOR POR CAMPOS
     $('.ttt th').html('<div class="ui input"><input type="text" placeholder="Buscar por..."></div>');

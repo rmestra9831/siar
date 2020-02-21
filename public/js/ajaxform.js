@@ -528,7 +528,6 @@ $('#EditAnswerFormSend').click(function (e) {
 
 var itemsNotify = document.querySelectorAll('#itemNotify');
 $(itemsNotify).click(function (e) {
-  // console.log($(this).attr('xvurl'));
   userAuth = $(this).attr('idUser');
   idNotify = $(this).attr('idNotidy');
   url = $(this).attr('xvurl');
@@ -545,14 +544,15 @@ $(itemsNotify).click(function (e) {
 });
 $('#allNotifyReaded').click(function (e) {
   userAuth = $(this).attr('idUser');
-  var data = "userAuth=" + userAuth + "";
+  data = "userAuth=" + userAuth + "";
+  url = $(this).attr('xvurl');
   $.ajax({
     type: "PUT",
     url: "radicado/" + userAuth + "/readAllNotify",
     data: data,
     success: function success(response) {
-      // console.log(response);
-      window.location.reload();
+      location.replace(' ');
+      window.location.assign('/radicado/' + url + '/show');
     }
   });
 });

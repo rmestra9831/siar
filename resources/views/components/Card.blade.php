@@ -2,20 +2,19 @@
   @foreach ($radicados as $radicado)
     <div class="ui link cards justify-content-center">
       <div class="card w-85 mt-4 ">
-        <div class="ribbon">
-          <span class="ribbon4 c-white text-uppercase font-weight-bolder
+
+        <div class="content">
+          <div class="ui column row top attached label d-flex justify-content-between 
             @if(auth()->user()->hasRole('Super Admin') && $radicado->atention == 'Normal') bg-secundary @else bg-urgente @endif 
             @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') bg-admissions @else bg-urgente @endif 
-          ">{{$radicado->atention}}</span>
-        </div>
-        <div class="content">
-          <div class="ui grid centered">
+            @if(auth()->user()->hasRole('Direccion') && $radicado->atention == 'Normal') bg-direction @else bg-urgente @endif 
+            @if(auth()->user()->hasRole('Jef Programa') && $radicado->atention == 'Normal') bg-jefprogram @else bg-urgente @endif 
+            ">
+            <strong class="h4 text-white m-0">{{$radicado->atention}}</strong>
+            <strong class="h4 text-white m-0">{{$radicado->consecutive}}</strong>
+          </div>
+          <div class="ui grid centered pt-3">
 
-            <div class="column row p-0 pt-3">
-                <div class="column right floated right aligned ml-3 mr-3"><strong class="h4 text-white">{{$radicado->consecutive}}</strong></div>
-            </div>
-
-            <div class="ui divider"></div>
             <div class="three column row p-0">
                 <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">nombres:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->first_name}}</p></strong></div>
                 <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">apellidos:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->last_name}}</p></strong></div>
@@ -34,7 +33,7 @@
                 <div class="left floated column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">asunto<p class="ml-2 text-initial font-weight-light as-center">{{$radicado->affair}}</p></strong></div>
                 <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">delegado a:<p class="ml-2 text-initial font-weight-light as-center">@if(!$radicado->delegateId) No respondido @else {{$radicado->delegateId->name}} @endif</p></strong></div>
                 <div class="right floated column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex as-center">respondido por:<p class="ml-2 text-initial font-weight-light as-center">@if(!$radicado->userAnswered) No respondido @else {{$radicado->userAnswered->name}} @endif</p></strong></div>
-        </div>
+            </div>
             <div class="ui divider"></div>      
           </div>
         </div>

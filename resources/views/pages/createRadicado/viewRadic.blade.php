@@ -11,20 +11,18 @@
       <div class="ui cards m-auto justify-content-center">
         @if ($radicado->reasonAnswerCheck && auth()->user()->hasrole('Jef Programa|Aux Direccion')) @include('common.InfoReasonEdit') @endif {{--Mensaje de modificacion--}}
         <div class="card w-90 mt-4">
-          <div class="ribbon">
-            <span class="ribbon4 c-white text-uppercase font-weight-bolder
+         
+          <div class="content">
+            <div class="ui column row top attached label d-flex justify-content-between 
               @if(auth()->user()->hasRole('Super Admin') && $radicado->atention == 'Normal') bg-secundary @else bg-urgente @endif 
               @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') bg-admissions @else bg-urgente @endif 
-            ">{{$radicado->atention}}</span>
-          </div>
-          <div class="content">
-            <div class="ui grid centered">
-              
-              <div class="column row p-0 pt-3">
-                  <div class="column right floated right aligned ml-3 mr-3"><strong class="h4 text-white">{{$radicado->consecutive}}</strong></div>
-              </div>
-              
-              <div class="ui divider"></div>
+              @if(auth()->user()->hasRole('Direccion') && $radicado->atention == 'Normal') bg-direction @else bg-urgente @endif 
+              @if(auth()->user()->hasRole('Jef Programa') && $radicado->atention == 'Normal') bg-jefprogram @else bg-urgente @endif 
+              ">
+              <strong class="h4 text-white m-0">{{$radicado->atention}}</strong>
+              <strong class="h4 text-white m-0">{{$radicado->consecutive}}</strong>
+            </div>
+            <div class="ui grid centered pt-3">
               <div class="three column row p-0">
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">nombres:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->first_name}}</p></strong></div>
                   <div class="column d-inline-flex text-truncate"><strong data-tooltip="Agregar" data-position="top center" class="text-uppercase d-flex ">apellidos:<p class="ml-2 text-capitalize font-weight-light as-center">{{$radicado->last_name}}</p></strong></div>
