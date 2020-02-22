@@ -27,6 +27,13 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
         if (auth()->user()->hasrole('Jef Programa')) {
@@ -41,6 +48,13 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
         if (auth()->user()->hasrole('Direccion')) {
@@ -55,11 +69,18 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
         
     }
-    public function getFilterState($status){    
+    public function getFilterState($status){
         if (auth()->user()->hasrole('Admisiones')) {
             $stateFinal;
             /**DILTRADO DE RADICADOS */
@@ -81,6 +102,13 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
         if (auth()->user()->hasrole('Direccion')) {
@@ -106,6 +134,13 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
         if (auth()->user()->hasrole('Jef Programa')) {
@@ -129,6 +164,13 @@ class FilterController extends Controller
             ->addColumn('createBy', function($data){ return $data->createById->name;})
             ->addColumn('delegateTo', function($data){ if(!$data->state->delegated){ return 'N/a';}else{return $data->delegateId->name;}})
             ->addColumn('answerBy', function($data){ if(!$data->state->answered){ return 'N/a';}else{return $data->userAnswered->name;}})
+            ->addColumn('sent_dir', function($data){ if(!$data->date_sent_dir){ return 'N/a';}else{return $data->date_sent_dir;}})
+            ->addColumn('get_dir', function($data){ if(!$data->date_get_dir){ return 'N/a';}else{return $data->date_get_dir;}})
+            ->addColumn('delegado', function($data){ if(!$data->date_delegate){ return 'N/a';}else{return $data->date_delegate;}})
+            ->addColumn('answered', function($data){ if(!$data->date_answered){ return 'N/a';}else{return $data->date_answered;}})
+            ->addColumn('sentAdmission', function($data){ if(!$data->date_sent_admissions){ return 'N/a';}else{return $data->date_sent_admissions;}})
+            ->addColumn('sentMail', function($data){ if(!$data->date_sent_mail){ return 'N/a';}else{return $data->date_sent_mail;}})
+            ->addColumn('sentDelivered', function($data){ if(!$data->date_delivered){ return 'N/a';}else{return $data->date_delivered;}})
             ->toJson();
         }
     }

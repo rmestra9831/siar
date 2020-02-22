@@ -75,26 +75,26 @@
                 very compact table">
                 <thead>
                   <tr><th>Creado</th>
-                  <th>Env. dirección</th>
-                  <th>Rec. dirección</th>
+                  <th>Enviado a Dirección</th>
+                  <th>Recivido en Dirección</th>
                   <th>Delegado</th>
-                  <th>Pet. Redirección</th>
-                  <th>Resp. Redirección</th>
+                  <th>Petición de Redirección</th>
+                  <th>Respuesta de Redirección</th>
                   <th>Respondido</th>
-                  <th>Email env.</th>
+                  <th>Email enviado</th>
                   <th>Entregado</th>
                 </tr></thead>
                 <tbody>
                   <tr>
-                    <td>@if(!$radicado->date_creation) Null @else{{$radicado->date_creation}}@endif</td>
-                    <td>@if(!$radicado->date_sent_dir) Null @else{{$radicado->date_sent_dir}}@endif</td>
-                    <td>@if(!$radicado->date_get_dir) Null @else{{$radicado->date_get_dir}}@endif</td>
-                    <td>@if(!$radicado->date_delegate) Null @else{{$radicado->date_delegate}}@endif</td>
-                    <td>@if(!$radicado->date_petition_redirection) Null @else{{$radicado->date_delegate}}@endif</td>
-                    <td>@if(!$radicado->date_update_redirection) Null @else{{$radicado->date_delegate}}@endif</td>
-                    <td>@if(!$radicado->date_answered) Null @else{{$radicado->date_answered}}@endif</td>
-                    <td>@if(!$radicado->date_sent_mail) Null @else{{$radicado->date_sent_mail}}@endif</td>
-                    <td>@if(!$radicado->date_delivered) Null @else{{$radicado->date_delivered}}@endif</td>
+                    <td>@if(!$radicado->date_creation) N/a @else{{$radicado->date_creation}}@endif</td>
+                    <td>@if(!$radicado->date_sent_dir) N/a @else{{$radicado->date_sent_dir}}@endif</td>
+                    <td>@if(!$radicado->date_get_dir) N/a @else{{$radicado->date_get_dir}}@endif</td>
+                    <td>@if(!$radicado->date_delegate) N/a @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_petition_redirection) N/a @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_update_redirection) N/a @else{{$radicado->date_delegate}}@endif</td>
+                    <td>@if(!$radicado->date_answered) N/a @else{{$radicado->date_answered}}@endif</td>
+                    <td>@if(!$radicado->date_sent_mail) N/a @else{{$radicado->date_sent_mail}}@endif</td>
+                    <td>@if(!$radicado->date_delivered) N/a @else{{$radicado->date_delivered}}@endif</td>
                   </tr>
                 </tbody>
               </table>
@@ -103,11 +103,11 @@
               @if(auth()->user()->hasRole('Admisiones') && $radicado->atention == 'Normal') b-admissions @else b-urgente @endif
               very compact table">
               <thead>
-                <th>Rec. Delegado</th>
-                <th>Petición de redirección</th>
-                <th>Revisar respuesta</th>
+                <th>Delegado</th>
+                <th>Petición de Redirección</th>
+                <th>Revisar Respuesta</th>
                 <th>Respondido</th>
-                <th>Aprovado</th>
+                <th>Aprobado</th>
               </tr></thead>
               <tbody>
                 <tr>

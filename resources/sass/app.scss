@@ -46,6 +46,9 @@
   position: absolute;
   z-index: 1;
   background: aliceblue;
+  height: 370px;
+  overflow: auto;
+  box-shadow: 0 3px 17px -2px #808080ab;
 }
 #app {
   display: block !important;

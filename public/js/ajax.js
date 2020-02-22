@@ -545,6 +545,22 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
     data: 'delegateTo'
   }, {
     data: 'answerBy'
+  }, {
+    data: 'created_at'
+  }, {
+    data: 'sent_dir'
+  }, {
+    data: 'get_dir'
+  }, {
+    data: 'delegado'
+  }, {
+    data: 'answered'
+  }, {
+    data: 'sentAdmission'
+  }, {
+    data: 'sentMail'
+  }, {
+    data: 'sentDelivered'
   }],
   "language": configLanguageDatatable
 }); // Display the buttons tabla filtrado general
@@ -661,6 +677,22 @@ $(btnsFilterState).click(function (e) {
       data: 'delegateTo'
     }, {
       data: 'answerBy'
+    }, {
+      data: 'created_at'
+    }, {
+      data: 'sent_dir'
+    }, {
+      data: 'get_dir'
+    }, {
+      data: 'delegado'
+    }, {
+      data: 'answered'
+    }, {
+      data: 'sentAdmission'
+    }, {
+      data: 'sentMail'
+    }, {
+      data: 'sentDelivered'
     }],
     "language": configLanguageDatatable
   }); // Display the buttons tabla filtrado general
@@ -709,6 +741,15 @@ $(btnsFilterState).click(function (e) {
       }
     });
   });
+}); //datapicker RANGOS DE FECHAS DATATABLE
+
+$('#rangestart').calendar({
+  type: 'date',
+  endCalendar: $('#rangeend')
+});
+$('#rangeend').calendar({
+  type: 'date',
+  startCalendar: $('#rangestart')
 });
 
 /***/ }),

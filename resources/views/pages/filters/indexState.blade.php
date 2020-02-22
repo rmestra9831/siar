@@ -67,6 +67,14 @@
             <th class="ui center aligned">Creado por</th>
             <th class="ui center aligned">Delegado a</th>
             <th class="ui center aligned text-capitalize">Respondido por</th>
+            <th class="ui center aligned text-capitalize">Fecha Creado</th>
+            <th class="ui center aligned text-capitalize">Fecha Enviado Dirección</th>
+            <th class="ui center aligned text-capitalize">Fecha Recibido Dirección</th>
+            <th class="ui center aligned text-capitalize">Fecha Delegado</th>
+            <th class="ui center aligned text-capitalize">Fecha Respondido</th>
+            <th class="ui center aligned text-capitalize">Fecha Enviado a Admisiones</th>
+            <th class="ui center aligned text-capitalize">Fecha Email Enviado</th>
+            <th class="ui center aligned text-capitalize">Fecha Entregado Final</th>
             {{-- <th class="ui center aligned justify-content-center"style="width: 20%;" >Delegado</th> --}}
           </tr>
         </thead>
@@ -84,6 +92,14 @@
             <th name="Creado por">Creado por</th>
             <th name="Delegado a">Delegado a</th>
             <th name="Respondido por">Respondido por</th>
+            <th name="Respondido por">Fecha Creado</th>
+            <th name="Respondido por">Fecha Enviado Dirección</th>
+            <th name="Respondido por">Fecha Recibido Dirección</th>
+            <th name="Respondido por">Fecha Delegado</th>
+            <th name="Respondido por">Fecha Respondido</th>
+            <th name="Respondido por">Fecha Enviado a Admisiones</th>
+            <th name="Respondido por">Fecha Email Enviado</th>
+            <th name="Respondido por">Fecha Entregado Final</th>
         </tfoot>
       </table>
     </div>
