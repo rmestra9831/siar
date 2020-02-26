@@ -124,7 +124,8 @@ $("input:text").click(function () {
 $('input:file', '.ui.upload_radic.input').on('change', function (e) {
   var name = e.target.files[0].name;
   $('input:text', $(e.target).parent()).val(name); //validando el boton de carga del archivo
-});
+}); //traer valores de las fechas // console.log($('#rangeend').calendar('get startDate'))
+//traer valores de las fechas // console.log($('#rangeend').calendar('get startDate'))
 
 /***/ }),
 

@@ -443,3 +443,49 @@ $('#allNotifyReaded').click(function (e) {
       }
   });
 });
+// confirmación de entregado o enviar a destinatario final
+$('.FinalState').click(function (e) { 
+  $.confirm({ //aqui va el alerta personalizado
+    animation: 'zoom',
+    closeAnimation: 'zoom',
+    theme: 'modern',
+    icon: 'lh question circle outline icon',
+    backgroundDismissAnimation: 'glow',
+    title: 'Confirmación!',
+    content: 'Que operación desea realizar ?',
+    type: 'purple',
+    buttons: {
+      specialKey:{
+        text:'Enviar Correo',
+        btnClass:'ui blue basic button',
+        action: function(){
+          location.href = $('.sentMailDelivered').attr('href');
+        }
+      },
+      delivered:{
+        text:'Marcar Como Entregado',
+        btnClass:'ui green button',
+        action: function(){
+          $.confirm({ //confirmacion de marcacion como entregado
+            theme: 'modern',
+            title: 'Confirmanos...',
+            content: '¿ Deseas marcar este radicado como entregado ?',
+            backgroundDismissAnimation: 'glow',
+            buttons: {
+                Cancelar: {
+                  btnClass:'ui red button basic' ,
+                },
+                confirmar: {
+                    text: 'Confirmar',
+                    btnClass:'ui blue button' ,
+                    action: function () {
+                        $.alert('Radicado Marcado correctamente');
+                    }
+                }
+            }
+        });
+        }
+      },   
+    }
+  }); 
+});

@@ -7,6 +7,7 @@ Route::put('/{slug}/getDir', 'RadicadoController@getDir')->name('getDir')->middl
 Route::get('/{slug}/download', 'RadicadoController@downloadRadic')->name('downloadRadic');
 Route::get('/{slug}/downloadAnswer', 'RadicadoController@downloadAnswer')->name('downloadAnswer');
 Route::get('/{slug}/downloadTemplateWord', 'RadicadoController@downloadTemplateWord')->name('downloadTemplateWord');
+Route::get('/sentMail/{slug}/origin','RadicadoController@sentMailDelivered')->name('sentMailDelivered')->middleware('auth');
 Route::put('/{slug}/sentAdmissions','RadicadoController@sentAdmissions')->name('sentAdmissions')->middleware('auth');
 // Route::get('/{slug}/previewRadic','RadicadoController@previewRadic')->name('previewRadic')->middleware('auth');
 //RESPUESTAS DEL RADICADO

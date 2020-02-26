@@ -223,4 +223,8 @@ class RadicadoController extends Controller
             return response()->json(true);
         }
     }
+    public function sentMailDelivered($slug){
+        $radicado = Radicado::where('slug', $slug)->firstOrFail();
+        return view('pages.sentMailDelivering', compact('radicado'));
+    }
 }

@@ -11449,6 +11449,10 @@ a.text-dark:focus {
   border-radius: 5px 0 0 5px;
 }
 
+.bg-urgente {
+  background: #e46c09 !important;
+}
+
 .bg-direction {
   background: #47994B !important;
 }
@@ -11459,10 +11463,6 @@ a.text-dark:focus {
 
 .bg-jefprogram {
   background: #693c75 !important;
-}
-
-.bg-urgente {
-  background: #e46c09;
 }
 
 .c-white {
@@ -11507,10 +11507,6 @@ a.text-dark:focus {
 
 .b-admissions {
   border-top: 0.2em solid #3c5375 !important;
-}
-
-.b-urgente {
-  border-top: 0.2em solid #e46c09 !important;
 }
 
 .disabled {

@@ -423,6 +423,7 @@ $('#table-permisos').DataTable({
 var date=new Date();
 var dateReport=date.getDate()+"_"+(date.getMonth()+1)+"_"+date.getFullYear();
 var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
+  "deferRender":    true,
   "serverSide": false,
   "scroller": true,
   "scrollX": true,
@@ -430,7 +431,55 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
     "type": "GET",
     "url": "getFilterRadics",
     "complete":function () {
-    
+      $('.dataTables_filter.ui.form').append("<div class='ui form'><div class='two fields'><div class='field'><div class='ui calendar' id='rangestart'><div class='ui input left icon'><i class='calendar icon'></i><input id='min' name='min' type='text' placeholder='Desde'></div></div></div><div class='field'><div class='ui calendar' id='rangeend'><div class='ui input left icon'><i class='calendar icon'></i><input id='max' name='max' type='text' placeholder='Hasta'></div></div></div></div></div>");
+      //   //datapicker RANGOS DE FECHAS DATATABLE
+        $('#rangeend').calendar({
+          // type: 'date',
+          startCalendar: $('#rangestart'),
+          formatter: {
+            date: function (date, settings) {
+              if (!date) return '';
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+              return year + '-' + month + '-' + day;
+            }
+          }
+        });
+        $('#rangestart').calendar({
+          // type: 'date',
+          endCalendar: $('#rangeend'),
+          formatter: {
+            date: function (date, settings) {
+              if (!date) return '';
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+              return year + '-' + month + '-' + day;
+            }
+          }
+        });
+        // filtrado entre fechas
+        $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+              var min = new Date($('#min').val());
+              var max = new Date($('#max').val());
+              var dataFilter = new Date(data[13]) || 0; // use data for the dataFilter column
+
+              if ( ( isNaN( min ) && isNaN( max ) ) ||
+                   ( isNaN( min ) && dataFilter <= max ) ||
+                   ( min <= dataFilter   && isNaN( max ) ) ||
+                   ( min <= dataFilter   && dataFilter <= max ) )
+              {
+                  return true;
+              }
+              return false;
+          }
+        );
+
+        // Event listener to the two range filtering inputs to redraw on input
+        $('#min').focusout( function() {tableFilterGeneral.draw();});
+        $('#max').focusout( function() {tableFilterGeneral.draw();});
     }
   }, //traigo los usuarios para mirar sus permisos
   "columns": [
@@ -447,7 +496,7 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
       {data: 'createBy'},
       {data: 'delegateTo'},
       {data: 'answerBy'},
-      {data: 'created_at'},
+      {data: 'creation'},
       {data: 'sent_dir'},
       {data: 'get_dir'},
       {data: 'delegado'},
@@ -458,13 +507,10 @@ var tableFilterGeneral = $('#tableFilterGeneral').DataTable({
   ],
   "language": configLanguageDatatable,
 });
+
 // Display the buttons tabla filtrado general
 if (window.location.pathname == '/radicado/filtrado_general') {
   new $.fn.dataTable.Buttons( tableFilterGeneral, [
-    // { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
-    // { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
-    // { extend: "colvis",text: 'Mostrar columnas'},
-    // { extend: 'print',text: 'Imprimir' ,messageBottom: null}
     { extend: 'excelHtml5', exportOptions: {columns: ':visible'}},
     { extend: 'pdfHtml5',exportOptions: {columns:  ':visible'},orientation: 'landscape', pageSize: 'LEGAL'},
     { extend: 'print',text: 'Imprimir' ,messageBottom: null,exportOptions: {columns:  ':visible'}},
@@ -499,7 +545,6 @@ $('#tableFilterGeneral tfoot th').each( function () { //BUSCADOR POR CAMPOS
 // Apply the search
 tableFilterGeneral.columns().every( function () {
   var that = this;
-
   $( 'input', this.footer() ).on( 'keyup change clear', function () {
       if ( that.search() !== this.value ) {
           that
@@ -508,7 +553,6 @@ tableFilterGeneral.columns().every( function () {
       }
   } );
 });
-
 //TABLA DE FILTRADOD DE ESTADOS -------------------------------------------------------------------
   var btnsFilterState = document.querySelectorAll('.item.filterState');
   var status; var tableFilterState;
@@ -520,13 +564,62 @@ tableFilterGeneral.columns().every( function () {
     status = $(this).attr('dataStatus');
     tableFilterState = $('#tableFilterState').DataTable({
       "destroy": true,
+      "deferRender": true,
       "serverSide": false,
       "scroller": true,
       "scrollX": true,
       "ajax": {
       "type": "GET",
       "url": "getFilterState/"+status+"",
-      "complete":function (response) {
+      "complete":function () {
+        $('.dataTables_filter.ui.form').append("<div class='ui form'><div class='two fields'><div class='field'><div class='ui calendar' id='rangestart'><div class='ui input left icon'><i class='calendar icon'></i><input id='min' name='min' type='text' placeholder='Desde'></div></div></div><div class='field'><div class='ui calendar' id='rangeend'><div class='ui input left icon'><i class='calendar icon'></i><input id='max' name='max' type='text' placeholder='Hasta'></div></div></div></div></div>");
+        //   //datapicker RANGOS DE FECHAS DATATABLE
+          $('#rangeend').calendar({
+            // type: 'date',
+            startCalendar: $('#rangestart'),
+            formatter: {
+              date: function (date, settings) {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return year + '-' + month + '-' + day;
+              }
+            }
+          });
+          $('#rangestart').calendar({
+            // type: 'date',
+            endCalendar: $('#rangeend'),
+            formatter: {
+              date: function (date, settings) {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                return year + '-' + month + '-' + day;
+              }
+            }
+          });
+          // filtrado entre fechas
+          $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = new Date($('#min').val());
+                var max = new Date($('#max').val());
+                var dataFilter = new Date(data[13]) || 0; // use data for the dataFilter column
+            
+                if ( ( isNaN( min ) && isNaN( max ) ) ||
+                     ( isNaN( min ) && dataFilter <= max ) ||
+                     ( min <= dataFilter   && isNaN( max ) ) ||
+                     ( min <= dataFilter   && dataFilter <= max ) )
+                {
+                    return true;
+                }
+                return false;
+            }
+          );
+          // Event listener to the two range filtering inputs to redraw on input
+          $('#min').focusout( function() {tableFilterState.draw();});
+          $('#max').focusout( function() {tableFilterState.draw();});
       }
       }, //traigo los usuarios para mirar sus permisos
       "columns": [
@@ -543,7 +636,7 @@ tableFilterGeneral.columns().every( function () {
         {data: 'createBy'},
         {data: 'delegateTo'},
         {data: 'answerBy'},
-        {data: 'created_at'},
+        {data: 'creation'},
         {data: 'sent_dir'},
         {data: 'get_dir'},
         {data: 'delegado'},
@@ -558,10 +651,6 @@ tableFilterGeneral.columns().every( function () {
     // Display the buttons tabla filtrado general
     if (window.location.pathname == '/radicado/filtrado_de_estado') {
       new $.fn.dataTable.Buttons( tableFilterState, [
-      // { extend: "excel",title: 'Reportes_de_radicado_'+dateReport+'',messageTop: 'Reportes de radicados'},
-      // { extend: "pdf", title: 'Reportes_de_radicado_'+dateReport+'' ,orientation: 'landscape', pageSize: 'LEGAL'},
-      // { extend: "colvis",text: 'Mostrar columnas'},
-      // { extend: 'print',text: 'Imprimir' ,messageBottom: null}
       { extend: 'excelHtml5', exportOptions: {columns: ':visible'}},
       { extend: 'pdfHtml5',exportOptions: {columns:  ':visible'},orientation: 'landscape', pageSize: 'LEGAL'},
       { extend: 'print',text: 'Imprimir' ,messageBottom: null,exportOptions: {columns:  ':visible'}},
@@ -584,13 +673,3 @@ tableFilterGeneral.columns().every( function () {
     } );
     });
   });
-
-//datapicker RANGOS DE FECHAS DATATABLE
-$('#rangestart').calendar({
-  type: 'date',
-  endCalendar: $('#rangeend')
-});
-$('#rangeend').calendar({
-  type: 'date',
-  startCalendar: $('#rangestart')
-});
