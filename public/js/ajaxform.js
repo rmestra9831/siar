@@ -573,7 +573,7 @@ $('.FinalState').click(function (e) {
         text: 'Enviar Correo',
         btnClass: 'ui blue basic button',
         action: function action() {
-          location.href = $('.sentMailDelivered').attr('href');
+          location.href = $('.sentMailDeliveredView').attr('href');
         }
       },
       delivered: {
@@ -594,13 +594,47 @@ $('.FinalState').click(function (e) {
                 text: 'Confirmar',
                 btnClass: 'ui blue button',
                 action: function action() {
-                  $.alert('Radicado Marcado correctamente');
+                  //Aqui se ejecuta el ajax para marcar radicado como entregado
+                  id_radic = $('.FinalState').attr('name');
+                  $.ajax({
+                    type: "GET",
+                    url: "/radicado/DeliveredRadic/" + id_radic + "",
+                    success: function success(response) {
+                      $('.FinalState').addClass('disabled');
+                      $('.FinalState').html('<i class="check icon"></i> Entregado');
+                    }
+                  });
                 }
               }
             }
           });
         }
       }
+    }
+  });
+});
+$('.sentMailDelivered').click(function (e) {
+  id_radic = $(this).attr('name');
+  $.ajax({
+    type: "GET",
+    url: "/radicado/sentMailDelivered/" + id_radic + "",
+    beforeSend: function beforeSend() {
+      $('.sentMailDelivered').addClass('disabled');
+      $('.sentMailDelivered').html('<i class="notched circle loading icon"></i> Enviando...');
+    },
+    success: function success(response) {
+      // $(this).addClass('disabled');
+      // $(this).html('Correo Enviado');
+      $.alert({
+        theme: 'Modern',
+        icon: 'lh check circle outline icon',
+        title: 'Radicado Creado',
+        content: 'Con número ' + response.consecutive + '',
+        type: 'blue',
+        typeAnimated: true
+      });
+      $('.sentMailDelivered').addClass('disabled');
+      $('.sentMailDelivered').html('<i class="check icon"></i> Correo Enviado');
     }
   });
 });

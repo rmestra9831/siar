@@ -6,8 +6,8 @@
     @if (!$radicado->state->sentAdmissions)
       <a href="" class="ui disabled green button"><i class="spinner loading icon"></i>Enviado a dirección</a>
     @else
-      <button href="" class="ui blue button FinalState"><i class="share icon"></i>Entregar</button  >
-      <a hidden href="{{route('sentMailDelivered', $radicado->slug)}}" class="sentMailDelivered ui brown basic button"><i class="arrow alternate circle down outline icon"></i></a>               
+      <button name="{{ $radicado->slug }}" class="ui blue button FinalState @if($radicado->date_delivered) disabled @endif ">@if($radicado->date_delivered)<i class="check icon"></i> Entregado @else <i class="share icon"></i> Entregar @endif</button  >
+      <a hidden href="{{route('sentMailDeliveredView', $radicado->slug)}}" class="sentMailDeliveredView ui brown basic button"><i class="arrow alternate circle down outline icon"></i></a>               
     @endif
   @endhasrole
 @endif

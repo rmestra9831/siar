@@ -8,13 +8,15 @@ use App\Notifications\RadicadoAnswered;
 use App\Http\Requests\UploadPDF;
 use App\Notifications\SentDir;
 use Illuminate\Http\Request;
+use App\Mail\SentMailOrigin;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Origin;
 use App\Models\Motivo;
 use App\Models\State;
-use App\User;
 use Carbon\Carbon;
+use App\User;
+use Mail;
 use DB;
 
 class RadicadoController extends Controller
@@ -107,6 +109,7 @@ class RadicadoController extends Controller
     }
     public function uploadFile(UploadPDF $request, $slug){
         $radic = Radicado::where('slug',$slug)->firstOrFail();
+        // dd($request->file('uploadRadic')->storeAs('public/radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf'));
         $dd = $request->file('uploadRadic')->storeAs('public/radics','radicado_'.str_replace(['/','-'],'_',$radic->consecutive).'.pdf');
         $radic->file = $dd;
         $radic->save();
@@ -183,6 +186,7 @@ class RadicadoController extends Controller
     public function sentAdmissions($slug){
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
         $radicado->state->update(['sentAdmissions'=>true]);
+        $radicado->date_sent_admissions = Carbon::now();
         $radicado->save();
         //ENVIO DE CORREO
         $user = User::find($radicado->createById->id);
@@ -223,8 +227,21 @@ class RadicadoController extends Controller
             return response()->json(true);
         }
     }
-    public function sentMailDelivered($slug){
+    public function sentMailDeliveredView($slug){
         $radicado = Radicado::where('slug', $slug)->firstOrFail();
         return view('pages.sentMailDelivering', compact('radicado'));
+    }
+    public function sentMailDelivered($id){
+        $radicado = Radicado::firstWhere('id',$id);
+        $radicado->date_sent_mail = Carbon::now();
+        $radicado->save();
+        Mail::to($radicado->origin_correo)->send(new SentMailOrigin($radicado));
+        return response()->json(true);
+    }
+    public function DeliveredRadic($slug){
+        $radicado = Radicado::firstWhere('slug', $slug);
+        $radicado->date_delivered = Carbon::now();
+        $radicado->save();
+        return $radicado;
     }
 }

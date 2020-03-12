@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'pruebasudi2019@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Admisiones'),
+        'name' => env('MAIL_FROM_NAME', 'Comunicación SIC'),
     ],
 
     /*

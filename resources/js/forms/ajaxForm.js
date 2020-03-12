@@ -204,7 +204,7 @@ $('#delegateAnswer').click(function (e) {
   $('select[name="selectMulipleAnswer"]').empty();
   $('.btnFile').show();
   $.get("/getonlyUsers", function (data, p) { //TRAYENDO LOS DATOS DE LOS PROGRAMAS A DELEGAR LA RESPUESTA
-      $.each(data, function (p) { 
+      $.each(data, function (p) {
         select_motivo = '<option value="'+data[p].id+'">'+data[p].name+'</option>';
         $('select[name="selectMulipleAnswer"]').append(select_motivo);
       });
@@ -459,7 +459,7 @@ $('.FinalState').click(function (e) {
         text:'Enviar Correo',
         btnClass:'ui blue basic button',
         action: function(){
-          location.href = $('.sentMailDelivered').attr('href');
+          location.href = $('.sentMailDeliveredView').attr('href');
         }
       },
       delivered:{
@@ -478,8 +478,16 @@ $('.FinalState').click(function (e) {
                 confirmar: {
                     text: 'Confirmar',
                     btnClass:'ui blue button' ,
-                    action: function () {
-                        $.alert('Radicado Marcado correctamente');
+                    action: function () { //Aqui se ejecuta el ajax para marcar radicado como entregado
+                      id_radic = $('.FinalState').attr('name');
+                      $.ajax({
+                        type: "GET",
+                        url: "/radicado/DeliveredRadic/"+id_radic+"",
+                        success: function (response) {
+                          $('.FinalState').addClass('disabled');
+                          $('.FinalState').html('<i class="check icon"></i> Entregado');
+                        }
+                      });
                     }
                 }
             }
@@ -488,4 +496,29 @@ $('.FinalState').click(function (e) {
       },   
     }
   }); 
+});
+$('.sentMailDelivered').click(function (e) {
+  id_radic = $(this).attr('name');
+  $.ajax({
+    type: "GET",
+    url: "/radicado/sentMailDelivered/"+id_radic+"",
+    beforeSend: function(){
+      $('.sentMailDelivered').addClass('disabled');
+      $('.sentMailDelivered').html('<i class="notched circle loading icon"></i> Enviando...');
+    },
+    success: function (response) {
+      // $(this).addClass('disabled');
+      // $(this).html('Correo Enviado');
+      $.alert({
+        theme: 'Modern',
+        icon: 'lh check circle outline icon',
+        title: 'Radicado Creado',
+        content: 'Con número '+response.consecutive+'',
+        type: 'blue',
+        typeAnimated: true,
+      })
+      $('.sentMailDelivered').addClass('disabled');
+      $('.sentMailDelivered').html('<i class="check icon"></i> Correo Enviado');
+    }
+  });
 });

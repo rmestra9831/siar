@@ -67,26 +67,13 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/radicado/getFilterRadics', 'FilterController@getFilterRadics')->name('getFilterRadics')->middleware('auth');
     Route::get('/radicado/getFilterState/{status}', 'FilterController@getFilterState')->name('getFilterState')->middleware('auth');
 
-
-//vista previa de emails
-// Route::get('matriz', function () {
-//     $v1 = [2,4]; $v2 = [3,1]; $vt =[];
-//     for ($i=0; $i < count($v1) ; $i++) { 
-//         for ($j=0; $j < count($v2) ; $j++) { 
-//             if ($v1[$i] + $v2[$j] == 5) {
-//                 array_push($vt, [$v1[$i],$v2[$j]]);
-//             }
-//         }
-//     }
-//     var_dump($vt);
-//     //Esto es para que el profe vea que funciona XD
-   
-// });
 Route::get('mailSent/{slug}', function ($slug) {
     $radicado = Radicado::where('slug',$slug)->firstOrFail();
     $user = User::find(2);
     $url = $_SERVER['HTTP_HOST'];
     // $user->notify(new DelegateUser($radicado, $url));
     // return response()->json($radicado);
-    return (new MailMessage)->markdown('mail/notify/RedirectionRespon', compact('radicado','url'));
+    return (new MailMessage)->markdown('mail/notify/SentMailOrigin', compact('radicado','url'))
+                    ->subject('Nuevo Radicado '.$radicado->consecutive.' ( '.$radicado->atention.' )');
+    // return (new MailMessage)->markdown('mail/notify/RedirectionRespon', compact('radicado','url'));
 });

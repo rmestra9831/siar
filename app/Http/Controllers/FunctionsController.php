@@ -240,8 +240,8 @@ class FunctionsController extends Controller
     public function createRol(){      
     }
     public function onlyUsers(){
-
-        $users = user::where([['id','!=',auth()->user()->id],['name','!=','superadmin'],['name','!=','admissions']])->get();
+        $users = User::join('programs','programs.id','=','users.program_id')->get();
         return response()->json($users);
     }
+
 }

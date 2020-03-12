@@ -82,13 +82,15 @@ class AnswerController extends Controller
         return redirect()->route('viewRadic',[$slug])->with('statusAnswer','Radicado subido exitosamente');
     }
     public function delegateAnswer(Request $request, $slug){
+        $id_program = Program::find($request->selectMulipleAnswer);
+        $user = User::where('program_id',$id_program->id)->firstOrFail();
+        // dd($user);
         $radicado = Radicado::where('slug',$slug)->firstOrFail();
-        $radicado->delegate_id = $request->selectMulipleAnswer;
+        $radicado->delegate_id = $user->id;
         $radicado->date_delegate = Carbon::now();
         $radicado->state->update(['delegated'=>true]);
         $radicado->save();
         //ENVIO DE CORREO
-        $user = User::find($request->selectMulipleAnswer);
         $url = $_SERVER['HTTP_HOST'];
         $user->notify(new DelegateUser($radicado, $url));
         return redirect()->route('viewRadic',[$slug])->with('status','Radicado delegado exitosamente');

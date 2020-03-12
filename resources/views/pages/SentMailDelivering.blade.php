@@ -27,9 +27,9 @@
           </div>
         </div>
         <div class="two ui buttons">
-          <a href="" class="ui green button"><i class="external alternate icon"></i>Enviar correo</a>  
+          <button name="{{ $radicado->id }}" action="" class="ui green button sentMailDelivered @if($radicado->date_sent_mail) disabled @endif ">@if(!$radicado->date_sent_mail)<i class="external alternate icon"></i> Enviar correo @else <i class="check icon"></i> Correo enviado @endif </button>  
       </div>
       </div>
     </div>
   </div>
-@endsection
+  @endsection
