@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
             'password'=> bcrypt('123123123'),
             'program_id'=>null
         ]);
-        DB::table('users')->insert([
-            'name'=>'dirección',
+        DB::table('users')->insert([ //direccion
+            'name'=>'Direccion',
             'email'=>'d@yopmail.com',
             'ident'=>'DIR',
             'sede_id'=>'2',
@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
             'password'=> bcrypt('123456789'),
             'program_id'=>1
         ]);
-        DB::table('users')->insert([
-            'name'=>'admissions',
+        DB::table('users')->insert([ //admisiones
+            'name'=>'Jossy Javier Gabiria',
             'email'=>'a@yopmail.com',
             'sede_id'=>'2',
             'ident'=>'SIC',
@@ -37,58 +37,58 @@ class UserSeeder extends Seeder
             'password'=> bcrypt('123456789'),
             'program_id'=>null
         ]);
-        DB::table('users')->insert([
-            'name'=>'Paola Arciniegas',
-            'email'=>'sistemas@yopmail.com',
+        DB::table('users')->insert([ //sistemas
+            'name'=>'Paola Andrea Arciniegas Garcia',
+            'email'=>'je.sistemasbca@udi.edu.co',
             'ident'=>'SIS',
             'sede_id'=>'2',
             'slug'=>'paola_sistemas',
-            'password'=> bcrypt('123456789'),
+            'password'=> bcrypt('65780151'),
             'program_id'=>2
         ]);
-        DB::table('users')->insert([
-            'name'=>'Jeniffer Lombana',
-            'email'=>'psicologia@yopmail.com',
+        DB::table('users')->insert([ //psicologia
+            'name'=>'Jeniffer Lombana Herrera',
+            'email'=>'je.psicologiabca@udi.edu.co',
             'ident'=>'PSI',
             'sede_id'=>'2',
             'slug'=>'jenni_psicologia',
-            'password'=> bcrypt('123456789'),
+            'password'=> bcrypt('1096206313'),
             'program_id'=>3
         ]);
-        DB::table('users')->insert([
-            'name'=>'Edwin',
-            'email'=>'electronica@yopmail.com',
+        DB::table('users')->insert([ //electronica
+            'name'=>'Edwin Giovanni Sepulveda Tellez',
+            'email'=>'je.electronicabca@udi.edu.co',
             'ident'=>'ELEC',
             'sede_id'=>'2',
             'slug'=>'edwin_admon',
-            'password'=> bcrypt('123456789'),
+            'password'=> bcrypt('1098678159'),
             'program_id'=>4
         ]);
-        DB::table('users')->insert([
-            'name'=>'Admon Lombana',
-            'email'=>'admon@yopmail.com',
+        DB::table('users')->insert([ //administracion
+            'name'=>'Cesar Augusto Gonzales Serrano',
+            'email'=>'je.administrabca@udi.edu.co ',
             'ident'=>'ADM',
             'sede_id'=>'2',
-            'slug'=>'Admon_electronica',
-            'password'=> bcrypt('123456789'),
+            'slug'=>'Cesar_admon',
+            'password'=> bcrypt('91523097'),
             'program_id'=>5
         ]);
-        DB::table('users')->insert([
-            'name'=>'Sergio Lombana',
-            'email'=>'industrial@yopmail.com',
+        DB::table('users')->insert([ //industrial
+            'name'=>'Sergio Andres Santos Rueda',
+            'email'=>'je.industrialbca@udi.edu.co',
             'ident'=>'ADM',
             'sede_id'=>'2',
             'slug'=>'Sergio_industrial',
-            'password'=> bcrypt('123456789'),
+            'password'=> bcrypt('1101683118'),
             'program_id'=>6
         ]);
-        DB::table('users')->insert([
-            'name'=>'Luis Gabreil',
-            'email'=>'diseño@yopmail.com',
+        DB::table('users')->insert([ //diseño
+            'name'=>'Luis Gabreil Uriel',
+            'email'=>'je.graficobca@udi.edu.co',
             'ident'=>'DIS',
             'sede_id'=>'2',
-            'slug'=>'Sergio_industrial',
-            'password'=> bcrypt('123456789'),
+            'slug'=>'gabreil_industrial',
+            'password'=> bcrypt('10981618408'),
             'program_id'=>7
         ]);
         //directivos
