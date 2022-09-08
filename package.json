@@ -32,7 +32,7 @@
         "datatables.net-dt": "^1.10.20",
         "datatables.net-se": "^1.10.20",
         "jquery-confirm": "^3.3.4",
-        "jszip": "^3.2.2",
+        "jszip": "^3.7.0",
         "pdfmake": "^0.1.64",
         "run": "^1.4.0",
         "semantic-ui-calendar": "0.0.8"
